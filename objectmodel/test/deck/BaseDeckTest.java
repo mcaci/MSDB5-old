@@ -9,7 +9,7 @@ public class BaseDeckTest extends DeckTest {
 
     @Before
     public void setUp() throws Exception {
-        this.setTestObjectDeck(new BaseDeck());
+        this.setTestObjectAbstractDeck(new BaseDeck());
     }
 
 }
