@@ -1,4 +1,4 @@
-package deck.card;
+package card;
 
 /**
  * Created by nikiforos on 23/08/15.
