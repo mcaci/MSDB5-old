@@ -19,12 +19,16 @@ public class RandomDeckFactory {
 
     private Deck createdDeck;
 
+    public RandomDeckFactory() {
+        this(MAX_DECK_SIZE);
+    }
+
     public RandomDeckFactory(int realDeckSize) {
         List<Card> localDeck = createLocalDeck();
         shuffleLocalDeck(localDeck);
         this.createdDeck = new Deck();
-        final Queue<Card> cardQueue = this.createdDeck.getDeck();
-        addLocalDeckElementsToRealDeck(cardQueue, localDeck, realDeckSize);
+        final Queue<Card> actualDeck = this.createdDeck.getDeck();
+        addLocalDeckElementsToRealDeck(actualDeck, localDeck, realDeckSize);
     }
 
     public Deck getCreatedDeck() {
