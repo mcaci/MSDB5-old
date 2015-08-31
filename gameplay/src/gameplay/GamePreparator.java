@@ -5,7 +5,7 @@ import deck.Deck;
 import hand.Hand;
 import player.Player;
 import table.GameTable;
-import table.factory.GameTableFactory;
+import table.GameTableFactory;
 
 import java.util.Queue;
 

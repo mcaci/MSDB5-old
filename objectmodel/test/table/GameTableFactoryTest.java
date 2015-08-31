@@ -1,10 +1,9 @@
-package table.factory;
+package table;
 
 import deck.Deck;
 import org.junit.Before;
 import org.junit.Test;
 import player.Player;
-import table.GameTable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

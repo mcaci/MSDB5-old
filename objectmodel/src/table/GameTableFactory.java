@@ -1,9 +1,8 @@
-package table.factory;
+package table;
 
 import deck.Deck;
-import deck.factory.RandomDeckFactory;
+import deck.DeckFactory;
 import player.Player;
-import table.GameTable;
 
 /**
  * Created by nikiforos on 30/08/15.
@@ -15,7 +14,7 @@ public class GameTableFactory {
     public GameTable getCreatedGameTable() {
         GameTable gameTable = new GameTable();
 
-        RandomDeckFactory deckFactory = new RandomDeckFactory();
+        DeckFactory deckFactory = new DeckFactory();
         Deck deck = deckFactory.getCreatedDeck();
         gameTable.setDeck(deck);
 

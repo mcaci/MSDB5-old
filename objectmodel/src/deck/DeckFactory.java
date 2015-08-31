@@ -1,9 +1,8 @@
-package deck.factory;
+package deck;
 
 import card.Card;
 import card.CardNumber;
 import card.CardSuit;
-import deck.Deck;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -13,17 +12,17 @@ import java.util.Queue;
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class RandomDeckFactory {
+public class DeckFactory {
 
     private final static int MAX_DECK_SIZE = CardNumber.values().length * CardSuit.values().length;
 
     private Deck createdDeck;
 
-    public RandomDeckFactory() {
+    public DeckFactory() {
         this(MAX_DECK_SIZE);
     }
 
-    public RandomDeckFactory(int realDeckSize) {
+    public DeckFactory(int realDeckSize) {
         List<Card> localDeck = createLocalDeck();
         shuffleLocalDeck(localDeck);
         this.createdDeck = new Deck();

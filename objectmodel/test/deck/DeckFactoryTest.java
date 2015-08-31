@@ -1,7 +1,6 @@
-package deck.factory;
+package deck;
 
 import card.Card;
-import deck.Deck;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,22 +11,22 @@ import static org.junit.Assert.*;
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class RandomDeckFactoryTest {
+public class DeckFactoryTest {
 
-    private final static int TEST_DECK_SIZE = 5; // If more than RandomDeckFactory.MAX_DECK_SIZE (40 for now) it will
+    private final static int TEST_DECK_SIZE = 5; // If more than DeckFactory.MAX_DECK_SIZE (40 for now) it will
     // fail all tests (with explanation)
 
-    private RandomDeckFactory testRandomDeckFactory;
+    private DeckFactory testDeckFactory;
     private Deck testObjectDeck;
 
     @Before
     public void setUp() throws Exception {
         try {
-            testRandomDeckFactory = new RandomDeckFactory(TEST_DECK_SIZE);
+            testDeckFactory = new DeckFactory(TEST_DECK_SIZE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        testObjectDeck = testRandomDeckFactory.getCreatedDeck();
+        testObjectDeck = testDeckFactory.getCreatedDeck();
     }
 
     @Test
@@ -62,7 +61,6 @@ public class RandomDeckFactoryTest {
         Queue<Card> cards = testObjectDeck.getDeck();
 
         Object[] cardArray = cards.toArray();
-        System.out.println(cardArray.length);
         for (int i = 0; i < cardArray.length; i++) {
             Object cardToSearch = cardArray[i];
             for (int j = i + 1; j < cardArray.length - 1; j++) {
