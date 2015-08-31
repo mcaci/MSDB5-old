@@ -1,6 +1,7 @@
 package deck;
 
 import card.Card;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +28,12 @@ public class DeckFactoryTest {
             fail(e.getMessage());
         }
         testObjectDeck = testDeckFactory.getCreatedDeck();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("DeckFactoryTest: showing deck after creation");
+        System.out.println(testObjectDeck.toString());
     }
 
     @Test

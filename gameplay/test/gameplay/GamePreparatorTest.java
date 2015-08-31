@@ -24,6 +24,7 @@ public class GamePreparatorTest {
 
     @After
     public void tearDown() throws Exception {
+        System.out.println("GamePreparatorTest: after table creation");
         System.out.println(gameTable.toString());
     }
 
