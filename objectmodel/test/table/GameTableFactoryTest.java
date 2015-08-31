@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import player.Player;
 
+import static gameinfo.GameInfoConstants.MAX_DECK_SIZE;
+import static gameinfo.GameInfoConstants.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -33,16 +35,16 @@ public class GameTableFactoryTest {
     public void testGetCreatedTable() throws Exception {
         assertNotNull(testGameTable);
 
+        // test for the created deck
         Deck tableDeck = testGameTable.getDeck();
         assertNotNull(tableDeck);
         final int deckSize = tableDeck.getSize();
-        assertEquals("The size of the deck should be " + GameTableFactory.MAX_DECK_SIZE, deckSize, GameTableFactory
-                .MAX_DECK_SIZE);
+        assertEquals("The size of the deck should be " + MAX_DECK_SIZE, deckSize, MAX_DECK_SIZE);
 
+        // test for the created players
         Player[] players = testGameTable.getPlayers();
         assertNotNull(players);
         int numberOfPlayers = players.length;
-        assertEquals("Number of players should be " + GameTableFactory.NUMBER_OF_PLAYERS, numberOfPlayers, GameTableFactory
-                .NUMBER_OF_PLAYERS);
+        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, numberOfPlayers, NUMBER_OF_PLAYERS);
     }
 }

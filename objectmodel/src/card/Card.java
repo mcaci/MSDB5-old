@@ -13,7 +13,6 @@ public class Card {
         this.cardSuit = cardSuit;
     }
 
-
     public CardSuit getCardSuit() {
         return cardSuit;
     }
@@ -40,7 +39,6 @@ public class Card {
 
         if (getCardSuit() != card.getCardSuit()) return false;
         return getCardNumber() == card.getCardNumber();
-
     }
 
     @Override

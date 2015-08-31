@@ -9,12 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import static gameinfo.GameInfoConstants.MAX_DECK_SIZE;
+
 /**
  * Created by nikiforos on 29/08/15.
  */
 public class DeckFactory {
-
-    private final static int MAX_DECK_SIZE = CardNumber.values().length * CardSuit.values().length;
 
     private Deck createdDeck;
 
@@ -23,25 +23,17 @@ public class DeckFactory {
     }
 
     public DeckFactory(int realDeckSize) {
-        List<Card> localDeck = createLocalDeck();
-        shuffleLocalDeck(localDeck);
         this.createdDeck = new Deck();
-        final Queue<Card> actualDeck = this.createdDeck.getDeck();
-        addLocalDeckElementsToRealDeck(actualDeck, localDeck, realDeckSize);
+
+        List<Card> localDeck = createLocalDeck();
+
+        shuffleLocalDeck(localDeck);
+
+        addLocalDeckElementsToRealDeck(localDeck, realDeckSize);
     }
 
     public Deck getCreatedDeck() {
         return this.createdDeck;
-    }
-
-    private void addLocalDeckElementsToRealDeck(Queue<Card> cardQueue, List<Card> localDeck, int realDeckSize) {
-        if (realDeckSize > MAX_DECK_SIZE) {
-            throw new IllegalArgumentException("The size of the deck, " + realDeckSize + ", cannot exceed the max of " +
-                    "the deck: " + MAX_DECK_SIZE);
-        }
-        for (int i = 0; i < realDeckSize; i++) {
-            cardQueue.add(localDeck.get(i));
-        }
     }
 
     private List<Card> createLocalDeck() {
@@ -58,6 +50,17 @@ public class DeckFactory {
 
     private void shuffleLocalDeck(List<Card> localDeck) {
         Collections.shuffle(localDeck);
+    }
+
+    private void addLocalDeckElementsToRealDeck(List<Card> localDeck, int realDeckSize) {
+        final Queue<Card> actualDeckQueue = this.createdDeck.getDeck();
+        if (realDeckSize > MAX_DECK_SIZE) {
+            throw new IllegalArgumentException("The size of the deck, " + realDeckSize + ", cannot exceed the max of " +
+                    "the deck: " + MAX_DECK_SIZE);
+        }
+        for (int i = 0; i < realDeckSize; i++) {
+            actualDeckQueue.add(localDeck.get(i));
+        }
     }
 
 }
