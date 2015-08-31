@@ -20,6 +20,9 @@ public class GameTableFactory {
         gameTable.setDeck(deck);
 
         Player[] players = new Player[NUMBER_OF_PLAYERS];
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            players[i] = new Player();
+        }
         gameTable.setPlayers(players);
 
         return gameTable;
