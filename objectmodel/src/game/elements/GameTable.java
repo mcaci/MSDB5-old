@@ -1,7 +1,6 @@
-package table;
+package game.elements;
 
-import deck.Deck;
-import player.Player;
+import game.player.Player;
 
 import java.util.Arrays;
 
@@ -31,7 +30,7 @@ public class GameTable {
     @Override
     public String toString() {
         return "GameTable{" +
-                "deck=" + deck +
+                "game=" + deck +
                 ", players=" + Arrays.toString(players) +
                 '}';
     }

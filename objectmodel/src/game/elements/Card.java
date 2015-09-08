@@ -1,4 +1,4 @@
-package card;
+package game.elements;
 
 /**
  * Created by nikiforos on 23/08/15.

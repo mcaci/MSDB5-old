@@ -1,10 +1,11 @@
-package table;
+package game.factory;
 
-import deck.Deck;
+import game.elements.Deck;
+import game.elements.GameTable;
+import game.player.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import player.Player;
 
 import static gameinfo.GameInfoConstants.MAX_DECK_SIZE;
 import static gameinfo.GameInfoConstants.NUMBER_OF_PLAYERS;
@@ -35,11 +36,11 @@ public class GameTableFactoryTest {
     public void testGetCreatedTable() throws Exception {
         assertNotNull(testGameTable);
 
-        // test for the created deck
+        // test for the created game
         Deck tableDeck = testGameTable.getDeck();
         assertNotNull(tableDeck);
-        final int deckSize = tableDeck.getSize();
-        assertEquals("The size of the deck should be " + MAX_DECK_SIZE, deckSize, MAX_DECK_SIZE);
+        final int deckSize = tableDeck.getDeck().size();
+        assertEquals("The size of the game should be " + MAX_DECK_SIZE, deckSize, MAX_DECK_SIZE);
 
         // test for the created players
         Player[] players = testGameTable.getPlayers();

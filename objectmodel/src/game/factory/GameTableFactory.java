@@ -1,8 +1,8 @@
-package table;
+package game.factory;
 
-import deck.Deck;
-import deck.DeckFactory;
-import player.Player;
+import game.elements.Deck;
+import game.elements.GameTable;
+import game.player.Player;
 
 import static gameinfo.GameInfoConstants.NUMBER_OF_PLAYERS;
 
@@ -24,8 +24,8 @@ public class GameTableFactory {
     }
 
     private Deck createDeck() {
-        DeckFactory deckFactory = new DeckFactory();
-        return deckFactory.getCreatedDeck();
+        DeckFactory cardSetFactory = new DeckFactory();
+        return cardSetFactory.createDeck();
     }
 
     private Player[] createPlayers() {
