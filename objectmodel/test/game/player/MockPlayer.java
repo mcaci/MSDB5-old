@@ -1,6 +1,6 @@
 package game.player;
 
-import gameinfo.GameInfoConstants;
+import game.player.auction.Score;
 import org.junit.After;
 import org.junit.Test;
 
@@ -20,9 +20,9 @@ public abstract class MockPlayer extends Player {
     public void testValidity() throws Exception {
         assertNotNull(this.getHand());
         assertFalse(this.getHand().isEmpty());
-        assertNotNull(this.getPersonalAuctionInfo());
-        assertTrue(this.getPersonalAuctionInfo().getAuctionScore().getScore() >= GameInfoConstants.MIN_AUCTION_SCORE);
-        assertTrue(this.getPersonalAuctionInfo().getAuctionScore().getScore() <= GameInfoConstants.MAX_AUCTION_SCORE);
-        assertNotNull(this.getPersonalAuctionInfo().getAuctionPlayerStance());
+        assertNotNull(this.getAuctionInfo());
+        assertTrue(this.getAuctionInfo().getScore().getScore() >= Score.MIN_SCORE);
+        assertTrue(this.getAuctionInfo().getScore().getScore() <= Score.MAX_SCORE);
+        assertNotNull(this.getAuctionInfo().getStatus());
     }
 }

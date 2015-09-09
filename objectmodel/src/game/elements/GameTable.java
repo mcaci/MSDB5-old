@@ -8,6 +8,9 @@ import java.util.Arrays;
  * Created by nikiforos on 30/08/15.
  */
 public class GameTable {
+
+    public static final int NUMBER_OF_PLAYERS = 5;
+
     private Deck deck;
     private Player[] players;
 

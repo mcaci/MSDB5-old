@@ -4,7 +4,7 @@ import game.elements.Deck;
 import game.elements.GameTable;
 import game.player.Player;
 
-import static gameinfo.GameInfoConstants.NUMBER_OF_PLAYERS;
+import static game.elements.GameTable.NUMBER_OF_PLAYERS;
 
 /**
  * Created by nikiforos on 30/08/15.

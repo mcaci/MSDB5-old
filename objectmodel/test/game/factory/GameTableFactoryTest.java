@@ -7,8 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static gameinfo.GameInfoConstants.MAX_DECK_SIZE;
-import static gameinfo.GameInfoConstants.NUMBER_OF_PLAYERS;
+import static game.elements.Deck.DEFAULT_SIZE;
+import static game.elements.GameTable.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -40,7 +40,7 @@ public class GameTableFactoryTest {
         Deck tableDeck = testGameTable.getDeck();
         assertNotNull(tableDeck);
         final int deckSize = tableDeck.getDeck().size();
-        assertEquals("The size of the game should be " + MAX_DECK_SIZE, deckSize, MAX_DECK_SIZE);
+        assertEquals("The size of the game should be " + DEFAULT_SIZE, deckSize, DEFAULT_SIZE);
 
         // test for the created players
         Player[] players = testGameTable.getPlayers();

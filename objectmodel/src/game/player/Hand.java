@@ -39,7 +39,12 @@ public class Hand {
         this.hand.addAll(cardList.subList(0, handSize));
     }
 
+    public void addCardSet(List<Card> hand) {
+        this.addCardSet(hand, hand.size());
+    }
+
     public boolean isEmpty() {
         return this.hand.isEmpty();
     }
+
 }
