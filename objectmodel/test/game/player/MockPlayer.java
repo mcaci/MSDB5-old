@@ -9,11 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by nikiforos on 04/09/15.
  */
-public class MockPlayer extends Player {
-
-    public MockPlayer(boolean isSizeDeckPresent) {
-        super(new MockHand(isSizeDeckPresent));
-    }
+public abstract class MockPlayer extends Player {
 
     @After
     public void tearDown() throws Exception {
