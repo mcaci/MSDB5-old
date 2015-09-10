@@ -28,7 +28,7 @@ public class HandFactoryTest extends CardSetFactoryTest {
     }
 
     @Parameterized.Parameters
-    public static Collection primeNumbers() {
+    public static Collection inputParameters() {
         return Arrays.asList(new Object[][]{
                 {true},
                 {false}
