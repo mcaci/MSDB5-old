@@ -10,6 +10,8 @@ import java.util.Arrays;
 public class GameTable {
 
     public static final int NUMBER_OF_PLAYERS = 5;
+    public static final int SIDE_DECK_SIZE = 5;
+    public static final int NO_SIDE_DECK_SIZE = 0;
 
     private Deck deck;
     private Player[] players;
