@@ -10,15 +10,15 @@ import static org.junit.Assert.assertTrue;
 public class CardNumberTest {
 
     @Test
-    public void testValueOfTheCard() throws Exception {
-        assertTrue(CardNumber.ASSO.valueOfTheCard() > CardNumber.TRE.valueOfTheCard());
-        assertTrue(CardNumber.TRE.valueOfTheCard() > CardNumber.RE.valueOfTheCard());
-        assertTrue(CardNumber.RE.valueOfTheCard() > CardNumber.CAVALLO.valueOfTheCard());
-        assertTrue(CardNumber.CAVALLO.valueOfTheCard() > CardNumber.DONNA.valueOfTheCard());
-        assertTrue(CardNumber.DONNA.valueOfTheCard() > CardNumber.SETTE.valueOfTheCard());
-        assertTrue(CardNumber.SETTE.valueOfTheCard() > CardNumber.SEI.valueOfTheCard());
-        assertTrue(CardNumber.SEI.valueOfTheCard() > CardNumber.CINQUE.valueOfTheCard());
-        assertTrue(CardNumber.CINQUE.valueOfTheCard() > CardNumber.QUATTRO.valueOfTheCard());
-        assertTrue(CardNumber.QUATTRO.valueOfTheCard() > CardNumber.DUE.valueOfTheCard());
+    public void testValue() throws Exception {
+        assertTrue(CardNumber.ASSO.value() > CardNumber.TRE.value());
+        assertTrue(CardNumber.TRE.value() > CardNumber.RE.value());
+        assertTrue(CardNumber.RE.value() > CardNumber.CAVALLO.value());
+        assertTrue(CardNumber.CAVALLO.value() > CardNumber.DONNA.value());
+        assertTrue(CardNumber.DONNA.value() > CardNumber.SETTE.value());
+        assertTrue(CardNumber.SETTE.value() > CardNumber.SEI.value());
+        assertTrue(CardNumber.SEI.value() > CardNumber.CINQUE.value());
+        assertTrue(CardNumber.CINQUE.value() > CardNumber.QUATTRO.value());
+        assertTrue(CardNumber.QUATTRO.value() > CardNumber.DUE.value());
     }
 }

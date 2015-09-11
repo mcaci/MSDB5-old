@@ -44,7 +44,7 @@ public enum CardNumber {
         return 0;
     }
 
-    public int valueOfTheCard() {
+    public int value() {
         int value = 0;
         if (this.pointsForTheCard() > 0) {
             value = this.pointsForTheCard() + 10;
@@ -59,7 +59,7 @@ public enum CardNumber {
         return "CardNumber{" +
                 "name=" + name() +
                 ", points=" + pointsForTheCard() +
-                ", value=" + valueOfTheCard() +
+                ", value=" + value() +
                 '}';
     }
 
