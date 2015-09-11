@@ -12,11 +12,19 @@ public enum CardSuit {
         return isBriscola;
     }
 
+    public void resetBriscola() {
+        final CardSuit[] cardSuits = CardSuit.values();
+        for (int i = 0; i < cardSuits.length; i++) {
+            final CardSuit cardSuit = cardSuits[i];
+            cardSuit.isBriscola = false;
+        }
+    }
+
     public void setAsBriscola() {
         final CardSuit[] cardSuits = CardSuit.values();
         for (int i = 0; i < cardSuits.length; i++) {
             final CardSuit cardSuit = cardSuits[i];
-            cardSuit.isBriscola = this == cardSuit;
+            cardSuit.isBriscola = (this == cardSuit);
         }
     }
 
