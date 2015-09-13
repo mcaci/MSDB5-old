@@ -32,7 +32,7 @@ public class AuctionStance {
     @Override
     public String toString() {
         return "AuctionStance{" +
-                "score=" + score +
+                "auction=" + score +
                 ", status=" + status +
                 '}';
     }
