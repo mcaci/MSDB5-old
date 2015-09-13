@@ -3,7 +3,7 @@ package game.player.auction;
 /**
  * Created by nikiforos on 04/09/15.
  */
-public class Score {
+public class Score implements Comparable<Score> {
 
     public static final byte MIN_SCORE = 60;
     public static final byte MAX_SCORE = 120;
@@ -36,5 +36,11 @@ public class Score {
         return "Score{" +
                 "score=" + score +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Score other) {
+        return Byte.compare(this.score, other.score);
     }
 }

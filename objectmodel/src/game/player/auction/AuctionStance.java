@@ -3,12 +3,12 @@ package game.player.auction;
 /**
  * Created by nikiforos on 04/09/15.
  */
-public class AuctionInfo {
+public class AuctionStance {
 
     private Score score;
     private Status status;
 
-    public AuctionInfo() {
+    public AuctionStance() {
         score = new Score();
         status = Status.NOT_STARTED;
     }
@@ -31,7 +31,7 @@ public class AuctionInfo {
 
     @Override
     public String toString() {
-        return "AuctionInfo{" +
+        return "AuctionStance{" +
                 "score=" + score +
                 ", status=" + status +
                 '}';

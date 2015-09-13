@@ -1,13 +1,13 @@
 package game.player;
 
-import game.player.auction.AuctionInfo;
+import game.player.auction.AuctionStance;
 
 /**
  * Created by nikiforos on 30/08/15.
  */
 public class Player {
     private final Hand hand = new Hand();
-    private final AuctionInfo auctionInfo = new AuctionInfo();
+    private final AuctionStance auctionStance = new AuctionStance();
 
     public Hand getHand() {
         return hand;
@@ -17,23 +17,23 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "hand=" + hand +
-                ", auctionInfo=" + auctionInfo +
+                ", auctionStance=" + auctionStance +
                 '}';
     }
 
-    public AuctionInfo getAuctionInfo() {
-        return auctionInfo;
+    public AuctionStance getAuctionStance() {
+        return auctionStance;
     }
 
     public boolean hasActed() {
-        return auctionInfo.getStatus().actionWasDone();
+        return auctionStance.getStatus().actionWasDone();
     }
 
     public boolean isWinner() {
-        return auctionInfo.getStatus().isWinner();
+        return auctionStance.getStatus().isWinner();
     }
 
     public boolean hasFolded() {
-        return auctionInfo.getStatus().hasFolded();
+        return auctionStance.getStatus().hasFolded();
     }
 }

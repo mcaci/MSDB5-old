@@ -20,9 +20,9 @@ public abstract class MockPlayer extends Player {
     public void testValidity() throws Exception {
         assertNotNull(this.getHand());
         assertFalse(this.getHand().isEmpty());
-        assertNotNull(this.getAuctionInfo());
-        assertTrue(this.getAuctionInfo().getScore().getScore() >= Score.MIN_SCORE);
-        assertTrue(this.getAuctionInfo().getScore().getScore() <= Score.MAX_SCORE);
-        assertNotNull(this.getAuctionInfo().getStatus());
+        assertNotNull(this.getAuctionStance());
+        assertTrue(this.getAuctionStance().getScore().getScore() >= Score.MIN_SCORE);
+        assertTrue(this.getAuctionStance().getScore().getScore() <= Score.MAX_SCORE);
+        assertNotNull(this.getAuctionStance().getStatus());
     }
 }

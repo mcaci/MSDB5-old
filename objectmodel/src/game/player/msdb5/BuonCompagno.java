@@ -1,4 +1,4 @@
-package game.player.impl.msdb5;
+package game.player.msdb5;
 
 import game.player.Player;
 
