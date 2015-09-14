@@ -1,6 +1,8 @@
 package game.player.msdb5;
 
 import game.player.Player;
+import strategy.auction.IAuctionAction;
+import strategy.auction.msdb5.AuctionAction_Dubbioso;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -12,4 +14,7 @@ import game.player.Player;
  * il suo prossimo regalo di compleanno sarà un cappio portatile, completo di Boia gonfiabile.
  */
 public class Dubbioso extends Player {
+    public Dubbioso(IAuctionAction auctionAction) {
+        super(new AuctionAction_Dubbioso());
+    }
 }

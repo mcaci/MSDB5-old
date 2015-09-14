@@ -1,6 +1,8 @@
 package game.player.msdb5;
 
 import game.player.Player;
+import strategy.auction.IAuctionAction;
+import strategy.auction.msdb5.AuctionAction_CampioneDecaduto;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -12,4 +14,8 @@ import game.player.Player;
  * di un Re di spade che lo farà abdicare miseramente. I suoi ex sudditi lo compiangono ancora.
  */
 public class CampioneDecaduto extends Player {
+
+    public CampioneDecaduto(IAuctionAction auctionAction) {
+        super(new AuctionAction_CampioneDecaduto());
+    }
 }

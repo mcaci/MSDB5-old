@@ -1,6 +1,8 @@
 package game.player.msdb5;
 
 import game.player.Player;
+import strategy.auction.IAuctionAction;
+import strategy.auction.msdb5.AuctionAction_BuonCompagno;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -13,4 +15,7 @@ import game.player.Player;
  * quindi questo è il solo motivo della sua vittoria. Sta ancora maledicendo chi ha inventato il Poker Texano.
  */
 public class BuonCompagno extends Player {
+    public BuonCompagno(IAuctionAction auctionAction) {
+        super(new AuctionAction_BuonCompagno());
+    }
 }

@@ -3,6 +3,7 @@ package game.factory;
 import game.elements.Deck;
 import game.elements.GameTable;
 import game.player.Player;
+import strategy.auction.AuctionActionDefault;
 
 import static game.elements.GameTable.NUMBER_OF_PLAYERS;
 
@@ -31,7 +32,7 @@ public class GameTableFactory {
     private Player[] createPlayers() {
         Player[] players = new Player[NUMBER_OF_PLAYERS];
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            players[i] = new Player();
+            players[i] = new Player(new AuctionActionDefault());
         }
         return players;
     }

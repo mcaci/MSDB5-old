@@ -1,6 +1,8 @@
 package game.player.msdb5;
 
 import game.player.Player;
+import strategy.auction.IAuctionAction;
+import strategy.auction.msdb5.AuctionAction_Rialzatore;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -12,4 +14,7 @@ import game.player.Player;
  * Sfortunatamente gioca in casa quindi non può essere contraddetto.
  */
 public class Rialzatore extends Player {
+    public Rialzatore(IAuctionAction auctionAction) {
+        super(new AuctionAction_Rialzatore());
+    }
 }

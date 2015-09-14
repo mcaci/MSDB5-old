@@ -1,6 +1,8 @@
 package game.player.msdb5;
 
 import game.player.Player;
+import strategy.auction.IAuctionAction;
+import strategy.auction.msdb5.AuctionAction_Ambiguo;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -12,4 +14,7 @@ import game.player.Player;
  * tecnica di gioco probabilmente sarà stato tutto vanificato dall'apocalisse del 2012.
  */
 public class Ambiguo extends Player {
+    public Ambiguo(IAuctionAction auctionAction) {
+        super(new AuctionAction_Ambiguo());
+    }
 }
