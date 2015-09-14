@@ -14,8 +14,16 @@ public class MockAuctionAction implements IAuctionAction {
     @Override
     public Score chooseNextScore(Hand hand, int currentScore) {
         final Score score = new Score();
-        score.setSafeScore(currentScore++);
+        final int nextScore = decideNextScore(currentScore);
+        score.setSafeScore(nextScore);
         return score;
+    }
+
+    private int decideNextScore(int currentScore) {
+        int nextScore = ++currentScore;
+        nextScore = Math.max(nextScore, MIN_AUCTION_SCORE);
+        nextScore = Math.min(nextScore, MAX_AUCTION_SCORE);
+        return nextScore;
     }
 
     @Override

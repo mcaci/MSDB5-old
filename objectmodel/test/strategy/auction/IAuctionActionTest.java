@@ -40,6 +40,7 @@ public class IAuctionActionTest {
     @Parameterized.Parameters
     public static Collection initParameters() {
         return Arrays.asList(new Object[][]{
+                {MockAuctionAction.class},
                 {AuctionAction_Rialzatore.class},
                 {AuctionAction_CampioneDecaduto.class},
                 {AuctionAction_BuonCompagno.class},

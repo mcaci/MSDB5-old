@@ -10,6 +10,9 @@ import game.player.auction.Score;
  */
 public interface IAuctionAction {
 
+    byte MIN_AUCTION_SCORE = 60;
+    byte MAX_AUCTION_SCORE = 120;
+
     Score chooseNextScore(Hand hand, int currentScore);
 
     AuctionStance chooseNextStance(Player playerDeciding, int currentScore);
