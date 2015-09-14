@@ -15,6 +15,7 @@ public class GameTable {
 
     private Deck deck;
     private Player[] players;
+    private int auctionScore = 0;
 
     public Deck getDeck() {
         return deck;
@@ -32,11 +33,20 @@ public class GameTable {
         this.players = players;
     }
 
+    public int getAuctionScore() {
+        return auctionScore;
+    }
+
+    public void setAuctionScore(int auctionScore) {
+        this.auctionScore = auctionScore;
+    }
+
     @Override
     public String toString() {
         return "GameTable{" +
-                "game=" + deck +
+                "deck=" + deck +
                 ", players=" + Arrays.toString(players) +
+                ", auctionScore=" + auctionScore +
                 '}';
     }
 }

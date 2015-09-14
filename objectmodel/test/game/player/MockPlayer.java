@@ -3,7 +3,7 @@ package game.player;
 import game.player.auction.Score;
 import org.junit.After;
 import org.junit.Test;
-import strategy.auction.AuctionActionDefault;
+import strategy.auction.MockAuctionAction;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public abstract class MockPlayer extends Player {
 
     public MockPlayer() {
-        super(new AuctionActionDefault());
+        super(new MockAuctionAction());
     }
 
     @After
