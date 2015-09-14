@@ -1,12 +1,14 @@
 package game.player.auction;
 
+import strategy.auction.IAuctionAction;
+
 /**
  * Created by nikiforos on 04/09/15.
  */
 public class Score implements Comparable<Score> {
 
-    public static final byte MIN_SCORE = 60;
-    public static final byte MAX_SCORE = 120;
+    public static final byte MIN_SCORE = IAuctionAction.MIN_AUCTION_SCORE;
+    public static final byte MAX_SCORE = IAuctionAction.MAX_AUCTION_SCORE;
 
     private byte score = MIN_SCORE;
 
