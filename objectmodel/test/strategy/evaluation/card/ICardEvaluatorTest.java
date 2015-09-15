@@ -32,8 +32,6 @@ public class ICardEvaluatorTest {
     public static Collection primeNumbers() {
         return Arrays.asList(new Object[][]{
                 {DummyCardEvaluator.class}
-//                ,
-//                {SumEvaluator.class}
         });
     }
 

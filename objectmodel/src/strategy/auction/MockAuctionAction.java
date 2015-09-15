@@ -9,7 +9,8 @@ import game.player.auction.Status;
 /**
  * Created by nikiforos on 14/09/15.
  */
-// TODO: move to test package and use real implementation in src
+// TODO: move to test package and use real implementation in src, the deprecated is to make it explicit
+@Deprecated
 public class MockAuctionAction implements IAuctionAction {
     @Override
     public Score chooseNextScore(Hand hand, int currentScore) {
