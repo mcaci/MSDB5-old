@@ -1,9 +1,6 @@
 package game.factory;
 
-import game.elements.Card;
-import game.player.Hand;
-
-import java.util.List;
+import game.elements.Hand;
 
 /**
  * Created by nikiforos on 08/09/15.
@@ -15,10 +12,6 @@ public class HandFactory extends CardSetFactory {
     }
 
     public Hand createHand() {
-        Hand createdHand = new Hand();
-        List<Card> localHand = createCardSet();
-        shuffleCardSet(localHand);
-        createdHand.addCardSet(localHand, setSize);
-        return createdHand;
+        return new Hand(createShuffledCardSet(), this.setSize);
     }
 }
