@@ -4,6 +4,7 @@ import game.elements.Card;
 import game.elements.CardNumber;
 import game.elements.CardSuit;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,16 +14,16 @@ import java.util.List;
  */
 abstract class CardSetFactory {
 
-    final int setSize;
+    private final int cardSetSize;
 
-    public CardSetFactory(int setSize) {
-        this.setSize = setSize;
+    public CardSetFactory(int cardSetSize) {
+        this.cardSetSize = cardSetSize;
     }
 
-    List<Card> createShuffledCardSet() {
+    Collection<Card> createShuffledCardSet() {
         List<Card> localCardSet = createSortedCardSet();
         shuffleCardSet(localCardSet);
-        return localCardSet;
+        return localCardSet.subList(0, this.cardSetSize);
     }
 
     private List<Card> createSortedCardSet() {
