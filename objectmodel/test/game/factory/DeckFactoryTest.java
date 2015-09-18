@@ -1,7 +1,7 @@
 package game.factory;
 
 import game.elements.Card;
-import game.elements.Deck;
+import game.elements.cardset.Deck;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class DeckFactoryTest extends CardSetFactoryTest {
 
     @Override
     public Collection<Card> getCardSet() {
-        return testObjectDeck.getDeck();
+        return testObjectDeck.getCardSet();
     }
 
     @Before
@@ -38,9 +38,9 @@ public class DeckFactoryTest extends CardSetFactoryTest {
     @Test
     public void testGetCreatedDeck() throws Exception {
         assertNotNull(testObjectDeck);
-        assertNotNull(testObjectDeck.getDeck());
-        assertEquals("Size doesn't correspond to test value " + Deck.DEFAULT_SIZE, Deck.DEFAULT_SIZE,
-                testObjectDeck.getDeck().size());
+        assertNotNull(testObjectDeck.getCardSet());
+        assertEquals("Size doesn't correspond to test value " + Deck.DECK_DEFAULT_SIZE, Deck.DECK_DEFAULT_SIZE,
+                testObjectDeck.getCardSet().size());
     }
 
 }

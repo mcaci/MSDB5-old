@@ -1,6 +1,6 @@
 package game.factory;
 
-import game.elements.Hand;
+import game.elements.cardset.Hand;
 
 /**
  * Created by nikiforos on 08/09/15.
@@ -12,6 +12,6 @@ public class HandFactory extends CardSetFactory {
     }
 
     public Hand createHand() {
-        return new Hand(createShuffledCardSet(), this.setSize);
+        return new Hand(createShuffledCardSet());
     }
 }

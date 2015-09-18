@@ -1,4 +1,4 @@
-package game.player;
+package game.elements.cardset;
 
 import game.factory.HandFactory;
 
@@ -10,7 +10,7 @@ public class MockHand extends Hand {
     public MockHand(boolean isSizeDeckPresent) {
         HandFactory handFactory = new HandFactory(isSizeDeckPresent);
         Hand createdHand = handFactory.createHand();
-        this.getHand().addAll(createdHand.getHand());
+        this.getCardSet().addAll(createdHand.getCardSet());
     }
 
 }

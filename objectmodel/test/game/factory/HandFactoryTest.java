@@ -1,7 +1,7 @@
 package game.factory;
 
 import game.elements.Card;
-import game.player.Hand;
+import game.elements.cardset.Hand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class HandFactoryTest extends CardSetFactoryTest {
 
     @Override
     public Collection<Card> getCardSet() {
-        return handCreated.getHand();
+        return handCreated.getCardSet();
     }
 
     @Before
@@ -55,15 +55,15 @@ public class HandFactoryTest extends CardSetFactoryTest {
     @Test
     public void testGetCreatedHand() throws Exception {
         assertNotNull(handCreated);
-        assertNotNull(handCreated.getHand());
+        assertNotNull(handCreated.getCardSet());
         if (isSizeDeckPresent) {
             assertEquals("Size doesn't correspond to test value " + Hand.WITH_SIDE_DECK_HAND_SIZE,
                     Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    handCreated.getHand().size());
+                    handCreated.getCardSet().size());
         } else {
             assertEquals("Size doesn't correspond to test value " + Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
                     Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    handCreated.getHand().size());
+                    handCreated.getCardSet().size());
         }
     }
 }

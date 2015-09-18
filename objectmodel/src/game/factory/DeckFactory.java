@@ -1,6 +1,6 @@
 package game.factory;
 
-import game.elements.Deck;
+import game.elements.cardset.Deck;
 
 /**
  * Created by nikiforos on 08/09/15.
@@ -8,10 +8,10 @@ import game.elements.Deck;
 public class DeckFactory extends CardSetFactory {
 
     public DeckFactory() {
-        super(Deck.DEFAULT_SIZE);
+        super(Deck.DECK_DEFAULT_SIZE);
     }
 
     public Deck createDeck() {
-        return new Deck(createShuffledCardSet(), this.setSize);
+        return new Deck(createShuffledCardSet());
     }
 }
