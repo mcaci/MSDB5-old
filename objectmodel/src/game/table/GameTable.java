@@ -1,5 +1,6 @@
-package game.elements;
+package game.table;
 
+import game.elements.cardset.Deck;
 import game.player.Player;
 
 import java.util.Arrays;

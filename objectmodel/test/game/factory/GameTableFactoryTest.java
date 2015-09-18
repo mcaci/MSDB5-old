@@ -1,14 +1,14 @@
 package game.factory;
 
-import game.elements.Deck;
-import game.elements.GameTable;
+import game.elements.cardset.Deck;
 import game.player.Player;
+import game.table.GameTable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static game.elements.Deck.DEFAULT_SIZE;
-import static game.elements.GameTable.NUMBER_OF_PLAYERS;
+import static game.elements.cardset.Deck.DECK_DEFAULT_SIZE;
+import static game.table.GameTable.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -39,8 +39,8 @@ public class GameTableFactoryTest {
         // test for the created game
         Deck tableDeck = testGameTable.getDeck();
         assertNotNull(tableDeck);
-        final int deckSize = tableDeck.getDeck().size();
-        assertEquals("The size of the game should be " + DEFAULT_SIZE, deckSize, DEFAULT_SIZE);
+        final int deckSize = tableDeck.getCardSet().size();
+        assertEquals("The size of the game should be " + DECK_DEFAULT_SIZE, deckSize, DECK_DEFAULT_SIZE);
 
         // test for the created players
         Player[] players = testGameTable.getPlayers();
