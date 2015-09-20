@@ -18,7 +18,6 @@ public class GameTable {
     private Deck deck;
     private Player[] players;
     private int auctionScore = 0;
-    private boolean auctionIsOver = false;
 
     public Deck getDeck() {
         return deck;
@@ -42,14 +41,6 @@ public class GameTable {
 
     public void setAuctionScore(int auctionScore) {
         this.auctionScore = auctionScore;
-    }
-
-    public boolean isAuctionIsOver() {
-        return auctionIsOver;
-    }
-
-    public void setAuctionIsOver() {
-        this.auctionIsOver = true;
     }
 
     public void setWinningPlayer() {
@@ -78,7 +69,6 @@ public class GameTable {
                 "deck=" + deck +
                 ", players=" + Arrays.toString(players) +
                 ", auctionScore=" + auctionScore +
-                ", auctionIsOver=" + auctionIsOver +
                 '}';
     }
 }
