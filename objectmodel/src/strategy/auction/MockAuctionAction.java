@@ -1,6 +1,6 @@
 package strategy.auction;
 
-import game.player.Hand;
+import game.elements.cardset.Hand;
 import game.player.Player;
 import game.player.auction.AuctionStance;
 import game.player.auction.Score;
@@ -29,9 +29,16 @@ public class MockAuctionAction implements IAuctionAction {
 
     @Override
     public AuctionStance chooseNextStance(Player playerDeciding, int currentScore) {
-        final AuctionStance auctionStance = new AuctionStance();
-        auctionStance.setStatus(Status.IN_AUCTION);
-        auctionStance.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
+        final AuctionStance auctionStance = playerDeciding.getAuctionStance();
+        if (!auctionStance.getStatus().hasFolded()) {
+            final double randomFlag = Math.random();
+            if (randomFlag > 0.5) {
+                auctionStance.setStatus(Status.IN_AUCTION);
+                auctionStance.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
+            } else {
+                auctionStance.setStatus(Status.FOLDED);
+            }
+        }
         return auctionStance;
     }
 }

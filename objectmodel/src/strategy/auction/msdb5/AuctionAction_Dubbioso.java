@@ -1,6 +1,6 @@
 package strategy.auction.msdb5;
 
-import game.player.Hand;
+import game.elements.cardset.Hand;
 import game.player.Player;
 import game.player.auction.AuctionStance;
 import game.player.auction.Score;

@@ -1,11 +1,11 @@
 package gameplay.start;
 
 import game.elements.Card;
-import game.elements.Deck;
-import game.elements.GameTable;
+import game.elements.cardset.Deck;
+import game.elements.cardset.Hand;
 import game.factory.GameTableFactory;
-import game.player.Hand;
 import game.player.Player;
+import game.table.GameTable;
 
 import java.util.Queue;
 
@@ -29,8 +29,8 @@ public class GamePreparator {
     }
 
     private void distributeCardsToPlayers(Deck gameDeck, Player[] players, boolean useSideDeck) {
-        Queue<Card> deck = gameDeck.getDeck();
-        int size = gameDeck.getDeck().size();
+        Queue<Card> deck = gameDeck.getCardSet();
+        int size = gameDeck.getCardSet().size();
         if (useSideDeck) {
             size -= SIDE_DECK_SIZE;
         }

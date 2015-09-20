@@ -21,15 +21,15 @@ public class ICardEvaluatorTest {
 
     private ICardEvaluator iCardEvaluatorTestObject;
 
-    private Class implClass;
+    private Class<?> implClass;
     private Card inputCard;
 
-    public ICardEvaluatorTest(Class implClass) {
+    public ICardEvaluatorTest(Class<?> implClass) {
         this.implClass = implClass;
     }
 
     @Parameterized.Parameters
-    public static Collection primeNumbers() {
+    public static Collection<?> primeNumbers() {
         return Arrays.asList(new Object[][]{
                 {DummyCardEvaluator.class}
         });

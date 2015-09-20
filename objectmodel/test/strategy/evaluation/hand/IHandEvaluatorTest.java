@@ -1,7 +1,7 @@
 package strategy.evaluation.hand;
 
-import game.player.Hand;
-import game.player.MockHand;
+import game.elements.cardset.Hand;
+import game.elements.cardset.MockHand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ public class IHandEvaluatorTest {
 
     private IHandEvaluator iHandEvaluatorTestObject;
 
-    private Class implClass;
+    private Class<?> implClass;
     private Hand inputHand;
 
     public IHandEvaluatorTest(Class implClass) {
@@ -29,7 +29,7 @@ public class IHandEvaluatorTest {
     }
 
     @Parameterized.Parameters
-    public static Collection primeNumbers() {
+    public static Collection<?> primeNumbers() {
         return Arrays.asList(new Object[][]{
                 {DummyHandEvaluator.class}
         });

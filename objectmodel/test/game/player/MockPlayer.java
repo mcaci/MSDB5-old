@@ -1,19 +1,34 @@
 package game.player;
 
+import game.elements.cardset.MockHand;
 import game.player.auction.Score;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import strategy.auction.MockAuctionAction;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by nikiforos on 04/09/15.
  */
-public abstract class MockPlayer extends Player {
+@RunWith(Parameterized.class)
+public class MockPlayer extends Player {
 
-    public MockPlayer() {
-        super(new MockAuctionAction());
+    public MockPlayer(boolean isSideDeckPresent) {
+        super(new MockHand(isSideDeckPresent), new MockAuctionAction());
+    }
+
+    @Parameterized.Parameters
+    public static Collection initParameters() {
+        return Arrays.asList(new Object[][]{
+                {true},
+                {false}
+        });
     }
 
     @After

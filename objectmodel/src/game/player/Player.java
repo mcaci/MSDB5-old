@@ -1,5 +1,6 @@
 package game.player;
 
+import game.elements.cardset.Hand;
 import game.player.auction.AuctionStance;
 import strategy.auction.IAuctionAction;
 
@@ -7,16 +8,33 @@ import strategy.auction.IAuctionAction;
  * Created by nikiforos on 30/08/15.
  */
 public class Player {
-    final IAuctionAction auctionAction;
-    private final Hand hand = new Hand();
+    private final Hand hand;
+    private final IAuctionAction auctionAction;
     private AuctionStance auctionStance = new AuctionStance();
 
-    public Player(IAuctionAction auctionAction) {
+    Player(Hand hand, IAuctionAction auctionAction) {
+        this.hand = hand;
         this.auctionAction = auctionAction;
     }
 
+    public Player(IAuctionAction auctionAction) {
+        this(new Hand(), auctionAction);
+    }
+
     public Hand getHand() {
-        return hand;
+        return this.hand;
+    }
+
+    public AuctionStance getAuctionStance() {
+        return auctionStance;
+    }
+
+    public void setAuctionStance(AuctionStance auctionStance) {
+        this.auctionStance = auctionStance;
+    }
+
+    public IAuctionAction getAuctionAction() {
+        return auctionAction;
     }
 
     @Override
@@ -25,10 +43,6 @@ public class Player {
                 "hand=" + hand +
                 ", auctionStance=" + auctionStance +
                 '}';
-    }
-
-    public AuctionStance getAuctionStance() {
-        return auctionStance;
     }
 
     public boolean hasActed() {
@@ -41,6 +55,10 @@ public class Player {
 
     public boolean hasFolded() {
         return auctionStance.getStatus().hasFolded();
+    }
+
+    public int tellScore() {
+        return this.auctionStance.getScore().getScore();
     }
 
     public void performAuctionAction(int currentScore) {

@@ -1,14 +1,15 @@
 package gameplay.auction;
 
-import game.elements.GameTable;
-import game.factory.GameTableFactory;
 import game.player.Player;
+import game.table.GameTable;
+import game.table.MockGameTable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import strategy.auction.IAuctionAction;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Created by nikiforos on 01/09/15.
@@ -21,10 +22,7 @@ public class AuctionRoundTest {
     @Before
     public void setUp() throws Exception {
         auctionRoundTest = new AuctionRound();
-
-        // input players
-        GameTableFactory gameTableFactory = new GameTableFactory();
-        inputOutputGameTable = gameTableFactory.getCreatedGameTable();
+        inputOutputGameTable = new MockGameTable(true);
     }
 
     @After
@@ -37,7 +35,7 @@ public class AuctionRoundTest {
     public void testPerformAuctionRound() throws Exception {
         // output game table
         int originalScore = inputOutputGameTable.getAuctionScore();
-        auctionRoundTest.performAuctionRound(inputOutputGameTable);
+        auctionRoundTest.executeRound(inputOutputGameTable);
 
         // 1) the score of the table is greater than the original one
         int outputScore = inputOutputGameTable.getAuctionScore();
@@ -46,17 +44,29 @@ public class AuctionRoundTest {
             // 1.1) all players have acted
             testAllPlayersHaveActed(inputOutputGameTable.getPlayers());
         } else {
-            int winnerIndex = getIndexOfWinner();
-            // 1.1) check there is a winner and four folded
-            testWinnerCase(inputOutputGameTable.getPlayers(), winnerIndex);
-            // 1.2) the winner has the greater auction score
-            testWinnerScore(inputOutputGameTable.getPlayers(), winnerIndex);
+            // 1.1) Specific last round checks
+            performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
         }
+        // 2) other global checks
+        performGlobalVerification(inputOutputGameTable.getPlayers());
+    }
 
-        // 2) all the players scores are different
-        testAllScoresAreDifferent(inputOutputGameTable.getPlayers());
-        // 3) all the players scores are between the valid range
-        testAllScoresAreInTheValidRange(inputOutputGameTable.getPlayers());
+    public void performGlobalVerification(Player[] players) {
+        // 1) all the players scores are different (excpet if score is 60)
+        testAllScoresAreDifferent(players);
+        // 2) all the players scores are between the valid range
+        testAllScoresAreInTheValidRange(players);
+    }
+
+    public void performSpecificLastRoundVerification(Player[] players) {
+        int winnerIndex = getIndexOfWinner(players);
+        if (winnerIndex < 0) {
+            fail("no winner is registered");
+        }
+        // 1) check there is a winner and four folded
+        testWinnerCase(players, winnerIndex);
+        // 2) the winner has the greater auction score
+        testWinnerScore(players, winnerIndex);
     }
 
     private void testAllPlayersHaveActed(Player[] players) {
@@ -69,7 +79,8 @@ public class AuctionRoundTest {
         for (int i = 0; i < players.length; i++) {
             if (i != winnerIndex) {
                 final Player player = players[i];
-                assertTrue(player.toString() + " is not the winner so it should result as folded", player.hasFolded());
+                assertTrue(player.toString() + " is not the winner (Player: " + i + ") so it should result as folded",
+                        player.hasFolded());
             }
         }
     }
@@ -89,9 +100,13 @@ public class AuctionRoundTest {
         boolean conditionIsVerified = true;
         for (int i = 0; i < players.length && conditionIsVerified; i++) {
             byte iScore = players[i].getAuctionStance().getScore().getScore();
-            for (int j = i + 1; j < players.length && conditionIsVerified; j++) {
-                byte jScore = players[j].getAuctionStance().getScore().getScore();
-                conditionIsVerified &= iScore != jScore;
+            if (iScore > 60) {
+                for (int j = i + 1; j < players.length && conditionIsVerified; j++) {
+                    byte jScore = players[j].getAuctionStance().getScore().getScore();
+                    if (jScore > 60) {
+                        conditionIsVerified &= iScore != jScore;
+                    }
+                }
             }
         }
         assertTrue(conditionIsVerified);
@@ -104,9 +119,9 @@ public class AuctionRoundTest {
         }
     }
 
-    private int getIndexOfWinner() {
-        Player[] inputOutputPlayers = inputOutputGameTable.getPlayers();
-        int winnerIndex = 0;
+    private int getIndexOfWinner(Player[] players) {
+        Player[] inputOutputPlayers = players;
+        int winnerIndex = -1;
         for (int i = 0; i < inputOutputPlayers.length; i++) {
             final Player player = inputOutputPlayers[i];
             if (player.isWinner()) {

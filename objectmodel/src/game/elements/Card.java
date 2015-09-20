@@ -27,6 +27,19 @@ public class Card {
 
     @Override
     public String toString() {
+        return shortVersion();
+    }
+
+    private String shortVersion() {
+        return "<" + cardNumber.name() + "," + cardSuit.name() + ">";
+    }
+
+    /**
+     * regular toString version, longer, good for in depth debugging
+     *
+     * @return
+     */
+    private String normalVersion() {
         return "<" + cardNumber + "," + cardSuit + ">";
     }
 

@@ -1,6 +1,6 @@
 package strategy.evaluation.hand;
 
-import game.player.Hand;
+import game.elements.cardset.Hand;
 
 /**
  * Created by nikiforos on 07/09/15.

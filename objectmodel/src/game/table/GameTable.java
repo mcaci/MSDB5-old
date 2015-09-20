@@ -2,6 +2,7 @@ package game.table;
 
 import game.elements.cardset.Deck;
 import game.player.Player;
+import game.player.auction.Status;
 
 import java.util.Arrays;
 
@@ -47,8 +48,28 @@ public class GameTable {
         return auctionIsOver;
     }
 
-    public void setAuctionIsOver(boolean auctionIsOver) {
-        this.auctionIsOver = auctionIsOver;
+    public void setAuctionIsOver() {
+        this.auctionIsOver = true;
+    }
+
+    public void setWinningPlayer() {
+        for (int i = 0; i < this.players.length; i++) {
+            final Player player = players[i];
+            if (!player.hasFolded()) {
+                player.getAuctionStance().setStatus(Status.AUCTION_WINNER);
+            }
+        }
+    }
+
+    public int getFoldedCount() {
+        int foldedCount = 0;
+        for (int i = 0; i < this.players.length; i++) {
+            final Player player = players[i];
+            if (player.hasFolded()) {
+                foldedCount++;
+            }
+        }
+        return foldedCount;
     }
 
     @Override
@@ -60,6 +81,4 @@ public class GameTable {
                 ", auctionIsOver=" + auctionIsOver +
                 '}';
     }
-
-
 }

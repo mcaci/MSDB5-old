@@ -1,11 +1,11 @@
 package game.factory;
 
-import game.elements.Deck;
-import game.elements.GameTable;
+import game.elements.cardset.Deck;
 import game.player.Player;
+import game.table.GameTable;
 import strategy.auction.MockAuctionAction;
 
-import static game.elements.GameTable.NUMBER_OF_PLAYERS;
+import static game.table.GameTable.NUMBER_OF_PLAYERS;
 
 /**
  * Created by nikiforos on 30/08/15.
@@ -25,8 +25,8 @@ public class GameTableFactory {
     }
 
     private Deck createDeck() {
-        DeckFactory cardSetFactory = new DeckFactory();
-        return cardSetFactory.createDeck();
+        DeckFactory deckFactory = new DeckFactory();
+        return deckFactory.createDeck();
     }
 
     private Player[] createPlayers() {

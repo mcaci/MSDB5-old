@@ -1,8 +1,8 @@
 package strategy.auction;
 
-import game.player.Hand;
-import game.player.MockHand;
-import game.player.MockPlayerNoSideDeck;
+import game.elements.cardset.Hand;
+import game.elements.cardset.MockHand;
+import game.player.MockPlayer;
 import game.player.Player;
 import game.player.auction.AuctionStance;
 import game.player.auction.Score;
@@ -29,16 +29,16 @@ public class IAuctionActionTest {
     private int CURRENT_SCORE = 60;
     private IAuctionAction iAuctionActionTestObject;
 
-    private Class implClass;
+    private Class<?> implClass;
     private Hand inputHand;
     private Player inputPlayer;
 
-    public IAuctionActionTest(Class implClass) {
+    public IAuctionActionTest(Class<?> implClass) {
         this.implClass = implClass;
     }
 
     @Parameterized.Parameters
-    public static Collection initParameters() {
+    public static Collection<?> initParameters() {
         return Arrays.asList(new Object[][]{
                 {MockAuctionAction.class},
                 {AuctionAction_Rialzatore.class},
@@ -52,7 +52,7 @@ public class IAuctionActionTest {
     @Before
     public void setUp() throws Exception {
         inputHand = new MockHand(true);
-        inputPlayer = new MockPlayerNoSideDeck();
+        inputPlayer = new MockPlayer(false);
         Constructor<?> constructor = implClass.getConstructor();
         iAuctionActionTestObject = (IAuctionAction) constructor.newInstance();
     }
@@ -69,6 +69,7 @@ public class IAuctionActionTest {
         switch (beforeStatus) {
             case FOLDED:
                 assertTrue(afterStatus == Status.FOLDED);
+                assertTrue(afterScore.compareTo(beforeScore) == 0);
                 break;
             default:
                 assertTrue(afterStatus.actionWasDone());
