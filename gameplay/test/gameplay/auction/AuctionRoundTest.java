@@ -12,8 +12,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
+ * TODO: to be deleted and replaced by AuctionRoulette soon
  * Created by nikiforos on 01/09/15.
  */
+@Deprecated
 public class AuctionRoundTest {
 
     private AuctionRound auctionRoundTest;
@@ -35,7 +37,7 @@ public class AuctionRoundTest {
     public void testPerformAuctionRound() throws Exception {
         // output game table
         int originalScore = inputOutputGameTable.getAuctionScore();
-        auctionRoundTest.executeRound(inputOutputGameTable);
+        auctionRoundTest.execute(inputOutputGameTable);
 
         // 1) the score of the table is greater than the original one
         int outputScore = inputOutputGameTable.getAuctionScore();
