@@ -1,5 +1,6 @@
 package gameplay.auction;
 
+import game.player.Player;
 import game.table.GameTable;
 import game.table.MockGameTable;
 import org.junit.After;
@@ -38,12 +39,40 @@ public class AuctionRouletteTest {
         Boolean isAuctionOver = (Boolean) method.invoke(auctionRouletteTest, inputOutputGameTable);
 
         // TODO: specify what to check for the auction
-        final boolean auctionOverCondition = true;
+        final boolean auctionOverCondition = testWinnerCase(inputOutputGameTable.getPlayers());
         if (auctionOverCondition) {
             assertTrue(isAuctionOver);
         } else {
             assertFalse(isAuctionOver);
         }
+    }
+
+    private boolean testWinnerCase(Player[] players) {
+        int winnerIndex = getIndexOfWinner(players);
+        boolean isThereOneWinnerFourFolded = true;
+        for (int i = 0; i < players.length; i++) {
+            if (i != winnerIndex) {
+                final Player player = players[i];
+                isThereOneWinnerFourFolded &= player.hasFolded();
+//                assertTrue(player.toString() + " is not the winner (Player: " + i + ") so it should result as folded",
+//                        player.hasFolded());
+            }
+        }
+        return isThereOneWinnerFourFolded;
+    }
+
+
+    private int getIndexOfWinner(Player[] players) {
+        Player[] inputOutputPlayers = players;
+        int winnerIndex = -1;
+        for (int i = 0; i < inputOutputPlayers.length; i++) {
+            final Player player = inputOutputPlayers[i];
+            if (player.isWinner()) {
+                winnerIndex = i;
+                break;
+            }
+        }
+        return winnerIndex;
     }
 
     @Test
