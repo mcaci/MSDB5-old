@@ -81,7 +81,7 @@ public class AuctionRouletteTest {
         method.setAccessible(true);
         method.invoke(auctionRouletteTest);
 
-        // TODO: specify what to check for the updated game table
+        // TODO: specify what to check for the updated gametable
 //        final boolean auctionOverCondition = true;
 //        if(auctionOverCondition) {
 //            assertTrue(isAuctionOver);
