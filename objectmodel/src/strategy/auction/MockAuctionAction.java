@@ -20,7 +20,7 @@ public class MockAuctionAction implements IAuctionAction {
         return score;
     }
 
-    private int decideNextScore(int currentScore) {
+    int decideNextScore(int currentScore) {
         int nextScore = ++currentScore;
         nextScore = Math.max(nextScore, MIN_AUCTION_SCORE);
         nextScore = Math.min(nextScore, MAX_AUCTION_SCORE);
