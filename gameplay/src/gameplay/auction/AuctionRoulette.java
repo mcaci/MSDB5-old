@@ -1,9 +1,9 @@
 package gameplay.auction;
 
-import game.player.Player;
-import game.player.auction.Status;
-import game.table.GameTable;
-import strategy.auction.IAuctionAction;
+import game.elements.player.Player;
+import game.elements.player.auction.Status;
+import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.table.GameTable;
 
 /**
  * Created by nikiforos on 18/09/15.
@@ -22,10 +22,12 @@ public class AuctionRoulette {
             playerInTurn.performAuctionAction(currentScore);
 
             // 2) update game table
-            int playerScore = playerInTurn.getAuctionStance().getScore().getScore();
+            int playerScore = playerInTurn.getAuctionInfo().getScore().getScore();
             if (currentScore < playerScore) {
                 gameTable.setAuctionScore(playerScore);
             }
+
+            // 2.1) TODO: turn card if side deck is present
 
             // 3) set next player to do the auction
             playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
@@ -42,11 +44,11 @@ public class AuctionRoulette {
     private void setWinner(Player[] players, int auctionScore) {
         Player winner = null;
         for (int i = 0; i < players.length; i++) {
-            if (players[i].getAuctionStance().getScore().getScore() == auctionScore) {
+            if (players[i].getAuctionInfo().getScore().getScore() == auctionScore) {
                 winner = players[i];
             }
         }
-        winner.getAuctionStance().setStatus(Status.AUCTION_WINNER);
+        winner.getAuctionInfo().setStatus(Status.AUCTION_WINNER);
     }
 
     private boolean isAuctionOver(GameTable gameTable) {

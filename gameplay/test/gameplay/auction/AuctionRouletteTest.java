@@ -1,13 +1,13 @@
 package gameplay.auction;
 
-import game.player.MockUnwaveringPlayer;
-import game.player.Player;
-import game.table.GameTable;
-import game.table.MockGameTable;
+import game.elements.player.MockUnwaveringPlayer;
+import game.elements.player.Player;
+import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.table.GameTable;
+import game.elements.table.MockGameTable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import strategy.auction.IAuctionAction;
 
 import java.lang.reflect.Method;
 
@@ -126,10 +126,10 @@ public class AuctionRouletteTest {
     private void testAllScoresAreDifferent(Player[] players) {
         boolean conditionIsVerified = true;
         for (int i = 0; i < players.length && conditionIsVerified; i++) {
-            byte iScore = players[i].getAuctionStance().getScore().getScore();
+            byte iScore = players[i].getAuctionInfo().getScore().getScore();
             if (iScore > 60) {
                 for (int j = i + 1; j < players.length && conditionIsVerified; j++) {
-                    byte jScore = players[j].getAuctionStance().getScore().getScore();
+                    byte jScore = players[j].getAuctionInfo().getScore().getScore();
                     if (jScore > 60) {
                         conditionIsVerified &= iScore != jScore;
                     }
@@ -141,8 +141,8 @@ public class AuctionRouletteTest {
 
     private void testAllScoresAreInTheValidRange(Player[] players) {
         for (int i = 0; i < players.length; i++) {
-            assertTrue(players[i].getAuctionStance().getScore().getScore() >= IAuctionAction.MIN_AUCTION_SCORE);
-            assertTrue(players[i].getAuctionStance().getScore().getScore() <= IAuctionAction.MAX_AUCTION_SCORE);
+            assertTrue(players[i].getAuctionInfo().getScore().getScore() >= IAuctionAction.MIN_AUCTION_SCORE);
+            assertTrue(players[i].getAuctionInfo().getScore().getScore() <= IAuctionAction.MAX_AUCTION_SCORE);
         }
     }
 
@@ -168,13 +168,13 @@ public class AuctionRouletteTest {
     }
 
     private void testWinnerScore(Player[] players, int winnerIndex) {
-        byte winnerScore = players[winnerIndex].getAuctionStance().getScore().getScore();
+        byte winnerScore = players[winnerIndex].getAuctionInfo().getScore().getScore();
         if (winnerScore > 60) {
             for (int i = 0; i < players.length; i++) {
                 if (i != winnerIndex) {
                     final Player player = players[i];
                     assertTrue(player.toString() + " is not the winner so its auction score should be inferior",
-                            winnerScore > player.getAuctionStance().getScore().getScore());
+                            winnerScore > player.getAuctionInfo().getScore().getScore());
                 }
             }
         }
