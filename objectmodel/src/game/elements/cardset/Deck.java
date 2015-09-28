@@ -1,8 +1,8 @@
 package game.elements.cardset;
 
-import game.elements.Card;
-import game.elements.CardNumber;
-import game.elements.CardSuit;
+import game.elements.base.Card;
+import game.elements.base.CardNumber;
+import game.elements.base.CardSuit;
 
 import java.util.Collection;
 import java.util.LinkedList;

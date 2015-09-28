@@ -1,6 +1,6 @@
 package game.elements.cardset;
 
-import game.elements.Card;
+import game.elements.base.Card;
 
 import java.util.Collection;
 import java.util.LinkedList;
