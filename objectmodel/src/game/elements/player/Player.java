@@ -11,7 +11,7 @@ import game.factory.cardset.HandFactory;
 public class Player {
     private final Hand hand;
     private final IAuctionPersonality auctionAction;
-    private AuctionInfo auctionInfo = new AuctionInfo();
+    private final AuctionInfo auctionInfo = new AuctionInfo();
 
     Player(Hand hand, IAuctionPersonality auctionAction) {
         this.hand = hand;
@@ -19,7 +19,7 @@ public class Player {
     }
 
     public Player(IAuctionPersonality auctionAction) {
-        this(new HandFactory(true).createHand(), auctionAction);
+        this(new HandFactory().createHand(), auctionAction);
     }
 
     public Hand getHand() {
@@ -28,10 +28,6 @@ public class Player {
 
     public AuctionInfo getAuctionInfo() {
         return auctionInfo;
-    }
-
-    public void setAuctionInfo(AuctionInfo auctionInfo) {
-        this.auctionInfo = auctionInfo;
     }
 
     public IAuctionPersonality getAuctionAction() {
