@@ -14,8 +14,8 @@ public class Hand extends CardSet<List<Card>> {
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;
     public static final int WITHOUT_SIDE_DECK_HAND_SIZE = 8;
 
-    public Hand() {
-        super(new LinkedList<Card>());
+    Hand() {
+        super(new LinkedList<>());
     }
 
     public Hand(Collection<Card> deckCards) {
