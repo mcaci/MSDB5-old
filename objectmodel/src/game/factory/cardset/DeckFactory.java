@@ -12,6 +12,6 @@ public class DeckFactory extends CardSetFactory {
     }
 
     public Deck createDeck() {
-        return new Deck(createShuffledCardSet());
+        return new Deck(createCardSet());
     }
 }

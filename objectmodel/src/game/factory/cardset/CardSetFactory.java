@@ -20,7 +20,15 @@ abstract class CardSetFactory {
         this.cardSetSize = cardSetSize;
     }
 
-    Collection<Card> createShuffledCardSet() {
+    Collection<Card> createCardSet() {
+        Collection<Card> localCardSet = Collections.EMPTY_LIST;
+        if (cardSetSize > 0) {
+            localCardSet = createShuffledCardSet();
+        }
+        return localCardSet;
+    }
+
+    private Collection<Card> createShuffledCardSet() {
         List<Card> localCardSet = createSortedCardSet();
         shuffleCardSet(localCardSet);
         return localCardSet.subList(0, this.cardSetSize);
