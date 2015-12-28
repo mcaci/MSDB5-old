@@ -11,11 +11,12 @@ import game.factory.cardset.HandFactory;
 public class Player {
     private final Hand hand;
     private final IAuctionPersonality auctionAction;
-    private final AuctionInfo auctionInfo = new AuctionInfo();
+    private final AuctionInfo auctionInfo;
 
     Player(Hand hand, IAuctionPersonality auctionAction) {
         this.hand = hand;
         this.auctionAction = auctionAction;
+        this.auctionInfo = new AuctionInfo();
     }
 
     public Player(IAuctionPersonality auctionAction) {
