@@ -1,4 +1,4 @@
-package game.elements.player.impl.msdb5;
+package game.player;
 
 import game.elements.player.Player;
 import game.elements.player.strategy.auction.IAuctionPersonality;

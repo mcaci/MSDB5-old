@@ -1,4 +1,4 @@
-package game.elements.player.strategy.auction;
+package game.player.auction;
 
 import game.elements.cardset.Hand;
 import game.elements.cardset.MockHand;
@@ -7,6 +7,7 @@ import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
 import game.elements.player.auction.Status;
+import game.elements.player.strategy.auction.IAuctionPersonality;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +40,11 @@ public class IAuctionPersonalityTest {
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
         return Arrays.asList(new Object[][]{
-                {MockAuctionPersonality.class},
-                {MockUnwaveringAuctionPersonality.class}
+                {AuctionPersonality_Rialzatore.class},
+                {AuctionPersonality_CampioneDecaduto.class},
+                {AuctionPersonality_BuonCompagno.class},
+                {AuctionPersonality_Dubbioso.class},
+                {AuctionPersonality_Ambiguo.class}
         });
     }
 

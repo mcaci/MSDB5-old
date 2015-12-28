@@ -1,4 +1,4 @@
-package game.elements.player.strategy.auction.msdb5;
+package game.player.auction;
 
 import game.elements.cardset.Hand;
 import game.elements.player.Player;
@@ -11,21 +11,14 @@ import game.elements.player.strategy.evaluation.hand.IHandEvaluator;
 /**
  * Created by nikiforos on 10/09/15.
  */
-public class AuctionPersonality_Ambiguo implements IAuctionPersonality {
+public class AuctionPersonality_BuonCompagno implements IAuctionPersonality {
 
     @Override
     public Score chooseNextScore(Hand hand, int currentScore) {
-        int nextScore = currentScore;
         // TODO: put appropriate implementation of IHandEvaluator and extract class
-        IHandEvaluator handEvaluator = new IHandEvaluator() {
-            @Override
-            public int evaluateHand(Hand handToEvaluate) {
-                return 0;
-            }
-
-        };
+        IHandEvaluator handEvaluator = handToEvaluate -> 0;
         int handEvaluation = handEvaluator.evaluateHand(hand);
-        nextScore = decideNextScore(currentScore, handEvaluation);
+        int nextScore = decideNextScore(currentScore, handEvaluation);
 
         final Score score = new Score();
         score.setSafeScore(nextScore);

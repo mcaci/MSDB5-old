@@ -1,4 +1,4 @@
-package game.elements.player.strategy.auction.msdb5;
+package game.player.auction;
 
 import game.elements.cardset.Hand;
 import game.elements.player.Player;
