@@ -1,7 +1,7 @@
 package game.elements.player.strategy.evaluation.hand;
 
 import game.elements.base.Card;
-import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.Hand;
 import game.elements.player.strategy.evaluation.card.DummyCardEvaluator;
 
 import java.util.Collection;
@@ -13,9 +13,9 @@ import java.util.Iterator;
 public class SumEvaluator implements IHandEvaluator {
 
     @Override
-    public int evaluateHand(DeckAwareHand deckAwareHandToEvaluate) {
+    public int evaluateHand(Hand handToEvaluate) {
         DummyCardEvaluator cardEvaluator = new DummyCardEvaluator();
-        Collection<Card> cards = deckAwareHandToEvaluate.getCardSet();
+        Collection<Card> cards = handToEvaluate.getCardSet();
         int handValue = 0;
         Iterator<Card> cardIterator = cards.iterator();
         while (cardIterator.hasNext()) {

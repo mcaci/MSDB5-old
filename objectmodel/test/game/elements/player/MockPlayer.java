@@ -1,6 +1,6 @@
 package game.elements.player;
 
-import game.elements.cardset.MockDeckAwareHand;
+import game.elements.cardset.MockHand;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
 import game.elements.player.auction.Status;
@@ -26,7 +26,7 @@ public class MockPlayer extends Player {
     }
 
     MockPlayer(boolean isSideDeckPresent, MockAuctionAction auctionAction) {
-        super(new MockDeckAwareHand(isSideDeckPresent), auctionAction);
+        super(new MockHand(isSideDeckPresent), auctionAction);
     }
 
     @Parameterized.Parameters
@@ -95,8 +95,8 @@ public class MockPlayer extends Player {
 
     @Test
     public void testValidity() throws Exception {
-        assertNotNull(this.getDeckAwareHand());
-        assertFalse(this.getDeckAwareHand().isEmpty());
+        assertNotNull(this.getHand());
+        assertFalse(this.getHand().isEmpty());
         assertNotNull(this.getAuctionInfo());
         assertTrue(this.getAuctionInfo().getScore().getScore() >= Score.MIN_SCORE);
         assertTrue(this.getAuctionInfo().getScore().getScore() <= Score.MAX_SCORE);

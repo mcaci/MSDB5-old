@@ -1,6 +1,6 @@
 package game.elements.player.strategy.evaluation.hand;
 
-import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.Hand;
 
 /**
  * Created by nikiforos on 07/09/15.
@@ -8,7 +8,7 @@ import game.elements.cardset.DeckAwareHand;
 public class DummyHandEvaluator implements IHandEvaluator {
 
     @Override
-    public int evaluateHand(DeckAwareHand deckAwareHandToEvaluate) {
+    public int evaluateHand(Hand handToEvaluate) {
         return 60;
     }
 

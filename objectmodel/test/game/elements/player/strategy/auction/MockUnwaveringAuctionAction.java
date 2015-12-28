@@ -21,7 +21,7 @@ public class MockUnwaveringAuctionAction extends MockAuctionAction {
         final AuctionInfo auctionInfo = playerDeciding.getAuctionInfo();
         if (!auctionInfo.getStatus().hasFolded()) {
             auctionInfo.setStatus(Status.IN_AUCTION);
-            auctionInfo.setScore(chooseNextScore(playerDeciding.getDeckAwareHand(), currentScore));
+            auctionInfo.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
         }
         return auctionInfo;
     }

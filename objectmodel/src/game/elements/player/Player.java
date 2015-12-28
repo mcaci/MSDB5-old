@@ -1,6 +1,6 @@
 package game.elements.player;
 
-import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.Hand;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.strategy.auction.IAuctionAction;
 
@@ -8,21 +8,21 @@ import game.elements.player.strategy.auction.IAuctionAction;
  * Created by nikiforos on 30/08/15.
  */
 public class Player {
-    private final DeckAwareHand deckAwareHand;
+    private final Hand hand;
     private final IAuctionAction auctionAction;
     private AuctionInfo auctionInfo = new AuctionInfo();
 
-    Player(DeckAwareHand deckAwareHand, IAuctionAction auctionAction) {
-        this.deckAwareHand = deckAwareHand;
+    Player(Hand hand, IAuctionAction auctionAction) {
+        this.hand = hand;
         this.auctionAction = auctionAction;
     }
 
     public Player(IAuctionAction auctionAction) {
-        this(new DeckAwareHand(), auctionAction);
+        this(new Hand(), auctionAction);
     }
 
-    public DeckAwareHand getDeckAwareHand() {
-        return this.deckAwareHand;
+    public Hand getHand() {
+        return this.hand;
     }
 
     public AuctionInfo getAuctionInfo() {
@@ -40,7 +40,7 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "deckAwareHand=" + deckAwareHand +
+                "hand=" + hand +
                 ", auctionInfo=" + auctionInfo +
                 '}';
     }

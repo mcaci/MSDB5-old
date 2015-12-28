@@ -1,6 +1,6 @@
 package game.factory.cardset;
 
-import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.Hand;
 
 /**
  * Created by nikiforos on 08/09/15.
@@ -8,10 +8,10 @@ import game.elements.cardset.DeckAwareHand;
 public class HandFactory extends CardSetFactory {
 
     public HandFactory(boolean isSizeDeckPresent) {
-        super(isSizeDeckPresent ? DeckAwareHand.WITH_SIDE_DECK_HAND_SIZE : DeckAwareHand.WITHOUT_SIDE_DECK_HAND_SIZE);
+        super(isSizeDeckPresent ? Hand.WITH_SIDE_DECK_HAND_SIZE : Hand.WITHOUT_SIDE_DECK_HAND_SIZE);
     }
 
-    public DeckAwareHand createHand() {
-        return new DeckAwareHand(createShuffledCardSet());
+    public Hand createHand() {
+        return new Hand(createShuffledCardSet());
     }
 }
