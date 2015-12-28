@@ -2,7 +2,7 @@ package game.factory.table;
 
 import game.elements.base.Card;
 import game.elements.cardset.Deck;
-import game.elements.cardset.Hand;
+import game.elements.cardset.DeckAwareHand;
 import game.elements.player.Player;
 import game.elements.table.GameTable;
 
@@ -41,9 +41,9 @@ public class PreparedGameTableFactory extends GameTableFactory {
         }
         for (int i = 0; i < size; i++) {
             Player player = players[i % NUMBER_OF_PLAYERS];
-            Hand playerHand = player.getHand();
+            DeckAwareHand playerDeckAwareHand = player.getDeckAwareHand();
             Card cardToAdd = deck.remove();
-            playerHand.add(cardToAdd);
+            playerDeckAwareHand.add(cardToAdd);
         }
     }
 }

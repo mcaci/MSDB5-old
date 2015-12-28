@@ -1,6 +1,6 @@
 package game.elements.player.strategy.auction;
 
-import game.elements.cardset.Hand;
+import game.elements.cardset.DeckAwareHand;
 import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
@@ -16,7 +16,7 @@ public class MockAuctionAction implements IAuctionAction {
     private static final double CHANCE_TO_FOLD = 0.4;
 
     @Override
-    public Score chooseNextScore(Hand hand, int currentScore) {
+    public Score chooseNextScore(DeckAwareHand deckAwareHand, int currentScore) {
         final Score score = new Score();
         final int nextScore = decideNextScore(currentScore);
         score.setSafeScore(nextScore);
@@ -37,7 +37,7 @@ public class MockAuctionAction implements IAuctionAction {
             final double randomFlag = Math.random();
             if (randomFlag > CHANCE_TO_FOLD) {
                 auctionInfo.setStatus(Status.IN_AUCTION);
-                auctionInfo.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
+                auctionInfo.setScore(chooseNextScore(playerDeciding.getDeckAwareHand(), currentScore));
             } else {
                 auctionInfo.setStatus(Status.FOLDED);
             }

@@ -1,7 +1,7 @@
 package game.elements.player.strategy.auction;
 
-import game.elements.cardset.Hand;
-import game.elements.cardset.MockHand;
+import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.MockDeckAwareHand;
 import game.elements.player.MockPlayer;
 import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
@@ -30,7 +30,7 @@ public class IAuctionActionTest {
     private IAuctionAction iAuctionActionTestObject;
 
     private Class<?> implClass;
-    private Hand inputHand;
+    private DeckAwareHand inputDeckAwareHand;
     private Player inputPlayer;
 
     public IAuctionActionTest(Class<?> implClass) {
@@ -52,7 +52,7 @@ public class IAuctionActionTest {
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new MockHand(true);
+        inputDeckAwareHand = new MockDeckAwareHand(true);
         inputPlayer = new MockPlayer(false);
         Constructor<?> constructor = implClass.getConstructor();
         iAuctionActionTestObject = (IAuctionAction) constructor.newInstance();
@@ -95,7 +95,7 @@ public class IAuctionActionTest {
 
     @Test
     public void testChooseNextScore() throws Exception {
-        Score nextScore = iAuctionActionTestObject.chooseNextScore(inputHand, CURRENT_SCORE);
+        Score nextScore = iAuctionActionTestObject.chooseNextScore(inputDeckAwareHand, CURRENT_SCORE);
         assertTrue(nextScore.getScore() + " is not greater than " + CURRENT_SCORE, nextScore.getScore() >
                 CURRENT_SCORE);
 

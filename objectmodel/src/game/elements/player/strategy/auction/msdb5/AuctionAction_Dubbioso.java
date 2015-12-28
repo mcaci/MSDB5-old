@@ -1,6 +1,6 @@
 package game.elements.player.strategy.auction.msdb5;
 
-import game.elements.cardset.Hand;
+import game.elements.cardset.DeckAwareHand;
 import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
@@ -14,18 +14,11 @@ import game.elements.player.strategy.evaluation.hand.IHandEvaluator;
 public class AuctionAction_Dubbioso implements IAuctionAction {
 
     @Override
-    public Score chooseNextScore(Hand hand, int currentScore) {
-        int nextScore = currentScore;
+    public Score chooseNextScore(DeckAwareHand deckAwareHand, int currentScore) {
         // TODO: put appropriate implementation of IHandEvaluator and extract class
-        IHandEvaluator handEvaluator = new IHandEvaluator() {
-            @Override
-            public int evaluateHand(Hand handToEvaluate) {
-                return 0;
-            }
-
-        };
-        int handEvaluation = handEvaluator.evaluateHand(hand);
-        nextScore = decideNextScore(currentScore, handEvaluation);
+        IHandEvaluator handEvaluator = handToEvaluate -> 0;
+        int handEvaluation = handEvaluator.evaluateHand(deckAwareHand);
+        int nextScore = decideNextScore(currentScore, handEvaluation);
 
         final Score score = new Score();
         score.setSafeScore(nextScore);
@@ -37,7 +30,7 @@ public class AuctionAction_Dubbioso implements IAuctionAction {
         // TODO: logic is not complete (improve test)
         final AuctionInfo auctionInfo = new AuctionInfo();
         auctionInfo.setStatus(Status.IN_AUCTION);
-        auctionInfo.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
+        auctionInfo.setScore(chooseNextScore(playerDeciding.getDeckAwareHand(), currentScore));
         return auctionInfo;
     }
 

@@ -23,8 +23,8 @@ public class MockUnwaveringPlayer extends MockPlayer {
 
     @Test
     public void testValidity() throws Exception {
-        assertNotNull(this.getHand());
-        assertFalse(this.getHand().isEmpty());
+        assertNotNull(this.getDeckAwareHand());
+        assertFalse(this.getDeckAwareHand().isEmpty());
         assertNotNull(this.getAuctionInfo());
         assertTrue(this.getAuctionInfo().getScore().getScore() >= Score.MIN_SCORE);
         assertTrue(this.getAuctionInfo().getScore().getScore() <= Score.MAX_SCORE);

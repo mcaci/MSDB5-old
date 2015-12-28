@@ -1,7 +1,7 @@
 package game.factory.cardset;
 
 import game.elements.base.Card;
-import game.elements.cardset.Hand;
+import game.elements.cardset.DeckAwareHand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,12 +18,12 @@ import static org.junit.Assert.assertNotNull;
  * Created by nikiforos on 08/09/15.
  */
 @RunWith(Parameterized.class)
-public class HandFactoryTest extends CardSetFactoryTest {
+public class DeckAwareHandFactoryTest extends CardSetFactoryTest {
 
     private boolean isSizeDeckPresent;
-    private Hand handCreated;
+    private DeckAwareHand deckAwareHandCreated;
 
-    public HandFactoryTest(boolean isSizeDeckPresent) {
+    public DeckAwareHandFactoryTest(boolean isSizeDeckPresent) {
         this.isSizeDeckPresent = isSizeDeckPresent;
     }
 
@@ -37,33 +37,33 @@ public class HandFactoryTest extends CardSetFactoryTest {
 
     @Override
     public Collection<Card> getCardSet() {
-        return handCreated.getCardSet();
+        return deckAwareHandCreated.getCardSet();
     }
 
     @Before
     public void setUp() throws Exception {
         cardSetFactoryTestObject = new HandFactory(isSizeDeckPresent);
-        handCreated = ((HandFactory) cardSetFactoryTestObject).createHand();
+        deckAwareHandCreated = ((HandFactory) cardSetFactoryTestObject).createHand();
     }
 
     @After
     public void tearDown() throws Exception {
-        System.out.println("HandFactoryTest: showing hand after creation");
-        System.out.println(handCreated.toString());
+        System.out.println("DeckAwareHandFactoryTest: showing hand after creation");
+        System.out.println(deckAwareHandCreated.toString());
     }
 
     @Test
     public void testGetCreatedHand() throws Exception {
-        assertNotNull(handCreated);
-        assertNotNull(handCreated.getCardSet());
+        assertNotNull(deckAwareHandCreated);
+        assertNotNull(deckAwareHandCreated.getCardSet());
         if (isSizeDeckPresent) {
-            assertEquals("Size doesn't correspond to test value " + Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    handCreated.getCardSet().size());
+            assertEquals("Size doesn't correspond to test value " + DeckAwareHand.WITH_SIDE_DECK_HAND_SIZE,
+                    DeckAwareHand.WITH_SIDE_DECK_HAND_SIZE,
+                    deckAwareHandCreated.getCardSet().size());
         } else {
-            assertEquals("Size doesn't correspond to test value " + Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    handCreated.getCardSet().size());
+            assertEquals("Size doesn't correspond to test value " + DeckAwareHand.WITHOUT_SIDE_DECK_HAND_SIZE,
+                    DeckAwareHand.WITHOUT_SIDE_DECK_HAND_SIZE,
+                    deckAwareHandCreated.getCardSet().size());
         }
     }
 }

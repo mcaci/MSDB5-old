@@ -1,7 +1,7 @@
 package game.elements.player.strategy.evaluation.hand;
 
-import game.elements.cardset.Hand;
-import game.elements.cardset.MockHand;
+import game.elements.cardset.DeckAwareHand;
+import game.elements.cardset.MockDeckAwareHand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,14 +17,14 @@ import static org.junit.Assert.assertTrue;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class IHandEvaluatorTest {
+public class IDeckAwareHandEvaluatorTest {
 
     private IHandEvaluator iHandEvaluatorTestObject;
 
     private Class<?> implClass;
-    private Hand inputHand;
+    private DeckAwareHand inputDeckAwareHand;
 
-    public IHandEvaluatorTest(Class implClass) {
+    public IDeckAwareHandEvaluatorTest(Class implClass) {
         this.implClass = implClass;
     }
 
@@ -37,14 +37,14 @@ public class IHandEvaluatorTest {
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new MockHand(true);
+        inputDeckAwareHand = new MockDeckAwareHand(true);
         Constructor<?> constructor = implClass.getConstructor();
         iHandEvaluatorTestObject = (IHandEvaluator) constructor.newInstance();
     }
 
     @Test
     public void testEvaluateHand() throws Exception {
-        int evaluation = iHandEvaluatorTestObject.evaluateHand(inputHand);
+        int evaluation = iHandEvaluatorTestObject.evaluateHand(inputDeckAwareHand);
 
         assertTrue(evaluation + " is less than 60", evaluation >= 60);
         assertTrue(evaluation + " is more than 120", evaluation <= 120);

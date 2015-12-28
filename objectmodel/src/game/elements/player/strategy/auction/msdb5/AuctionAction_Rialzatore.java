@@ -1,6 +1,6 @@
 package game.elements.player.strategy.auction.msdb5;
 
-import game.elements.cardset.Hand;
+import game.elements.cardset.DeckAwareHand;
 import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
@@ -16,20 +16,14 @@ public class AuctionAction_Rialzatore implements IAuctionAction {
     private static final int RIALZATORE_DEFAULT_SCORE = 80;
 
     @Override
-    public Score chooseNextScore(Hand hand, int currentScore) {
-        int nextScore = currentScore;
+    public Score chooseNextScore(DeckAwareHand deckAwareHand, int currentScore) {
+        int nextScore = 0;
         if (currentScore < RIALZATORE_DEFAULT_SCORE) {
             nextScore = RIALZATORE_DEFAULT_SCORE;
         } else {
             // TODO: put appropriate implementation of IHandEvaluator and extract class
-            IHandEvaluator handEvaluator = new IHandEvaluator() {
-                @Override
-                public int evaluateHand(Hand handToEvaluate) {
-                    return 0;
-                }
-
-            };
-            int handEvaluation = handEvaluator.evaluateHand(hand);
+            IHandEvaluator handEvaluator = handToEvaluate -> 0;
+            int handEvaluation = handEvaluator.evaluateHand(deckAwareHand);
             nextScore = computeNewScore(currentScore, handEvaluation);
         }
         final Score score = new Score();
@@ -42,7 +36,7 @@ public class AuctionAction_Rialzatore implements IAuctionAction {
         // TODO: logic is not complete (improve test)
         final AuctionInfo auctionInfo = new AuctionInfo();
         auctionInfo.setStatus(Status.IN_AUCTION);
-        auctionInfo.setScore(chooseNextScore(playerDeciding.getHand(), currentScore));
+        auctionInfo.setScore(chooseNextScore(playerDeciding.getDeckAwareHand(), currentScore));
         return auctionInfo;
     }
 

@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class Hand extends CardSet<List<Card>> {
+public class DeckAwareHand extends CardSet<List<Card>> {
 
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;
     public static final int WITHOUT_SIDE_DECK_HAND_SIZE = 8;
 
-    public Hand() {
+    public DeckAwareHand() {
         super(new LinkedList<Card>());
     }
 
-    public Hand(Collection<Card> deckCards) {
+    public DeckAwareHand(Collection<Card> deckCards) {
         this();
         this.getCardSet().addAll(deckCards);
     }
@@ -29,7 +29,7 @@ public class Hand extends CardSet<List<Card>> {
 
     @Override
     public String toString() {
-        return "Hand{" +
+        return "DeckAwareHand{" +
                 super.toString() +
                 '}';
     }

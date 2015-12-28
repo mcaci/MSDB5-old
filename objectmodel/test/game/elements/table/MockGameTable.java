@@ -63,7 +63,7 @@ public class MockGameTable extends GameTable {
     private void distributeCard(Card nextCard, int playerCounter) {
         int playerIndex = playerCounter % this.getPlayers().length;
         Player player = this.getPlayers()[playerIndex];
-        player.getHand().add(nextCard);
+        player.getDeckAwareHand().add(nextCard);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class MockGameTable extends GameTable {
         assertNotNull(this.getDeck());
         assertNotNull(this.getPlayers());
         for (int i = 0; i < this.getPlayers().length; i++) {
-            assertTrue(this.getPlayers()[i].getHand().getCardSet().size() > 0);
+            assertTrue(this.getPlayers()[i].getDeckAwareHand().getCardSet().size() > 0);
         }
     }
 
