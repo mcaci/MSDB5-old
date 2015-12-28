@@ -1,8 +1,8 @@
 package game.elements.player.impl.msdb5;
 
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionAction;
-import game.elements.player.strategy.auction.msdb5.AuctionAction_Dubbioso;
+import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Dubbioso;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -14,7 +14,7 @@ import game.elements.player.strategy.auction.msdb5.AuctionAction_Dubbioso;
  * il suo prossimo regalo di compleanno sarà un cappio portatile, completo di Boia gonfiabile.
  */
 public class Dubbioso extends Player {
-    public Dubbioso(IAuctionAction auctionAction) {
-        super(new AuctionAction_Dubbioso());
+    public Dubbioso(IAuctionPersonality auctionAction) {
+        super(new AuctionPersonality_Dubbioso());
     }
 }

@@ -2,23 +2,24 @@ package game.elements.player;
 
 import game.elements.cardset.Hand;
 import game.elements.player.auction.AuctionInfo;
-import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.factory.cardset.HandFactory;
 
 /**
  * Created by nikiforos on 30/08/15.
  */
 public class Player {
     private final Hand hand;
-    private final IAuctionAction auctionAction;
+    private final IAuctionPersonality auctionAction;
     private AuctionInfo auctionInfo = new AuctionInfo();
 
-    Player(Hand hand, IAuctionAction auctionAction) {
+    Player(Hand hand, IAuctionPersonality auctionAction) {
         this.hand = hand;
         this.auctionAction = auctionAction;
     }
 
-    public Player(IAuctionAction auctionAction) {
-        this(new Hand(), auctionAction);
+    public Player(IAuctionPersonality auctionAction) {
+        this(new HandFactory(true).createHand(), auctionAction);
     }
 
     public Hand getHand() {
@@ -33,7 +34,7 @@ public class Player {
         this.auctionInfo = auctionInfo;
     }
 
-    public IAuctionAction getAuctionAction() {
+    public IAuctionPersonality getAuctionAction() {
         return auctionAction;
     }
 
@@ -62,6 +63,7 @@ public class Player {
     }
 
     public void performAuctionAction(int currentScore) {
-        this.auctionInfo = this.auctionAction.chooseNextStance(this, currentScore);
+        AuctionInfo infoAfterAction = this.auctionAction.chooseNextStance(this, currentScore);
+        this.auctionInfo.update(infoAfterAction);
     }
 }

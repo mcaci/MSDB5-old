@@ -4,7 +4,7 @@ import game.elements.cardset.MockHand;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
 import game.elements.player.auction.Status;
-import game.elements.player.strategy.auction.MockAuctionAction;
+import game.elements.player.strategy.auction.MockAuctionPersonality;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +22,10 @@ import static org.junit.Assert.*;
 public class MockPlayer extends Player {
 
     public MockPlayer(boolean isSideDeckPresent) {
-        this(isSideDeckPresent, new MockAuctionAction());
+        this(isSideDeckPresent, new MockAuctionPersonality());
     }
 
-    MockPlayer(boolean isSideDeckPresent, MockAuctionAction auctionAction) {
+    MockPlayer(boolean isSideDeckPresent, MockAuctionPersonality auctionAction) {
         super(new MockHand(isSideDeckPresent), auctionAction);
     }
 

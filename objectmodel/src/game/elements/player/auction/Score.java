@@ -1,14 +1,14 @@
 package game.elements.player.auction;
 
-import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.player.strategy.auction.IAuctionPersonality;
 
 /**
  * Created by nikiforos on 04/09/15.
  */
 public class Score implements Comparable<Score> {
 
-    public static final byte MIN_SCORE = IAuctionAction.MIN_AUCTION_SCORE;
-    public static final byte MAX_SCORE = IAuctionAction.MAX_AUCTION_SCORE;
+    public static final byte MIN_SCORE = IAuctionPersonality.MIN_AUCTION_SCORE;
+    public static final byte MAX_SCORE = IAuctionPersonality.MAX_AUCTION_SCORE;
 
     private byte score = MIN_SCORE;
 

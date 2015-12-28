@@ -7,7 +7,7 @@ import game.elements.player.auction.Status;
 /**
  * Created by nikiforos on 25/09/15.
  */
-public class MockUnwaveringAuctionAction extends MockAuctionAction {
+public class MockUnwaveringAuctionPersonality extends MockAuctionPersonality {
 
     public static final int SCORE_INCREMENT = 7;
 

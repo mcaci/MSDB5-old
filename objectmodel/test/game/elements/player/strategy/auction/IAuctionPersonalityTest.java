@@ -24,29 +24,29 @@ import static org.junit.Assert.assertTrue;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class IAuctionActionTest {
+public class IAuctionPersonalityTest {
 
     private int CURRENT_SCORE = 60;
-    private IAuctionAction iAuctionActionTestObject;
+    private IAuctionPersonality iAuctionPersonalityTestObject;
 
     private Class<?> implClass;
     private Hand inputHand;
     private Player inputPlayer;
 
-    public IAuctionActionTest(Class<?> implClass) {
+    public IAuctionPersonalityTest(Class<?> implClass) {
         this.implClass = implClass;
     }
 
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
         return Arrays.asList(new Object[][]{
-                {MockAuctionAction.class},
-                {MockUnwaveringAuctionAction.class},
-                {AuctionAction_Rialzatore.class},
-                {AuctionAction_CampioneDecaduto.class},
-                {AuctionAction_BuonCompagno.class},
-                {AuctionAction_Dubbioso.class},
-                {AuctionAction_Ambiguo.class}
+                {MockAuctionPersonality.class},
+                {MockUnwaveringAuctionPersonality.class},
+                {AuctionPersonality_Rialzatore.class},
+                {AuctionPersonality_CampioneDecaduto.class},
+                {AuctionPersonality_BuonCompagno.class},
+                {AuctionPersonality_Dubbioso.class},
+                {AuctionPersonality_Ambiguo.class}
         });
     }
 
@@ -55,14 +55,14 @@ public class IAuctionActionTest {
         inputHand = new MockHand(true);
         inputPlayer = new MockPlayer(false);
         Constructor<?> constructor = implClass.getConstructor();
-        iAuctionActionTestObject = (IAuctionAction) constructor.newInstance();
+        iAuctionPersonalityTestObject = (IAuctionPersonality) constructor.newInstance();
     }
 
     @Test
     public void testChooseNextStance() throws Exception {
         Status beforeStatus = inputPlayer.getAuctionInfo().getStatus();
         Score beforeScore = inputPlayer.getAuctionInfo().getScore();
-        AuctionInfo nextStance = iAuctionActionTestObject.chooseNextStance(inputPlayer, CURRENT_SCORE);
+        AuctionInfo nextStance = iAuctionPersonalityTestObject.chooseNextStance(inputPlayer, CURRENT_SCORE);
         assertNotNull(nextStance);
         Status afterStatus = nextStance.getStatus();
         Score afterScore = nextStance.getScore();
@@ -95,7 +95,7 @@ public class IAuctionActionTest {
 
     @Test
     public void testChooseNextScore() throws Exception {
-        Score nextScore = iAuctionActionTestObject.chooseNextScore(inputHand, CURRENT_SCORE);
+        Score nextScore = iAuctionPersonalityTestObject.chooseNextScore(inputHand, CURRENT_SCORE);
         assertTrue(nextScore.getScore() + " is not greater than " + CURRENT_SCORE, nextScore.getScore() >
                 CURRENT_SCORE);
 

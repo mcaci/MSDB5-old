@@ -1,7 +1,7 @@
 package game.elements.player;
 
 import game.elements.player.auction.Score;
-import game.elements.player.strategy.auction.MockUnwaveringAuctionAction;
+import game.elements.player.strategy.auction.MockUnwaveringAuctionPersonality;
 import org.junit.After;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class MockUnwaveringPlayer extends MockPlayer {
 
     public MockUnwaveringPlayer(boolean isSideDeckPresent) {
-        super(isSideDeckPresent, new MockUnwaveringAuctionAction());
+        super(isSideDeckPresent, new MockUnwaveringAuctionPersonality());
     }
 
     @After

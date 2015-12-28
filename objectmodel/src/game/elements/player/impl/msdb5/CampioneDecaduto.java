@@ -1,8 +1,8 @@
 package game.elements.player.impl.msdb5;
 
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionAction;
-import game.elements.player.strategy.auction.msdb5.AuctionAction_CampioneDecaduto;
+import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.elements.player.strategy.auction.msdb5.AuctionPersonality_CampioneDecaduto;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -15,7 +15,7 @@ import game.elements.player.strategy.auction.msdb5.AuctionAction_CampioneDecadut
  */
 public class CampioneDecaduto extends Player {
 
-    public CampioneDecaduto(IAuctionAction auctionAction) {
-        super(new AuctionAction_CampioneDecaduto());
+    public CampioneDecaduto(IAuctionPersonality auctionAction) {
+        super(new AuctionPersonality_CampioneDecaduto());
     }
 }

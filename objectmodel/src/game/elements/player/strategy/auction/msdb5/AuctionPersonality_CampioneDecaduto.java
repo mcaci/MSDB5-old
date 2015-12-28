@@ -5,13 +5,13 @@ import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
 import game.elements.player.auction.Status;
-import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.player.strategy.auction.IAuctionPersonality;
 import game.elements.player.strategy.evaluation.hand.IHandEvaluator;
 
 /**
  * Created by nikiforos on 10/09/15.
  */
-public class AuctionAction_Ambiguo implements IAuctionAction {
+public class AuctionPersonality_CampioneDecaduto implements IAuctionPersonality {
 
     @Override
     public Score chooseNextScore(Hand hand, int currentScore) {

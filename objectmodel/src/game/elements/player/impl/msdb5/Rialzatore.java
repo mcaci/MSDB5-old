@@ -1,8 +1,8 @@
 package game.elements.player.impl.msdb5;
 
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionAction;
-import game.elements.player.strategy.auction.msdb5.AuctionAction_Rialzatore;
+import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Rialzatore;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -14,7 +14,7 @@ import game.elements.player.strategy.auction.msdb5.AuctionAction_Rialzatore;
  * Sfortunatamente gioca in casa quindi non può essere contraddetto.
  */
 public class Rialzatore extends Player {
-    public Rialzatore(IAuctionAction auctionAction) {
-        super(new AuctionAction_Rialzatore());
+    public Rialzatore(IAuctionPersonality auctionAction) {
+        super(new AuctionPersonality_Rialzatore());
     }
 }

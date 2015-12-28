@@ -5,27 +5,20 @@ import game.elements.player.Player;
 import game.elements.player.auction.AuctionInfo;
 import game.elements.player.auction.Score;
 import game.elements.player.auction.Status;
-import game.elements.player.strategy.auction.IAuctionAction;
+import game.elements.player.strategy.auction.IAuctionPersonality;
 import game.elements.player.strategy.evaluation.hand.IHandEvaluator;
 
 /**
  * Created by nikiforos on 10/09/15.
  */
-public class AuctionAction_CampioneDecaduto implements IAuctionAction {
+public class AuctionPersonality_Dubbioso implements IAuctionPersonality {
 
     @Override
     public Score chooseNextScore(Hand hand, int currentScore) {
-        int nextScore = currentScore;
         // TODO: put appropriate implementation of IHandEvaluator and extract class
-        IHandEvaluator handEvaluator = new IHandEvaluator() {
-            @Override
-            public int evaluateHand(Hand handToEvaluate) {
-                return 0;
-            }
-
-        };
+        IHandEvaluator handEvaluator = handToEvaluate -> 0;
         int handEvaluation = handEvaluator.evaluateHand(hand);
-        nextScore = decideNextScore(currentScore, handEvaluation);
+        int nextScore = decideNextScore(currentScore, handEvaluation);
 
         final Score score = new Score();
         score.setSafeScore(nextScore);

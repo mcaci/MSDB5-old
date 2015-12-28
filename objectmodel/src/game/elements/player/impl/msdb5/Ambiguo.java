@@ -1,8 +1,8 @@
 package game.elements.player.impl.msdb5;
 
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionAction;
-import game.elements.player.strategy.auction.msdb5.AuctionAction_Ambiguo;
+import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Ambiguo;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -14,7 +14,7 @@ import game.elements.player.strategy.auction.msdb5.AuctionAction_Ambiguo;
  * tecnica di gioco probabilmente sarà stato tutto vanificato dall'apocalisse del 2012.
  */
 public class Ambiguo extends Player {
-    public Ambiguo(IAuctionAction auctionAction) {
-        super(new AuctionAction_Ambiguo());
+    public Ambiguo(IAuctionPersonality auctionAction) {
+        super(new AuctionPersonality_Ambiguo());
     }
 }

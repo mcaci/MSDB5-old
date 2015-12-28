@@ -11,7 +11,7 @@ import game.elements.player.auction.Status;
  */
 // TODO: move to test package and use real implementation in src, the deprecated is to make it explicit
 @Deprecated
-public class MockAuctionAction implements IAuctionAction {
+public class MockAuctionPersonality implements IAuctionPersonality {
 
     private static final double CHANCE_TO_FOLD = 0.4;
 

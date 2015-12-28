@@ -13,6 +13,11 @@ public class AuctionInfo {
         status = Status.NOT_STARTED;
     }
 
+    public void update(AuctionInfo newInfo) {
+        this.setScore(newInfo.getScore());
+        this.setStatus(newInfo.getStatus());
+    }
+
     public Score getScore() {
         return score;
     }
@@ -36,4 +41,5 @@ public class AuctionInfo {
                 ", status=" + status +
                 '}';
     }
+
 }
