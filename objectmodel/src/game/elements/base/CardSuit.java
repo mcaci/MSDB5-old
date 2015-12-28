@@ -28,4 +28,10 @@ public enum CardSuit {
         }
     }
 
+    @Override
+    public String toString() {
+        return "CardSuit{" + this.name() + ", " +
+                "isBriscola=" + isBriscola +
+                '}';
+    }
 }

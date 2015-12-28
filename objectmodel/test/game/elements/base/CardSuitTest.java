@@ -1,5 +1,6 @@
 package game.elements.base;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -31,6 +32,11 @@ public class CardSuitTest {
             inputParams[i][0] = cardSuits[i];
         }
         return Arrays.asList(inputParams);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("MockCardSuit: " + this.cardSuitTestObject);
     }
 
     @Test
