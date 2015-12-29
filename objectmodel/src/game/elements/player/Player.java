@@ -2,6 +2,7 @@ package game.elements.player;
 
 import game.elements.cardset.Hand;
 import game.elements.player.auction.AuctionInfo;
+import game.elements.player.auction.Score;
 import game.elements.player.strategy.auction.IAuctionPersonality;
 import game.factory.cardset.HandFactory;
 
@@ -21,6 +22,24 @@ public class Player {
 
     public Player(IAuctionPersonality auctionAction) {
         this(new HandFactory().createHand(), auctionAction);
+    }
+
+    /**
+     * Not to be used, just a way to fill the game table
+     */
+    @Deprecated
+    public Player() {
+        this(new IAuctionPersonality() {
+            @Override
+            public Score chooseNextScore(Hand hand, int currentScore) {
+                return null;
+            }
+
+            @Override
+            public AuctionInfo chooseNextStance(Player playerDeciding, int currentScore) {
+                return null;
+            }
+        });
     }
 
     public Hand getHand() {

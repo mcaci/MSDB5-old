@@ -2,7 +2,6 @@ package game.factory.table;
 
 import game.elements.cardset.Deck;
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.MockAuctionPersonality;
 import game.elements.table.GameTable;
 import game.factory.cardset.DeckFactory;
 
@@ -33,7 +32,7 @@ public class GameTableFactory {
     private Player[] createPlayers() {
         Player[] players = new Player[NUMBER_OF_PLAYERS];
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            players[i] = new Player(new MockAuctionPersonality());
+            players[i] = new Player();
         }
         return players;
     }
