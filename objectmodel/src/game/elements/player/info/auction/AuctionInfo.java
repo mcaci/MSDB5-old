@@ -1,4 +1,4 @@
-package game.elements.player.auction;
+package game.elements.player.info.auction;
 
 /**
  * Created by nikiforos on 04/09/15.

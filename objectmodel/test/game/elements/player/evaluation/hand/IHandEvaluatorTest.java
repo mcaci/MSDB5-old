@@ -1,7 +1,8 @@
-package game.elements.player.strategy.evaluation.hand;
+package game.elements.player.evaluation.hand;
 
 import game.elements.cardset.Hand;
 import game.elements.cardset.MockHand;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ public class IHandEvaluatorTest {
 
     private Class<?> implClass;
     private Hand inputHand;
+    private int handEvaluation;
 
     public IHandEvaluatorTest(Class implClass) {
         this.implClass = implClass;
@@ -31,7 +33,8 @@ public class IHandEvaluatorTest {
     @Parameterized.Parameters
     public static Collection<?> primeNumbers() {
         return Arrays.asList(new Object[][]{
-                {DummyHandEvaluator.class}
+                {DummyHandEvaluator.class},
+                {SimpleWeightedSumEvaluator.class}
         });
     }
 
@@ -40,13 +43,16 @@ public class IHandEvaluatorTest {
         inputHand = new MockHand(true);
         Constructor<?> constructor = implClass.getConstructor();
         iHandEvaluatorTestObject = (IHandEvaluator) constructor.newInstance();
+        handEvaluation = iHandEvaluatorTestObject.evaluateHand(inputHand);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("Hand evaluated with " + iHandEvaluatorTestObject.getClass().getSimpleName() + ": " + this.inputHand + ", value: " + handEvaluation);
     }
 
     @Test
     public void testEvaluateHand() throws Exception {
-        int evaluation = iHandEvaluatorTestObject.evaluateHand(inputHand);
-
-        assertTrue(evaluation + " is less than 60", evaluation >= 60);
-        assertTrue(evaluation + " is more than 120", evaluation <= 120);
+        assertTrue(handEvaluation + " is more than 120", handEvaluation <= 120);
     }
 }

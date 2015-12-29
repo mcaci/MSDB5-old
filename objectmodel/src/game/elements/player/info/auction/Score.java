@@ -1,4 +1,4 @@
-package game.elements.player.auction;
+package game.elements.player.info.auction;
 
 import game.elements.player.strategy.auction.IAuctionPersonality;
 

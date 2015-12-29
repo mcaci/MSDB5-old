@@ -1,4 +1,4 @@
-package game.elements.player.strategy.evaluation.hand;
+package game.elements.player.evaluation.hand;
 
 import game.elements.cardset.Hand;
 

@@ -1,4 +1,4 @@
-package game.elements.player.strategy.evaluation.card;
+package game.elements.player.analysis.card;
 
 import game.elements.base.Card;
 
