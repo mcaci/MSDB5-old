@@ -10,15 +10,15 @@ import static org.junit.Assert.assertTrue;
 public class CardNumberTest {
 
     @Test
-    public void testValue() throws Exception {
-        assertTrue(CardNumber.ASSO.value() > CardNumber.TRE.value());
-        assertTrue(CardNumber.TRE.value() > CardNumber.RE.value());
-        assertTrue(CardNumber.RE.value() > CardNumber.CAVALLO.value());
-        assertTrue(CardNumber.CAVALLO.value() > CardNumber.DONNA.value());
-        assertTrue(CardNumber.DONNA.value() > CardNumber.SETTE.value());
-        assertTrue(CardNumber.SETTE.value() > CardNumber.SEI.value());
-        assertTrue(CardNumber.SEI.value() > CardNumber.CINQUE.value());
-        assertTrue(CardNumber.CINQUE.value() > CardNumber.QUATTRO.value());
-        assertTrue(CardNumber.QUATTRO.value() > CardNumber.DUE.value());
+    public void testgetWeight() throws Exception {
+        assertTrue(CardNumber.ASSO.getWeight() > CardNumber.TRE.getWeight());
+        assertTrue(CardNumber.TRE.getWeight() > CardNumber.RE.getWeight());
+        assertTrue(CardNumber.RE.getWeight() > CardNumber.CAVALLO.getWeight());
+        assertTrue(CardNumber.CAVALLO.getWeight() > CardNumber.DONNA.getWeight());
+        assertTrue(CardNumber.DONNA.getWeight() > CardNumber.SETTE.getWeight());
+        assertTrue(CardNumber.SETTE.getWeight() > CardNumber.SEI.getWeight());
+        assertTrue(CardNumber.SEI.getWeight() > CardNumber.CINQUE.getWeight());
+        assertTrue(CardNumber.CINQUE.getWeight() > CardNumber.QUATTRO.getWeight());
+        assertTrue(CardNumber.QUATTRO.getWeight() > CardNumber.DUE.getWeight());
     }
 }
