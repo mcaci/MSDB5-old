@@ -34,8 +34,8 @@ public class HandSuitAnalyzerTest {
         iHandEvaluatorTestObject.evaluate();
         briscolaEvaluation = iHandEvaluatorTestObject.getSuitEvaluation();
         float sum = 0F;
-        for (int i = 0; i < briscolaEvaluation.length; i++) {
-            sum += briscolaEvaluation[i];
+        for (float aBriscolaEvaluation : briscolaEvaluation) {
+            sum += aBriscolaEvaluation;
         }
         assertEquals(1.0, sum, 0.1);
     }
