@@ -9,7 +9,13 @@ public class DummyCardEvaluator implements ICardEvaluator {
 
     @Override
     public int evaluateCard(Card card) {
-        return 5;
+        int value = card.getCardNumber().pointsForTheCard();
+        if (value > 0) {
+            value += 10;
+        } else {
+            value = card.getCardNumber().ordinal();
+        }
+        return value;
     }
 
 }

@@ -4,63 +4,62 @@ package game.elements.base;
  * Created by nikiforos on 23/08/15.
  */
 public enum CardNumber {
-    ASSO {
+    ASSO(10) {
         @Override
         public int pointsForTheCard() {
             return 11;
         }
     },
-    DUE,
-    TRE {
+    DUE(1),
+    TRE(9) {
         @Override
         public int pointsForTheCard() {
             return 10;
         }
     },
-    QUATTRO,
-    CINQUE,
-    SEI,
-    SETTE,
-    DONNA {
+    QUATTRO(2),
+    CINQUE(3),
+    SEI(4),
+    SETTE(5),
+    DONNA(6) {
         @Override
         public int pointsForTheCard() {
             return 2;
         }
     },
-    CAVALLO {
+    CAVALLO(7) {
         @Override
         public int pointsForTheCard() {
             return 3;
         }
     },
-    RE {
+    RE(8) {
         @Override
         public int pointsForTheCard() {
             return 4;
         }
     };
 
-    public int pointsForTheCard() {
-        return 0;
+    private final int weight;
+
+    CardNumber(int weight) {
+        this.weight = weight;
     }
 
-    public int value() {
-        int value = 0;
-        if (this.pointsForTheCard() > 0) {
-            value = this.pointsForTheCard() + 10;
-        } else {
-            value = this.ordinal();
-        }
-        return value;
+    public int pointsForTheCard() {
+        return 0;
     }
 
     @Override
     public String toString() {
         return "CardNumber{" +
                 "name=" + name() +
+                ", weight=" + getWeight() +
                 ", points=" + pointsForTheCard() +
-                ", value=" + value() +
                 '}';
     }
 
+    public int getWeight() {
+        return weight;
+    }
 }
