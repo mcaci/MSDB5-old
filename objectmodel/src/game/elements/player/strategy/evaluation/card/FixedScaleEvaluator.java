@@ -12,6 +12,6 @@ public class FixedScaleEvaluator implements ICardEvaluator {
         if (points == 0) {
             points++;
         }
-        return points;
+        return points * card.getCardNumber().getWeight();
     }
 }
