@@ -2,8 +2,8 @@ package game.elements.player.strategy.auction;
 
 import game.elements.cardset.Hand;
 import game.elements.player.Player;
-import game.elements.player.auction.AuctionInfo;
-import game.elements.player.auction.Score;
+import game.elements.player.info.auction.AuctionInfo;
+import game.elements.player.info.auction.Score;
 
 /**
  * Created by nikiforos on 10/09/15.

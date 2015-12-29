@@ -1,9 +1,9 @@
 package game.elements.player;
 
 import game.elements.cardset.MockHand;
-import game.elements.player.auction.AuctionInfo;
-import game.elements.player.auction.Score;
-import game.elements.player.auction.Status;
+import game.elements.player.info.auction.AuctionInfo;
+import game.elements.player.info.auction.Score;
+import game.elements.player.info.auction.Status;
 import game.elements.player.strategy.auction.MockAuctionPersonality;
 import org.junit.After;
 import org.junit.Test;

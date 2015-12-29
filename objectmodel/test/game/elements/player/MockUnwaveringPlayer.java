@@ -1,6 +1,6 @@
 package game.elements.player;
 
-import game.elements.player.auction.Score;
+import game.elements.player.info.auction.Score;
 import game.elements.player.strategy.auction.MockUnwaveringAuctionPersonality;
 import org.junit.After;
 import org.junit.Test;
