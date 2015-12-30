@@ -23,6 +23,10 @@ public class CardSet<T extends Collection<Card>> {
         return this.cardSet.isEmpty();
     }
 
+    public int size() {
+        return cardSet.size();
+    }
+
     @Override
     public String toString() {
         return "CardSet{" +

@@ -34,7 +34,8 @@ public class IHandEvaluatorTest {
     public static Collection<?> primeNumbers() {
         return Arrays.asList(new Object[][]{
                 {DummyHandEvaluator.class},
-                {SimpleWeightedSumEvaluator.class}
+                {SimpleWeightedSumEvaluator.class},
+                {HandSuitEvaluator.class}
         });
     }
 

@@ -1,10 +1,13 @@
 package game.elements.player.analysis;
 
+import game.elements.base.CardSuit;
 import game.elements.cardset.Hand;
 import game.elements.cardset.MockHand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +19,7 @@ public class HandSuitAnalyzerTest {
     private HandSuitAnalyzer iHandEvaluatorTestObject;
 
     private Hand inputHand;
-    private float[] briscolaEvaluation;
+    private Map<CardSuit, Float> briscolaEvaluationResult;
 
     @Before
     public void setUp() throws Exception {
@@ -31,11 +34,11 @@ public class HandSuitAnalyzerTest {
 
     @Test
     public void testEvaluate() throws Exception {
-        iHandEvaluatorTestObject.evaluate();
-        briscolaEvaluation = iHandEvaluatorTestObject.getSuitEvaluation();
+        iHandEvaluatorTestObject.analyze();
+        briscolaEvaluationResult = iHandEvaluatorTestObject.analyze();
         float sum = 0F;
-        for (float aBriscolaEvaluation : briscolaEvaluation) {
-            sum += aBriscolaEvaluation;
+        for (Map.Entry<CardSuit, Float> aBriscolaEvaluation : briscolaEvaluationResult.entrySet()) {
+            sum += aBriscolaEvaluation.getValue();
         }
         assertEquals(1.0, sum, 0.1);
     }

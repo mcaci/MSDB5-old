@@ -5,42 +5,52 @@ import game.elements.base.CardSuit;
 import game.elements.cardset.Hand;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by nikiforos on 29/12/15.
  */
 public class HandSuitAnalyzer {
 
-    private final Hand evaluatedHand;
+    private final Hand handToEvaluate;
 
-    private final float[] suitEvaluation = new float[CardSuit.values().length];
-
-    public HandSuitAnalyzer(Hand evaluatedHand) {
-        this.evaluatedHand = evaluatedHand;
-        for (int i = 0; i < suitEvaluation.length; i++) {
-            suitEvaluation[i] = 0;
-        }
+    public HandSuitAnalyzer(Hand handToEvaluate) {
+        this.handToEvaluate = handToEvaluate;
     }
 
-    public void evaluate() {
-        final int handSize = evaluatedHand.size();
-        for (Card card : evaluatedHand.getCardSet()) {
-            suitEvaluation[card.getCardSuit().ordinal()]++;
-        }
-        for (int i = 0; i < suitEvaluation.length; i++) {
-            suitEvaluation[i] /= handSize;
-        }
+    public Map<CardSuit, Float> analyze() {
+        final int[] suitEvaluation = countCardsPerSuit();
+        final Map<CardSuit, Float> suitEvaluationMap = storeEvaluation(suitEvaluation);
+        return suitEvaluationMap;
     }
 
-    public float[] getSuitEvaluation() {
-        return suitEvaluation;
+    private Map<CardSuit, Float> storeEvaluation(int[] suitEvaluation) {
+        final Map<CardSuit, Float> suitEvaluationMap = new HashMap<>();
+        final float handSize = handToEvaluate.size();
+        final int suitSize = CardSuit.values().length;
+
+        for (int i = 0; i < suitSize; i++) {
+            suitEvaluationMap.put(CardSuit.values()[i], suitEvaluation[i] / handSize);
+        }
+
+        return suitEvaluationMap;
+    }
+
+    private int[] countCardsPerSuit() {
+        final int suitSize = CardSuit.values().length;
+        final int[] handSuitCount = new int[suitSize];
+        for (Card card : handToEvaluate.getCardSet()) {
+            handSuitCount[card.getCardSuit().ordinal()]++;
+        }
+        return handSuitCount;
     }
 
     @Override
     public String toString() {
         return "HandSuitAnalyzer{" +
-                "evaluatedHand=" + evaluatedHand +
-                ", suitEvaluation=" + Arrays.toString(suitEvaluation) +
+                "handToEvaluate=" + handToEvaluate +
+                ", suitEvaluation=" + Arrays.toString(analyze().entrySet().toArray()) +
                 '}';
     }
 }
