@@ -1,13 +1,11 @@
 package game.elements.player.auction;
 
-import game.elements.cardset.Hand;
 import game.elements.player.MockPlayer;
 import game.elements.player.MockUnwaveringPlayer;
 import game.elements.player.Player;
 import game.elements.player.auction.info.AuctionInfo;
 import game.elements.player.auction.info.AuctionScore;
 import game.elements.player.auction.info.AuctionStatus;
-import game.factory.cardset.HandFactoryTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +28,6 @@ public class IAuctionPersonalityTest {
     private IAuctionPersonality iAuctionPersonalityTestObject;
 
     private Class<?> implClass;
-    private Hand inputHand;
     private Player inputPlayer;
 
     public IAuctionPersonalityTest(Class<?> implClass) {
@@ -47,7 +44,6 @@ public class IAuctionPersonalityTest {
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new HandFactoryTest(true).getMockHand();
         inputPlayer = new MockPlayer();
         Constructor<?> constructor = implClass.getConstructor();
         iAuctionPersonalityTestObject = (IAuctionPersonality) constructor.newInstance();

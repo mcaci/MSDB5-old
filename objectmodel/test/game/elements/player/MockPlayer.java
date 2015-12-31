@@ -6,29 +6,24 @@ import game.elements.player.auction.info.AuctionScore;
 import game.elements.player.auction.info.AuctionStatus;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by nikiforos on 04/09/15.
  */
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class MockPlayer extends Player {
 
     private static final float CHANCE_TO_FOLD = 0.4F;
 
-    @Parameterized.Parameters
-    public static Collection initParameters() {
-        return Arrays.asList(new Object[][]{
-                {true},
-                {false}
-        });
-    }
+//    @Parameterized.Parameters
+//    public static Collection initParameters() {
+//        return Arrays.asList(new Object[][]{
+//                {true},
+//                {false}
+//        });
+//    }
 
     @After
     public void tearDown() throws Exception {
@@ -38,46 +33,42 @@ public class MockPlayer extends Player {
     @Test
     public void testPerformAuctionAction0() throws Exception {
         byte initialScore = 0;
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
-            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
-        }
+        chosenScoreCheck(initialScore);
     }
 
     @Test
     public void testPerformAuctionAction60() throws Exception {
         byte initialScore = 60;
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
-            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
-        }
+        chosenScoreCheck(initialScore);
     }
 
     @Test
     public void testPerformAuctionAction89() throws Exception {
         byte initialScore = 89;
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
-            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
-        }
+        chosenScoreCheck(initialScore);
         // TODO: turn the card when side deck is present
     }
 
     @Test
     public void testPerformAuctionAction119() throws Exception {
         byte initialScore = 119;
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
-            assertTrue(auctionInfo.getAuctionScore().getScore() == 120);
-        }
+        chosenScoreCheck(initialScore);
     }
 
     @Test
     public void testPerformAuctionAction120() throws Exception {
         byte initialScore = 120;
+        chosenScoreCheck(initialScore);
+    }
+
+    private void chosenScoreCheck(byte initialScore) {
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
-            assertTrue(auctionInfo.getAuctionScore().getScore() == initialScore);
+        final byte score = auctionInfo.getAuctionScore().getScore();
+        String message = "Comparing actual score of " + score + " with the initial score of " + initialScore;
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED || initialScore < 120) {
+            assertTrue(message, score > initialScore);
+        } else {
+            assertTrue(message, score == initialScore);
         }
     }
 
