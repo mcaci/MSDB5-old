@@ -2,8 +2,8 @@ package game.elements.player;
 
 import game.elements.cardset.Hand;
 import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.info.Score;
-import game.elements.player.auction.info.Status;
+import game.elements.player.auction.info.AuctionScore;
+import game.elements.player.auction.info.AuctionStatus;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
  */
 @RunWith(Parameterized.class)
 public class MockPlayer extends Player {
+
+    private static final float CHANCE_TO_FOLD = 0.4F;
 
     @Parameterized.Parameters
     public static Collection initParameters() {
@@ -36,30 +38,27 @@ public class MockPlayer extends Player {
     @Test
     public void testPerformAuctionAction0() throws Exception {
         byte initialScore = 0;
-//        performAuctionAction(initialScore);
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getStatus() != Status.FOLDED) {
-            assertTrue(auctionInfo.getScore().getScore() > initialScore);
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
+            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
         }
     }
 
     @Test
     public void testPerformAuctionAction60() throws Exception {
         byte initialScore = 60;
-//        performAuctionAction(initialScore);
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getStatus() != Status.FOLDED) {
-            assertTrue(auctionInfo.getScore().getScore() > initialScore);
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
+            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
         }
     }
 
     @Test
     public void testPerformAuctionAction89() throws Exception {
         byte initialScore = 89;
-//        performAuctionAction(initialScore);
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getStatus() != Status.FOLDED) {
-            assertTrue(auctionInfo.getScore().getScore() > initialScore);
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
+            assertTrue(auctionInfo.getAuctionScore().getScore() > initialScore);
         }
         // TODO: turn the card when side deck is present
     }
@@ -67,20 +66,18 @@ public class MockPlayer extends Player {
     @Test
     public void testPerformAuctionAction119() throws Exception {
         byte initialScore = 119;
-//        performAuctionAction(initialScore);
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getStatus() != Status.FOLDED) {
-            assertTrue(auctionInfo.getScore().getScore() == 120);
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
+            assertTrue(auctionInfo.getAuctionScore().getScore() == 120);
         }
     }
 
     @Test
     public void testPerformAuctionAction120() throws Exception {
         byte initialScore = 120;
-//        performAuctionAction(initialScore);
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (auctionInfo.getStatus() != Status.FOLDED) {
-            assertTrue(auctionInfo.getScore().getScore() == initialScore);
+        if (auctionInfo.getAuctionStatus() != AuctionStatus.FOLDED) {
+            assertTrue(auctionInfo.getAuctionScore().getScore() == initialScore);
         }
     }
 
@@ -89,18 +86,38 @@ public class MockPlayer extends Player {
         assertNotNull(this.getHand());
         assertFalse(this.getHand().isEmpty());
         assertNotNull(this.getAuctionInfo());
-        assertTrue(this.getAuctionInfo().getScore().getScore() >= Score.MIN_SCORE);
-        assertTrue(this.getAuctionInfo().getScore().getScore() <= Score.MAX_SCORE);
-        assertNotNull(this.getAuctionInfo().getStatus());
+        assertTrue(this.getAuctionInfo().getAuctionScore().getScore() >= AuctionScore.MIN_SCORE);
+        assertTrue(this.getAuctionInfo().getAuctionScore().getScore() <= AuctionScore.MAX_SCORE);
+        assertNotNull(this.getAuctionInfo().getAuctionStatus());
     }
 
     @Override
-    public Score chooseNextScore(Hand hand, int currentScore) {
-        return null;
+    public AuctionInfo performAuctionAction(int currentScore) {
+        final AuctionInfo auctionInfo = this.getAuctionInfo();
+        if (!auctionInfo.getAuctionStatus().hasFolded()) {
+            final double randomFlag = Math.random();
+            if (randomFlag > CHANCE_TO_FOLD) {
+                auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
+                auctionInfo.setAuctionScore(chooseNextScore(this.getHand(), currentScore));
+            } else {
+                auctionInfo.setAuctionStatus(AuctionStatus.FOLDED);
+            }
+        }
+        return auctionInfo;
     }
 
-    @Override
-    public AuctionInfo chooseNextStance(Player playerDeciding, int currentScore) {
-        return null;
+    AuctionScore chooseNextScore(Hand hand, int currentScore) {
+        final AuctionScore auctionScore = new AuctionScore();
+        final int nextScore = decideNextScore(currentScore);
+        auctionScore.setSafeScore(nextScore);
+        return auctionScore;
     }
+
+    int decideNextScore(int currentScore) {
+        int nextScore = ++currentScore;
+        nextScore = Math.max(nextScore, MIN_AUCTION_SCORE);
+        nextScore = Math.min(nextScore, MAX_AUCTION_SCORE);
+        return nextScore;
+    }
+
 }
