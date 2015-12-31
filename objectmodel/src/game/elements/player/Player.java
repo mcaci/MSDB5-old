@@ -8,6 +8,7 @@ import game.elements.player.auction.strategy.IAuctionPersonality;
  * Created by nikiforos on 30/08/15.
  */
 public abstract class Player implements IAuctionPersonality {
+
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private Hand hand = new Hand();
 
@@ -32,19 +33,19 @@ public abstract class Player implements IAuctionPersonality {
     }
 
     public boolean hasActed() {
-        return auctionInfo.getStatus().actionWasDone();
+        return auctionInfo.getAuctionStatus().actionWasDone();
     }
 
     public boolean isWinner() {
-        return auctionInfo.getStatus().isWinner();
+        return auctionInfo.getAuctionStatus().isWinner();
     }
 
     public boolean hasFolded() {
-        return auctionInfo.getStatus().hasFolded();
+        return auctionInfo.getAuctionStatus().hasFolded();
     }
 
     public int tellScore() {
-        return this.auctionInfo.getScore().getScore();
+        return this.auctionInfo.getAuctionScore().getScore();
     }
 
 }

@@ -5,40 +5,40 @@ package game.elements.player.auction.info;
  */
 public class AuctionInfo {
 
-    private Score score;
-    private Status status;
+    private AuctionScore auctionScore;
+    private AuctionStatus auctionStatus;
 
     public AuctionInfo() {
-        score = new Score();
-        status = Status.NOT_STARTED;
+        auctionScore = new AuctionScore();
+        auctionStatus = AuctionStatus.NOT_STARTED;
     }
 
     public void update(AuctionInfo newInfo) {
-        this.setScore(newInfo.getScore());
-        this.setStatus(newInfo.getStatus());
+        this.setAuctionScore(newInfo.getAuctionScore());
+        this.setAuctionStatus(newInfo.getAuctionStatus());
     }
 
-    public Score getScore() {
-        return score;
+    public AuctionScore getAuctionScore() {
+        return auctionScore;
     }
 
-    public void setScore(Score score) {
-        this.score = score;
+    public void setAuctionScore(AuctionScore auctionScore) {
+        this.auctionScore = auctionScore;
     }
 
-    public Status getStatus() {
-        return status;
+    public AuctionStatus getAuctionStatus() {
+        return auctionStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setAuctionStatus(AuctionStatus auctionStatus) {
+        this.auctionStatus = auctionStatus;
     }
 
     @Override
     public String toString() {
         return "AuctionInfo{" +
-                "auction=" + score +
-                ", status=" + status +
+                "auction=" + auctionScore +
+                ", auctionStatus=" + auctionStatus +
                 '}';
     }
 

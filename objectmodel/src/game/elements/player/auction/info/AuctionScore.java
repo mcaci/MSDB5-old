@@ -5,7 +5,7 @@ import game.elements.player.auction.strategy.IAuctionPersonality;
 /**
  * Created by nikiforos on 04/09/15.
  */
-public class Score implements Comparable<Score> {
+public class AuctionScore implements Comparable<AuctionScore> {
 
     public static final byte MIN_SCORE = IAuctionPersonality.MIN_AUCTION_SCORE;
     public static final byte MAX_SCORE = IAuctionPersonality.MAX_AUCTION_SCORE;
@@ -31,14 +31,14 @@ public class Score implements Comparable<Score> {
 
     @Override
     public String toString() {
-        return "Score{" +
+        return "AuctionScore{" +
                 "auction=" + score +
                 '}';
     }
 
 
     @Override
-    public int compareTo(Score other) {
+    public int compareTo(AuctionScore other) {
         return Byte.compare(this.score, other.score);
     }
 }

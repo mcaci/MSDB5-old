@@ -3,7 +3,7 @@ package game.elements.player.auction.info;
 /**
  * Created by nikiforos on 04/09/15.
  */
-public enum Status {
+public enum AuctionStatus {
     NOT_STARTED, IN_AUCTION, FOLDED, AUCTION_WINNER;
 
     public boolean actionWasDone() {
