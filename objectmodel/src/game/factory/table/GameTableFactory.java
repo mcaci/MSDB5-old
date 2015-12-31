@@ -4,7 +4,7 @@ import game.elements.cardset.Deck;
 import game.elements.cardset.Hand;
 import game.elements.player.Player;
 import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.info.Score;
+import game.elements.player.auction.info.AuctionScore;
 import game.elements.table.GameTable;
 import game.factory.cardset.DeckFactory;
 
@@ -38,7 +38,7 @@ public class GameTableFactory {
             // TODO: Filler, to be replaced with real implementations
             players[i] = new Player() {
                 @Override
-                public Score chooseNextScore(Hand hand, int currentScore) {
+                public AuctionScore chooseNextScore(Hand hand, int currentScore) {
                     return null;
                 }
 
