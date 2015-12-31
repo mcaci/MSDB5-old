@@ -1,8 +1,10 @@
 package game.player;
 
+import game.elements.cardset.Hand;
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionPersonality;
-import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Ambiguo;
+import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.auction.info.AuctionScore;
+import game.elements.player.auction.info.AuctionStatus;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -14,7 +16,35 @@ import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Ambiguo;
  * tecnica di gioco probabilmente sarà stato tutto vanificato dall'apocalisse del 2012.
  */
 public class Ambiguo extends Player {
-    public Ambiguo(IAuctionPersonality auctionAction) {
-        super(new AuctionPersonality_Ambiguo());
+
+    private static final float CHANCE_TO_FOLD = 0.4F;
+
+    @Override
+    public AuctionInfo performAuctionAction(int currentScore) {
+        final AuctionInfo auctionInfo = this.getAuctionInfo();
+        if (!auctionInfo.getAuctionStatus().hasFolded()) {
+            final double randomFlag = Math.random();
+            if (randomFlag > CHANCE_TO_FOLD) {
+                auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
+                auctionInfo.setAuctionScore(chooseNextScore(this.getHand(), currentScore));
+            } else {
+                auctionInfo.setAuctionStatus(AuctionStatus.FOLDED);
+            }
+        }
+        return auctionInfo;
+    }
+
+    AuctionScore chooseNextScore(Hand hand, int currentScore) {
+        final AuctionScore auctionScore = new AuctionScore();
+        final int nextScore = decideNextScore(currentScore);
+        auctionScore.setSafeScore(nextScore);
+        return auctionScore;
+    }
+
+    int decideNextScore(int currentScore) {
+        int nextScore = ++currentScore;
+        nextScore = Math.max(nextScore, MIN_AUCTION_SCORE);
+        nextScore = Math.min(nextScore, MAX_AUCTION_SCORE);
+        return nextScore;
     }
 }

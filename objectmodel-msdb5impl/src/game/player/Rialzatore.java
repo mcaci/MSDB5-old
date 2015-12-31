@@ -1,8 +1,10 @@
 package game.player;
 
+import game.elements.cardset.Hand;
 import game.elements.player.Player;
-import game.elements.player.strategy.auction.IAuctionPersonality;
-import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Rialzatore;
+import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.auction.info.AuctionScore;
+import game.elements.player.auction.info.AuctionStatus;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -14,7 +16,27 @@ import game.elements.player.strategy.auction.msdb5.AuctionPersonality_Rialzatore
  * Sfortunatamente gioca in casa quindi non può essere contraddetto.
  */
 public class Rialzatore extends Player {
-    public Rialzatore(IAuctionPersonality auctionAction) {
-        super(new AuctionPersonality_Rialzatore());
+
+    private static final int SCORE_INCREMENT = 7;
+
+    @Override
+    public AuctionInfo performAuctionAction(int currentScore) {
+        final AuctionInfo auctionInfo = this.getAuctionInfo();
+        if (!auctionInfo.getAuctionStatus().hasFolded()) {
+            auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
+            auctionInfo.setAuctionScore(chooseNextScore(this.getHand(), currentScore));
+        }
+        return auctionInfo;
+    }
+
+    int decideNextScore(int currentScore) {
+        return currentScore + SCORE_INCREMENT;
+    }
+
+    AuctionScore chooseNextScore(Hand hand, int currentScore) {
+        final AuctionScore auctionScore = new AuctionScore();
+        final int nextScore = decideNextScore(currentScore);
+        auctionScore.setSafeScore(nextScore);
+        return auctionScore;
     }
 }

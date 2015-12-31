@@ -1,13 +1,14 @@
 package game.player.auction;
 
 import game.elements.cardset.Hand;
-import game.elements.cardset.MockHand;
 import game.elements.player.MockPlayer;
 import game.elements.player.Player;
-import game.elements.player.auction.AuctionInfo;
-import game.elements.player.auction.Score;
-import game.elements.player.auction.Status;
-import game.elements.player.strategy.auction.IAuctionPersonality;
+import game.elements.player.auction.IAuctionPersonality;
+import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.auction.info.AuctionScore;
+import game.elements.player.auction.info.AuctionStatus;
+import game.factory.cardset.HandFactoryTest;
+import game.player.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,50 +41,50 @@ public class IAuctionPersonalityTest {
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
         return Arrays.asList(new Object[][]{
-                {AuctionPersonality_Rialzatore.class},
-                {AuctionPersonality_CampioneDecaduto.class},
-                {AuctionPersonality_BuonCompagno.class},
-                {AuctionPersonality_Dubbioso.class},
-                {AuctionPersonality_Ambiguo.class}
+                {Ambiguo.class},
+                {BuonCompagno.class},
+                {CampioneDecaduto.class},
+                {Dubbioso.class},
+                {Rialzatore.class}
         });
     }
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new MockHand(true);
-        inputPlayer = new MockPlayer(false);
+        inputHand = new HandFactoryTest(true).getMockHand();
+        inputPlayer = new MockPlayer();
         Constructor<?> constructor = implClass.getConstructor();
         iAuctionPersonalityTestObject = (IAuctionPersonality) constructor.newInstance();
     }
 
     @Test
     public void testChooseNextStance() throws Exception {
-        Status beforeStatus = inputPlayer.getAuctionInfo().getStatus();
-        Score beforeScore = inputPlayer.getAuctionInfo().getScore();
-        AuctionInfo nextStance = iAuctionPersonalityTestObject.chooseNextStance(inputPlayer, CURRENT_SCORE);
+        AuctionStatus beforeAuctionStatus = inputPlayer.getAuctionInfo().getAuctionStatus();
+        AuctionScore beforeAuctionScore = inputPlayer.getAuctionInfo().getAuctionScore();
+        AuctionInfo nextStance = iAuctionPersonalityTestObject.performAuctionAction(CURRENT_SCORE);
         assertNotNull(nextStance);
-        Status afterStatus = nextStance.getStatus();
-        Score afterScore = nextStance.getScore();
+        AuctionStatus afterAuctionStatus = nextStance.getAuctionStatus();
+        AuctionScore afterAuctionScore = nextStance.getAuctionScore();
 
-        checkScoreAndStatus(beforeStatus, beforeScore, afterStatus, afterScore);
+        checkScoreAndStatus(beforeAuctionStatus, beforeAuctionScore, afterAuctionStatus, afterAuctionScore);
     }
 
-    private void checkScoreAndStatus(Status beforeStatus, Score beforeScore, Status afterStatus, Score afterScore) {
-        String statusMessage = "<" + beforeStatus + ", " + afterStatus + ">";
-        String scoreMessage = "<" + beforeScore + ", " + afterScore + ">";
+    private void checkScoreAndStatus(AuctionStatus beforeAuctionStatus, AuctionScore beforeAuctionScore, AuctionStatus afterAuctionStatus, AuctionScore afterAuctionScore) {
+        String statusMessage = "<" + beforeAuctionStatus + ", " + afterAuctionStatus + ">";
+        String scoreMessage = "<" + beforeAuctionScore + ", " + afterAuctionScore + ">";
         boolean statusCheck;
         boolean scoreCheck;
-        switch (beforeStatus) {
+        switch (beforeAuctionStatus) {
             case FOLDED:
-                statusCheck = afterStatus.hasFolded();
-                scoreCheck = afterScore.compareTo(beforeScore) == 0;
+                statusCheck = afterAuctionStatus.hasFolded();
+                scoreCheck = afterAuctionScore.compareTo(beforeAuctionScore) == 0;
                 break;
             default:
-                statusCheck = afterStatus.actionWasDone();
-                if (afterStatus.hasFolded()) {
-                    scoreCheck = afterScore.compareTo(beforeScore) == 0;
+                statusCheck = afterAuctionStatus.actionWasDone();
+                if (afterAuctionStatus.hasFolded()) {
+                    scoreCheck = afterAuctionScore.compareTo(beforeAuctionScore) == 0;
                 } else {
-                    scoreCheck = afterScore.compareTo(beforeScore) > 0;
+                    scoreCheck = afterAuctionScore.compareTo(beforeAuctionScore) > 0;
                 }
                 break;
         }
@@ -93,8 +94,8 @@ public class IAuctionPersonalityTest {
 
     @Test
     public void testChooseNextScore() throws Exception {
-        Score nextScore = iAuctionPersonalityTestObject.chooseNextScore(inputHand, CURRENT_SCORE);
-        assertTrue(nextScore.getScore() + " is not greater than " + CURRENT_SCORE, nextScore.getScore() >
+        AuctionInfo nextAuctionInfo = iAuctionPersonalityTestObject.performAuctionAction(CURRENT_SCORE);
+        assertTrue(nextAuctionInfo.getAuctionScore().getScore() + " is not greater than " + CURRENT_SCORE, nextAuctionInfo.getAuctionScore().getScore() >
                 CURRENT_SCORE);
 
     }
