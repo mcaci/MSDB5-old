@@ -15,12 +15,8 @@ public class Deck extends CardSet<Queue<Card>> {
 
     public static final int DECK_DEFAULT_SIZE = CardNumber.values().length * CardSuit.values().length;
 
-    Deck() {
-        super(new LinkedList<>());
-    }
-
     public Deck(Collection<Card> deckCards) {
-        this();
+        super(new LinkedList<>());
         this.getCardSet().addAll(deckCards);
     }
 

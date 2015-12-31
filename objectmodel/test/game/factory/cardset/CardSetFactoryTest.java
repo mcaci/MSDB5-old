@@ -13,7 +13,11 @@ import static org.junit.Assert.assertTrue;
  */
 public abstract class CardSetFactoryTest {
 
-    CardSetFactory cardSetFactoryTestObject;
+    final CardSetFactory cardSetFactoryTestObject;
+
+    CardSetFactoryTest(CardSetFactory cardSetFactoryTestObject) {
+        this.cardSetFactoryTestObject = cardSetFactoryTestObject;
+    }
 
     public abstract Collection<Card> getCardSet();
 

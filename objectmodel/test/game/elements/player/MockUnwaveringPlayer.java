@@ -1,7 +1,6 @@
 package game.elements.player;
 
-import game.elements.player.info.auction.Score;
-import game.elements.player.strategy.auction.MockUnwaveringAuctionPersonality;
+import game.elements.player.auction.info.Score;
 import org.junit.After;
 import org.junit.Test;
 
@@ -11,10 +10,6 @@ import static org.junit.Assert.*;
  * Created by nikiforos on 04/09/15.
  */
 public class MockUnwaveringPlayer extends MockPlayer {
-
-    public MockUnwaveringPlayer(boolean isSideDeckPresent) {
-        super(isSideDeckPresent, new MockUnwaveringAuctionPersonality());
-    }
 
     @After
     public void tearDown() throws Exception {

@@ -1,7 +1,10 @@
 package game.factory.table;
 
 import game.elements.cardset.Deck;
+import game.elements.cardset.Hand;
 import game.elements.player.Player;
+import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.auction.info.Score;
 import game.elements.table.GameTable;
 import game.factory.cardset.DeckFactory;
 
@@ -32,7 +35,18 @@ public class GameTableFactory {
     private Player[] createPlayers() {
         Player[] players = new Player[NUMBER_OF_PLAYERS];
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            players[i] = new Player();
+            // TODO: Filler, to be replaced with real implementations
+            players[i] = new Player() {
+                @Override
+                public Score chooseNextScore(Hand hand, int currentScore) {
+                    return null;
+                }
+
+                @Override
+                public AuctionInfo chooseNextStance(Player playerDeciding, int currentScore) {
+                    return null;
+                }
+            };
         }
         return players;
     }

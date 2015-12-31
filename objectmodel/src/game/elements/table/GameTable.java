@@ -2,7 +2,7 @@ package game.elements.table;
 
 import game.elements.cardset.Deck;
 import game.elements.player.Player;
-import game.elements.player.info.auction.Status;
+import game.elements.player.auction.info.Status;
 
 import java.util.Arrays;
 

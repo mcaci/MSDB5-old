@@ -21,7 +21,7 @@ abstract class CardSetFactory {
     }
 
     Collection<Card> createCardSet() {
-        Collection<Card> localCardSet = Collections.EMPTY_LIST;
+        Collection<Card> localCardSet = Collections.emptyList();
         if (cardSetSize > 0) {
             localCardSet = createShuffledCardSet();
         }
