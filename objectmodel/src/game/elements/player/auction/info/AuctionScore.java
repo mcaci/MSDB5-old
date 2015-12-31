@@ -1,6 +1,6 @@
 package game.elements.player.auction.info;
 
-import game.elements.player.auction.strategy.IAuctionPersonality;
+import game.elements.player.auction.IAuctionPersonality;
 
 /**
  * Created by nikiforos on 04/09/15.

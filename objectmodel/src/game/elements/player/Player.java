@@ -1,8 +1,8 @@
 package game.elements.player;
 
 import game.elements.cardset.Hand;
+import game.elements.player.auction.IAuctionPersonality;
 import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.strategy.IAuctionPersonality;
 
 /**
  * Created by nikiforos on 30/08/15.
