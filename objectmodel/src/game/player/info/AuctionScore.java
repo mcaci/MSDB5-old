@@ -1,14 +1,12 @@
 package game.player.info;
 
-import game.player.characteristic.IAuctionPersonality;
-
 /**
  * Created by nikiforos on 04/09/15.
  */
 public class AuctionScore implements Comparable<AuctionScore> {
 
-    public static final byte MIN_SCORE = IAuctionPersonality.MIN_AUCTION_SCORE;
-    public static final byte MAX_SCORE = IAuctionPersonality.MAX_AUCTION_SCORE;
+    public static final byte MIN_SCORE = 60;
+    public static final byte MAX_SCORE = 120;
 
     private byte score = MIN_SCORE;
 
