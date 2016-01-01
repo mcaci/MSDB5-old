@@ -1,6 +1,6 @@
 package game.factory.cardset;
 
-import game.elements.base.Card;
+import game.cardset.card.Card;
 import org.junit.Test;
 
 import java.util.Collection;

@@ -1,8 +1,8 @@
 package game.factory.cardset;
 
-import game.elements.base.Card;
-import game.elements.base.CardNumber;
-import game.elements.base.CardSuit;
+import game.cardset.card.Card;
+import game.cardset.card.CardNumber;
+import game.cardset.card.CardSuit;
 
 import java.util.Collection;
 import java.util.Collections;

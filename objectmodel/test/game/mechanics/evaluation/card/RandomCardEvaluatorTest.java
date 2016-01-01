@@ -10,7 +10,7 @@ import java.util.Collection;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class RandomCardEvaluatorTest extends BaseICardEvaluatorTest {
+public class RandomCardEvaluatorTest extends BaseCardEvaluatorTest {
 
     public RandomCardEvaluatorTest(Class<?> implClass) {
         this.implClass = implClass;

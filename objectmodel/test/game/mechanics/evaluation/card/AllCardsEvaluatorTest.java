@@ -1,7 +1,7 @@
 package game.mechanics.evaluation.card;
 
-import game.elements.base.Card;
-import game.elements.cardset.Deck;
+import game.cardset.Deck;
+import game.cardset.card.Card;
 import game.factory.cardset.DeckFactoryTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -14,7 +14,7 @@ import java.util.Iterator;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class AllCardsEvaluatorTest extends BaseICardEvaluatorTest {
+public class AllCardsEvaluatorTest extends BaseCardEvaluatorTest {
 
     // Declaring params and size
     private final static Deck FULL_DECK = new DeckFactoryTest().getMockDeck();

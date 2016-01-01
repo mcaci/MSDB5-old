@@ -1,6 +1,6 @@
 package game.factory.cardset;
 
-import game.elements.cardset.Deck;
+import game.cardset.Deck;
 
 /**
  * Created by nikiforos on 08/09/15.

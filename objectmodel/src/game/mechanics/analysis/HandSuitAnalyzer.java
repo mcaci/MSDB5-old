@@ -1,8 +1,8 @@
 package game.mechanics.analysis;
 
-import game.elements.base.Card;
-import game.elements.base.CardSuit;
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
+import game.cardset.card.Card;
+import game.cardset.card.CardSuit;
 
 import java.util.Arrays;
 import java.util.HashMap;

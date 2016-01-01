@@ -1,7 +1,7 @@
 package game.mechanics.evaluation.hand;
 
-import game.elements.base.CardSuit;
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
+import game.cardset.card.CardSuit;
 import game.mechanics.analysis.HandSuitAnalyzer;
 
 import java.util.Map;

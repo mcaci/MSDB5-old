@@ -1,7 +1,7 @@
 package game.factory.cardset;
 
-import game.elements.base.Card;
-import game.elements.cardset.Deck;
+import game.cardset.Deck;
+import game.cardset.card.Card;
 import org.junit.After;
 import org.junit.Test;
 

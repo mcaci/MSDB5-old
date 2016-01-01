@@ -1,6 +1,6 @@
 package game.factory.cardset;
 
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
 
 /**
  * Created by nikiforos on 08/09/15.

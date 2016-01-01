@@ -1,7 +1,7 @@
 package game.mechanics.analysis;
 
-import game.elements.base.CardSuit;
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
+import game.cardset.card.CardSuit;
 import game.factory.cardset.HandFactoryTest;
 import org.junit.After;
 import org.junit.Before;

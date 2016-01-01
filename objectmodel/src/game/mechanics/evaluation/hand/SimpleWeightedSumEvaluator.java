@@ -1,7 +1,7 @@
 package game.mechanics.evaluation.hand;
 
-import game.elements.base.Card;
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
+import game.cardset.card.Card;
 import game.mechanics.evaluation.card.FixedScaleEvaluator;
 import game.mechanics.evaluation.card.ICardEvaluator;
 

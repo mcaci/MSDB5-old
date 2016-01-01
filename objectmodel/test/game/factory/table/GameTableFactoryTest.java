@@ -1,13 +1,13 @@
 package game.factory.table;
 
-import game.elements.cardset.Deck;
-import game.elements.player.Player;
-import game.elements.table.GameTable;
+import game.cardset.Deck;
+import game.player.Player;
+import game.table.GameTable;
 import org.junit.After;
 import org.junit.Test;
 
-import static game.elements.cardset.Deck.DECK_DEFAULT_SIZE;
-import static game.elements.table.GameTable.NUMBER_OF_PLAYERS;
+import static game.cardset.Deck.DECK_DEFAULT_SIZE;
+import static game.table.GameTable.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

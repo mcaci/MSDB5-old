@@ -1,10 +1,10 @@
 package game.factory.table;
 
-import game.elements.base.Card;
-import game.elements.cardset.Deck;
-import game.elements.cardset.Hand;
-import game.elements.player.Player;
-import game.elements.table.GameTable;
+import game.cardset.Deck;
+import game.cardset.Hand;
+import game.cardset.card.Card;
+import game.player.Player;
+import game.table.GameTable;
 
 import java.util.Queue;
 

@@ -1,6 +1,6 @@
 package game.factory.table;
 
-import game.elements.table.GameTable;
+import game.table.GameTable;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 

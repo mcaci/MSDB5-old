@@ -1,6 +1,6 @@
 package game.mechanics.evaluation.card;
 
-import game.elements.base.Card;
+import game.cardset.card.Card;
 
 /**
  * Created by nikiforos on 10/09/15.

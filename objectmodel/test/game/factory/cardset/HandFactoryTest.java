@@ -1,7 +1,7 @@
 package game.factory.cardset;
 
-import game.elements.base.Card;
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
+import game.cardset.card.Card;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

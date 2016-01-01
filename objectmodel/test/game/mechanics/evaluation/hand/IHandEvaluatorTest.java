@@ -1,6 +1,6 @@
 package game.mechanics.evaluation.hand;
 
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
 import game.factory.cardset.HandFactoryTest;
 import org.junit.After;
 import org.junit.Before;

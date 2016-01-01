@@ -1,6 +1,6 @@
 package game.mechanics.evaluation.hand;
 
-import game.elements.cardset.Hand;
+import game.cardset.Hand;
 
 /**
  * Created by nikiforos on 07/09/15.

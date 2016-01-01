@@ -1,12 +1,12 @@
 package game.factory.table;
 
-import game.elements.cardset.Deck;
-import game.elements.player.Player;
-import game.elements.player.info.AuctionInfo;
-import game.elements.table.GameTable;
+import game.cardset.Deck;
 import game.factory.cardset.DeckFactory;
+import game.player.Player;
+import game.player.info.AuctionInfo;
+import game.table.GameTable;
 
-import static game.elements.table.GameTable.NUMBER_OF_PLAYERS;
+import static game.table.GameTable.NUMBER_OF_PLAYERS;
 
 /**
  * Created by nikiforos on 30/08/15.
