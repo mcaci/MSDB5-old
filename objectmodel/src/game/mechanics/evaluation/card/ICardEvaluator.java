@@ -1,4 +1,4 @@
-package game.mechanics.analysis.card;
+package game.mechanics.evaluation.card;
 
 import game.elements.base.Card;
 

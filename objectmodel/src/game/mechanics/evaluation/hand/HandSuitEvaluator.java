@@ -1,4 +1,4 @@
-package game.mechanics.hand;
+package game.mechanics.evaluation.hand;
 
 import game.elements.base.CardSuit;
 import game.elements.cardset.Hand;
@@ -15,6 +15,8 @@ public class HandSuitEvaluator implements IHandEvaluator {
     public int evaluateHand(Hand handToEvaluate) {
         HandSuitAnalyzer handSuitAnalyzer = new HandSuitAnalyzer(handToEvaluate);
         Map<CardSuit, Float> analisysResult = handSuitAnalyzer.analyze();
+
+//        TODO: incomplete
 
         return 60;
     }

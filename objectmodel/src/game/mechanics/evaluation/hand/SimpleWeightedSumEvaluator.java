@@ -1,9 +1,9 @@
-package game.mechanics.hand;
+package game.mechanics.evaluation.hand;
 
 import game.elements.base.Card;
 import game.elements.cardset.Hand;
-import game.mechanics.analysis.card.FixedScaleEvaluator;
-import game.mechanics.analysis.card.ICardEvaluator;
+import game.mechanics.evaluation.card.FixedScaleEvaluator;
+import game.mechanics.evaluation.card.ICardEvaluator;
 
 import java.util.Collection;
 import java.util.Iterator;

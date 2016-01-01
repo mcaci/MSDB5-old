@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
  */
 public abstract class BaseICardEvaluatorTest {
 
+    final static Class[] EVAL_IMPL_CLASSES = {DummyCardEvaluator.class, FixedScaleEvaluator.class};
     ICardEvaluator iCardEvaluatorTestObject;
-
     Class<?> implClass;
     Card inputCard = new MockCard();
     int evaluation = 0;

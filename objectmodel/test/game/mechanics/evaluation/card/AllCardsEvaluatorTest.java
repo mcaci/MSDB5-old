@@ -14,13 +14,12 @@ import java.util.Iterator;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class AllCardsEvaluatorTestI extends BaseICardEvaluatorTest {
+public class AllCardsEvaluatorTest extends BaseICardEvaluatorTest {
 
     // Declaring params and size
     private final static Deck FULL_DECK = new DeckFactoryTest().getMockDeck();
-    private final static Class[] EVAL_IMPL_CLASSES = {DummyCardEvaluator.class, FixedScaleEvaluator.class};
 
-    public AllCardsEvaluatorTestI(Class<?> implClass, Card inputCard) {
+    public AllCardsEvaluatorTest(Class<?> implClass, Card inputCard) {
         this.implClass = implClass;
         this.inputCard = inputCard;
     }
