@@ -1,4 +1,4 @@
-package game.mechanics.analysis.card;
+package game.mechanics.evaluation.card;
 
 import game.elements.base.Card;
 import game.elements.base.CardNumber;
@@ -6,42 +6,24 @@ import game.elements.base.MockCard;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by nikiforos on 10/09/15.
+ * Created by nikiforos on 01/01/16.
  */
-@RunWith(Parameterized.class)
-public class ICardEvaluatorTest {
+public abstract class BaseICardEvaluatorTest {
 
-    private ICardEvaluator iCardEvaluatorTestObject;
+    ICardEvaluator iCardEvaluatorTestObject;
 
-    private Class<?> implClass;
-    private Card inputCard;
-    private int evaluation = 0;
-
-    public ICardEvaluatorTest(Class<?> implClass) {
-        this.implClass = implClass;
-    }
-
-    @Parameterized.Parameters
-    public static Collection<?> parameters() {
-        return Arrays.asList(new Object[][]{
-                {DummyCardEvaluator.class},
-                {FixedScaleEvaluator.class}
-        });
-    }
+    Class<?> implClass;
+    Card inputCard = new MockCard();
+    int evaluation = 0;
 
     @Before
     public void setUp() throws Exception {
-        inputCard = new MockCard();
         Constructor<?> constructor = implClass.getConstructor();
         iCardEvaluatorTestObject = (ICardEvaluator) constructor.newInstance();
         evaluation = iCardEvaluatorTestObject.evaluateCard(inputCard);
@@ -79,9 +61,18 @@ public class ICardEvaluatorTest {
         }
         int valueForSecondCard = iCardEvaluatorTestObject.evaluateCard(secondCard);
         if (first.getWeight() > second.getWeight()) {
-            assertTrue(evaluation + " should not be less than " + valueForSecondCard, evaluation > valueForSecondCard);
+            assertTrue("Evaluation for card " + inputCard + "that is " +
+                            evaluation + " should not be less than " +
+                            "Evaluation for card " + secondCard + "that is " +
+                            valueForSecondCard,
+                    evaluation > valueForSecondCard);
         } else if (first.getWeight() < second.getWeight()) {
-            assertTrue(evaluation + " should not be more than " + valueForSecondCard, evaluation < valueForSecondCard);
+            assertTrue("Evaluation for card " + inputCard + "that is " +
+                            evaluation + " should not be more than " +
+                            "Evaluation for card " + secondCard + "that is " +
+                            valueForSecondCard,
+                    evaluation < valueForSecondCard);
         } else fail("weights cannot be equal");
     }
+
 }

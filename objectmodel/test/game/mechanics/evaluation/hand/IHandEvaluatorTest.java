@@ -1,4 +1,4 @@
-package game.mechanics.hand;
+package game.mechanics.evaluation.hand;
 
 import game.elements.cardset.Hand;
 import game.factory.cardset.HandFactoryTest;
