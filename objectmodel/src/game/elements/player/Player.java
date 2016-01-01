@@ -1,8 +1,9 @@
 package game.elements.player;
 
 import game.elements.cardset.Hand;
-import game.elements.player.auction.IAuctionPersonality;
-import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.characteristic.IAuctionPersonality;
+import game.elements.player.info.AuctionInfo;
+import game.elements.player.info.AuctionStatus;
 
 /**
  * Created by nikiforos on 30/08/15.
@@ -46,6 +47,10 @@ public abstract class Player implements IAuctionPersonality {
 
     public int tellScore() {
         return this.auctionInfo.getAuctionScore().getScore();
+    }
+
+    public void setAsAuctionWinner() {
+        this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
 }

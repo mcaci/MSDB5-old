@@ -1,8 +1,9 @@
-package game.elements.player;
+package game.elements.player.mock;
 
-import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.info.AuctionScore;
-import game.elements.player.auction.info.AuctionStatus;
+import game.elements.player.Player;
+import game.elements.player.info.AuctionInfo;
+import game.elements.player.info.AuctionScore;
+import game.elements.player.info.AuctionStatus;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -35,21 +36,21 @@ public abstract class MockPlayer extends Player {
         return auctionInfo;
     }
 
-    AuctionScore chooseNextScore(int currentScore) {
+    private AuctionScore chooseNextScore(int currentScore) {
         final AuctionScore auctionScore = new AuctionScore();
         final int nextScore = decideNextScore(currentScore);
         auctionScore.setSafeScore(nextScore);
         return auctionScore;
     }
 
-    int decideNextScore(int currentScore) {
+    private int decideNextScore(int currentScore) {
         int nextScore = currentScore + scoreIncrement;
         nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE);
         nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
         return nextScore;
     }
 
-    boolean decideToContinueAuction() {
+    private boolean decideToContinueAuction() {
         final double tokenToStay = Math.random();
         return tokenToStay >= this.chanceToFold;
     }

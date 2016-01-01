@@ -1,4 +1,4 @@
-package game.elements.player;
+package game.elements.player.mock;
 
 /**
  * Created by nikiforos on 04/09/15.

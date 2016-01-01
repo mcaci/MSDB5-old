@@ -1,6 +1,6 @@
-package game.elements.player.auction;
+package game.elements.player.characteristic;
 
-import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.info.AuctionInfo;
 
 /**
  * Created by nikiforos on 10/09/15.

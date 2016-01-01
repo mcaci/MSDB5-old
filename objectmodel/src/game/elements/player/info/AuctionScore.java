@@ -1,6 +1,6 @@
-package game.elements.player.auction.info;
+package game.elements.player.info;
 
-import game.elements.player.auction.IAuctionPersonality;
+import game.elements.player.characteristic.IAuctionPersonality;
 
 /**
  * Created by nikiforos on 04/09/15.

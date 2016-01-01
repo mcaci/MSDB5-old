@@ -1,10 +1,12 @@
-package game.elements.player.auction;
+package game.elements.player.mock.characteristic;
 
-import game.elements.player.MockClassicPlayer;
-import game.elements.player.MockUnwaveringPlayer;
-import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.info.AuctionScore;
-import game.elements.player.auction.info.AuctionStatus;
+import game.elements.player.characteristic.IAuctionPersonality;
+import game.elements.player.info.AuctionInfo;
+import game.elements.player.info.AuctionScore;
+import game.elements.player.info.AuctionStatus;
+import game.elements.player.mock.MockClassicPlayer;
+import game.elements.player.mock.MockCowardPlayer;
+import game.elements.player.mock.MockUnwaveringPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +39,8 @@ public class IAuctionPersonalityTest {
     public static Collection<?> initParameters() {
         return Arrays.asList(new Object[][]{
                 {MockClassicPlayer.class},
-                {MockUnwaveringPlayer.class}
+                {MockUnwaveringPlayer.class},
+                {MockCowardPlayer.class}
         });
     }
 

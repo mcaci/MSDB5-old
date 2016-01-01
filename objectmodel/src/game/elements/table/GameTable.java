@@ -2,7 +2,6 @@ package game.elements.table;
 
 import game.elements.cardset.Deck;
 import game.elements.player.Player;
-import game.elements.player.auction.info.AuctionStatus;
 
 import java.util.Arrays;
 
@@ -56,7 +55,7 @@ public class GameTable {
         for (int i = 0; i < this.players.length; i++) {
             final Player player = players[i];
             if (!player.hasFolded()) {
-                player.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
+                player.setAsAuctionWinner();
             }
         }
     }

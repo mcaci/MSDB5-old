@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Created by nikiforos on 16/09/15.
  */
-public class CardSet<T extends Collection<Card>> {
+public abstract class CardSet<T extends Collection<Card>> {
 
     private final T cardSet;
 

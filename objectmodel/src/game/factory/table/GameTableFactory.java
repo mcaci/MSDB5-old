@@ -2,7 +2,7 @@ package game.factory.table;
 
 import game.elements.cardset.Deck;
 import game.elements.player.Player;
-import game.elements.player.auction.info.AuctionInfo;
+import game.elements.player.info.AuctionInfo;
 import game.elements.table.GameTable;
 import game.factory.cardset.DeckFactory;
 
