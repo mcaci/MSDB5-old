@@ -1,5 +1,6 @@
 package game.player.mock.characteristic;
 
+import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import game.player.characteristic.IAuctionPersonality;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionScore;
@@ -70,17 +71,26 @@ public class IAuctionPersonalityTest {
     @Test
     public void testValidity() throws Exception {
 
-        AuctionInfo infoAfterAction = iAuctionPersonalityTestObject.performAuctionAction(startingScore);
-        assertNotNull(infoAfterAction);
-
-        AuctionStatus statusAfterAction = infoAfterAction.getAuctionStatus();
-        AuctionScore scoreAfterAction = infoAfterAction.getAuctionScore();
-        if (!statusAfterAction.actionWasDone()) {
-            fail("Action should always be taken");
-        } else if (statusAfterAction.hasFolded()) {
-            assertTrue(startingScore >= scoreAfterAction.getScore());
+        AuctionInfo infoAfterAction = null;
+        boolean raisedCorrectly = false;
+        try {
+            infoAfterAction = iAuctionPersonalityTestObject.performAuctionAction(startingScore);
+        } catch (AuctionOnScoreOutOfBoundsException ex) {
+            raisedCorrectly = startingScore < AuctionScore.MIN_SCORE || startingScore >= AuctionScore.MAX_SCORE;
+        }
+        if (raisedCorrectly) {
+            assertNull(infoAfterAction);
         } else {
-            assertTrue(startingScore < scoreAfterAction.getScore());
+            assertNotNull(infoAfterAction);
+            AuctionStatus statusAfterAction = infoAfterAction.getAuctionStatus();
+            AuctionScore scoreAfterAction = infoAfterAction.getAuctionScore();
+            if (!statusAfterAction.actionWasDone()) {
+                fail("Action should always be taken");
+            } else if (statusAfterAction.hasFolded()) {
+                assertTrue(startingScore >= scoreAfterAction.getScore());
+            } else {
+                assertTrue(startingScore < scoreAfterAction.getScore());
+            }
         }
     }
 
