@@ -1,10 +1,9 @@
 package game.player;
 
-import game.elements.cardset.Hand;
-import game.elements.player.Player;
-import game.elements.player.auction.info.AuctionInfo;
-import game.elements.player.auction.info.AuctionScore;
-import game.elements.player.auction.info.AuctionStatus;
+import game.cardset.Hand;
+import game.player.info.AuctionInfo;
+import game.player.info.AuctionScore;
+import game.player.info.AuctionStatus;
 
 /**
  * Created by nikiforos on 11/09/15.
@@ -43,8 +42,8 @@ public class Ambiguo extends Player {
 
     int decideNextScore(int currentScore) {
         int nextScore = ++currentScore;
-        nextScore = Math.max(nextScore, MIN_AUCTION_SCORE);
-        nextScore = Math.min(nextScore, MAX_AUCTION_SCORE);
+        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE);
+        nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
         return nextScore;
     }
 }
