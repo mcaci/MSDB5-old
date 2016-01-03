@@ -16,7 +16,9 @@ public class HandSuitEvaluator implements IHandEvaluator {
         HandSuitAnalyzer handSuitAnalyzer = new HandSuitAnalyzer(handToEvaluate);
         Map<CardSuit, Float> analisysResult = handSuitAnalyzer.analyze();
 
-//        TODO: incomplete
+//      TODO: incomplete
+
+
 
         return 60;
     }

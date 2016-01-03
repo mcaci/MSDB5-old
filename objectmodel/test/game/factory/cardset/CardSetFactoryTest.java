@@ -39,15 +39,16 @@ public abstract class CardSetFactoryTest {
     public void testOnContent() throws Exception {
         assertNotNull(mockCardSet);
         assertNotNull(mockCardSet.getCardSet());
-        Collection<Card> cards = mockCardSet.getCardSet();
-        for (Card card : cards) {
-            assertTrue(card.isValid());
+        Collection<?> cards = mockCardSet.getCardSet();
+        for (Object card : cards) {
+            assertTrue(card instanceof Card);
+            assertTrue(((Card) card).isValid());
         }
     }
 
     @Test
     public void testAllCardsAreDifferent() throws Exception {
-        Collection<Card> cards = mockCardSet.getCardSet();
+        Collection<?> cards = mockCardSet.getCardSet();
 
         Object[] cardArray = cards.toArray();
         for (int i = 0; i < cardArray.length; i++) {
