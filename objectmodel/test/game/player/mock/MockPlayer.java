@@ -5,6 +5,7 @@ import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionScore;
 import game.player.info.AuctionStatus;
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -20,6 +21,11 @@ public abstract class MockPlayer extends Player {
     public MockPlayer(float chanceToFold, int scoreIncrement) {
         this.chanceToFold = chanceToFold;
         this.scoreIncrement = scoreIncrement;
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("Player tested: " + this);
     }
 
     @Override

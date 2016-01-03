@@ -13,11 +13,6 @@ public class AuctionInfo {
         auctionStatus = AuctionStatus.NOT_STARTED;
     }
 
-    public void update(AuctionInfo newInfo) {
-        this.setAuctionScore(newInfo.getAuctionScore());
-        this.setAuctionStatus(newInfo.getAuctionStatus());
-    }
-
     public AuctionScore getAuctionScore() {
         return auctionScore;
     }

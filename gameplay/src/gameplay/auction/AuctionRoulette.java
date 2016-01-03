@@ -1,9 +1,10 @@
 package gameplay.auction;
 
-import game.elements.player.Player;
-import game.elements.player.auction.Status;
-import game.elements.player.strategy.auction.IAuctionAction;
-import game.elements.table.GameTable;
+import game.player.Player;
+import game.player.info.AuctionScore;
+import game.player.info.AuctionStatus;
+import game.table.GameTable;
+import game.table.GameTableInfo;
 
 /**
  * Created by nikiforos on 18/09/15.
@@ -18,13 +19,14 @@ public class AuctionRoulette {
         Player playerInTurn = players[playerInTurnIndex];
         while (!isAuctionOver) {
             // 1) player takes his decision
-            int currentScore = gameTable.getAuctionScore();
-            playerInTurn.performAuctionAction(currentScore);
+            int currentScore = gameTable.getInfo().getAuctionScore();
+// TODO: under total refactor
+//            playerInTurn.performAuctionAction(currentScore);
 
             // 2) update game table
-            int playerScore = playerInTurn.getAuctionInfo().getScore().getScore();
+            int playerScore = playerInTurn.getAuctionInfo().getAuctionScore().getScore();
             if (currentScore < playerScore) {
-                gameTable.setAuctionScore(playerScore);
+                gameTable.getInfo().setAuctionScore(playerScore);
             }
 
             // 2.1) TODO: turn card if side deck is present
@@ -37,29 +39,29 @@ public class AuctionRoulette {
             isAuctionOver = isAuctionOver(gameTable);
         }
         // 5) set last player remaining as winner
-        final int auctionScore = gameTable.getAuctionScore();
+        final int auctionScore = gameTable.getInfo().getAuctionScore();
         setWinner(players, auctionScore);
     }
 
     private void setWinner(Player[] players, int auctionScore) {
         Player winner = null;
         for (int i = 0; i < players.length; i++) {
-            if (players[i].getAuctionInfo().getScore().getScore() == auctionScore) {
+            if (players[i].getAuctionInfo().getAuctionScore().getScore() == auctionScore) {
                 winner = players[i];
             }
         }
-        winner.getAuctionInfo().setStatus(Status.AUCTION_WINNER);
+        winner.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
     private boolean isAuctionOver(GameTable gameTable) {
         final int foldedCount = gameTable.getFoldedCount();
-        final int auctionScore = gameTable.getAuctionScore();
-        return foldedCount == 4 || auctionScore >= IAuctionAction.MAX_AUCTION_SCORE;
+        final int auctionScore = gameTable.getInfo().getAuctionScore();
+        return foldedCount == 4 || auctionScore >= AuctionScore.MAX_SCORE;
     }
 
     private int setNextPlayerToGo(int playerInTurn) {
         playerInTurn++;
-        playerInTurn %= GameTable.NUMBER_OF_PLAYERS;
+        playerInTurn %= GameTableInfo.NUMBER_OF_PLAYERS;
         return playerInTurn;
     }
 
