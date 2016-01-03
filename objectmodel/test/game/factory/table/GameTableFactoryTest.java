@@ -2,6 +2,9 @@ package game.factory.table;
 
 import game.cardset.Deck;
 import game.player.Player;
+import game.player.mock.MockClassicPlayer;
+import game.player.mock.MockCowardPlayer;
+import game.player.mock.MockUnwaveringPlayer;
 import game.table.GameTable;
 import org.junit.After;
 import org.junit.Test;
@@ -17,13 +20,14 @@ import static org.junit.Assert.assertNotNull;
 public class GameTableFactoryTest {
 
     private final GameTable mockGameTable;
+    private final Player[] mockPlayers = {new MockClassicPlayer(), new MockCowardPlayer(), new MockClassicPlayer(), new MockUnwaveringPlayer(), new MockClassicPlayer()};
 
     public GameTableFactoryTest() {
         this(new GameTableFactory());
     }
 
     GameTableFactoryTest(GameTableFactory gameTableFactoryTestObject) {
-        mockGameTable = gameTableFactoryTestObject.create();
+        mockGameTable = gameTableFactoryTestObject.create(mockPlayers);
     }
 
     @After

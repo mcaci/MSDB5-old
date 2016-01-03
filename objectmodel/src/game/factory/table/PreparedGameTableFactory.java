@@ -23,11 +23,10 @@ public class PreparedGameTableFactory extends GameTableFactory {
     }
 
     @Override
-    public GameTable create() {
-        GameTable gameTable = super.create();
+    public GameTable create(Player[] players) {
+        GameTable gameTable = super.create(players);
 
         Deck gameDeck = gameTable.getDeck();
-        Player[] players = gameTable.getPlayers();
         distributeCardsToPlayers(gameDeck, players, useSideDeck);
 
         return gameTable;

@@ -67,7 +67,7 @@ public class GameTable {
     public String toString() {
         return "GameTable{" +
                 "deck=" + deck +
-                "sideDeck=" + sideDeck +
+                ", sideDeck=" + sideDeck +
                 ", players=" + Arrays.toString(players) +
                 ", tableInfo=" + info +
                 '}';

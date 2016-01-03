@@ -1,5 +1,6 @@
 package game.factory.table;
 
+import game.player.Player;
 import game.table.GameTableInfo;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by nikiforos on 31/08/15.
@@ -28,6 +30,17 @@ public class PreparedGameTableFactoryTest extends GameTableFactoryTest {
                 {true},
                 {false}
         });
+    }
+
+    @Override
+    public void testOnPlayers() throws Exception {
+        super.testOnPlayers();
+        Player[] players = getMockGameTable().getPlayers();
+        for (Player player :
+                players) {
+            int handSize = player.getHand().size();
+            assertTrue("Hand should be between 7 and 8 cards and instead is of " + handSize, handSize == 7 || handSize == 8);
+        }
     }
 
     @Override
