@@ -6,32 +6,8 @@ package game.cardset.card;
 public enum CardSuit {
     ORO, COPPE, SPADE, BASTONI;
 
-    private boolean isBriscola = false;
-
-    public boolean isBriscola() {
-        return isBriscola;
-    }
-
-    public void resetBriscola() {
-        final CardSuit[] cardSuits = CardSuit.values();
-        for (int i = 0; i < cardSuits.length; i++) {
-            final CardSuit cardSuit = cardSuits[i];
-            cardSuit.isBriscola = false;
-        }
-    }
-
-    public void setAsBriscola() {
-        final CardSuit[] cardSuits = CardSuit.values();
-        for (int i = 0; i < cardSuits.length; i++) {
-            final CardSuit cardSuit = cardSuits[i];
-            cardSuit.isBriscola = (this == cardSuit);
-        }
-    }
-
-    @Override
+  @Override
     public String toString() {
-        return "CardSuit{" + this.name() + ", " +
-                "isBriscola=" + isBriscola +
-                '}';
+        return "CardSuit{" + this.name() + "}";
     }
 }

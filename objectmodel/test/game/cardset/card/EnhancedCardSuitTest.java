@@ -12,20 +12,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Tested class unused
  * Created by nikiforos on 11/09/15.
  */
+@Deprecated
 @RunWith(Parameterized.class)
-public class CardSuitTest {
+public class EnhancedCardSuitTest {
 
-    private CardSuit cardSuitTestObject;
+    private EnhancedCardSuit cardSuitTestObject;
 
-    public CardSuitTest(CardSuit cardSuitTestObject) {
+    public EnhancedCardSuitTest(EnhancedCardSuit cardSuitTestObject) {
         this.cardSuitTestObject = cardSuitTestObject;
     }
 
     @Parameterized.Parameters
     public static Collection inputParameters() {
-        CardSuit[] cardSuits = CardSuit.values();
+        EnhancedCardSuit[] cardSuits = EnhancedCardSuit.values();
         Object[][] inputParams = new Object[cardSuits.length][];
         for (int i = 0; i < inputParams.length; i++) {
             inputParams[i] = new Object[1];
@@ -42,7 +44,7 @@ public class CardSuitTest {
     @Test
     public void testSetAsBriscola() throws Exception {
         this.cardSuitTestObject.setAsBriscola();
-        CardSuit[] cardSuits = CardSuit.values();
+        EnhancedCardSuit[] cardSuits = EnhancedCardSuit.values();
         for (int i = 0; i < cardSuits.length; i++) {
             if (this.cardSuitTestObject == cardSuits[i]) {
                 assertTrue(cardSuits[i].isBriscola());
@@ -55,7 +57,7 @@ public class CardSuitTest {
     @Test
     public void testResetBriscola() throws Exception {
         this.cardSuitTestObject.resetBriscola();
-        CardSuit[] cardSuits = CardSuit.values();
+        EnhancedCardSuit[] cardSuits = EnhancedCardSuit.values();
         for (int i = 0; i < cardSuits.length; i++) {
             assertFalse(cardSuits[i].isBriscola());
         }

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class CardNumberTest {
 
     @Test
-    public void testgetWeight() throws Exception {
+    public void testWeights() throws Exception {
         assertTrue(CardNumber.ASSO.getWeight() > CardNumber.TRE.getWeight());
         assertTrue(CardNumber.TRE.getWeight() > CardNumber.RE.getWeight());
         assertTrue(CardNumber.RE.getWeight() > CardNumber.CAVALLO.getWeight());
