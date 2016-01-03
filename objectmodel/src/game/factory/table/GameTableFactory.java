@@ -6,7 +6,7 @@ import game.player.Player;
 import game.player.info.AuctionInfo;
 import game.table.GameTable;
 
-import static game.table.GameTable.NUMBER_OF_PLAYERS;
+import static game.table.GameTableInfo.NUMBER_OF_PLAYERS;
 
 /**
  * Created by nikiforos on 30/08/15.

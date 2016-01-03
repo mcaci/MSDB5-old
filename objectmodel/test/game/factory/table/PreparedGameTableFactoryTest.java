@@ -1,6 +1,6 @@
 package game.factory.table;
 
-import game.table.GameTable;
+import game.table.GameTableInfo;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -33,9 +33,9 @@ public class PreparedGameTableFactoryTest extends GameTableFactoryTest {
     @Override
     void testOnDeckSize(int deckSize) {
         // test for the created game
-        int sideDeckSize = GameTable.NO_SIDE_DECK_SIZE;
+        int sideDeckSize = GameTableInfo.NO_SIDE_DECK_SIZE;
         if (isSideDeckUsed) {
-            sideDeckSize = GameTable.SIDE_DECK_SIZE;
+            sideDeckSize = GameTableInfo.SIDE_DECK_SIZE;
         }
         assertEquals("At the end of the preparation the deck should have " + sideDeckSize + " cards",
                 sideDeckSize, deckSize);

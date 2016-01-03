@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import static game.cardset.Deck.DECK_DEFAULT_SIZE;
-import static game.table.GameTable.NUMBER_OF_PLAYERS;
+import static game.table.GameTableInfo.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

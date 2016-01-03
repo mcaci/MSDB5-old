@@ -10,14 +10,10 @@ import java.util.Arrays;
  */
 public class GameTable {
 
-    public static final int NUMBER_OF_PLAYERS = 5;
-    public static final int SIDE_DECK_SIZE = 5;
-    public static final int NO_SIDE_DECK_SIZE = 0;
-
+    private final GameTableInfo info = new GameTableInfo();
     private Deck deck;
     private Deck sideDeck;
     private Player[] players;
-    private int auctionScore = 0;
 
     public Deck getDeck() {
         return deck;
@@ -43,12 +39,8 @@ public class GameTable {
         this.players = players;
     }
 
-    public int getAuctionScore() {
-        return auctionScore;
-    }
-
-    public void setAuctionScore(int auctionScore) {
-        this.auctionScore = auctionScore;
+    public GameTableInfo getInfo() {
+        return info;
     }
 
     public void setWinningPlayer() {
@@ -77,7 +69,7 @@ public class GameTable {
                 "deck=" + deck +
                 "sideDeck=" + sideDeck +
                 ", players=" + Arrays.toString(players) +
-                ", auctionScore=" + auctionScore +
+                ", tableInfo=" + info +
                 '}';
     }
 }
