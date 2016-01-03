@@ -12,7 +12,6 @@ public class GameTable {
 
     private final GameTableInfo info = new GameTableInfo();
     private Deck deck;
-    private Deck sideDeck;
     private Player[] players;
 
     public Deck getDeck() {
@@ -21,14 +20,6 @@ public class GameTable {
 
     public void setDeck(Deck deck) {
         this.deck = deck;
-    }
-
-    public Deck getSideDeck() {
-        return sideDeck;
-    }
-
-    public void setSideDeck(Deck sideDeck) {
-        this.sideDeck = sideDeck;
     }
 
     public Player[] getPlayers() {
@@ -67,7 +58,6 @@ public class GameTable {
     public String toString() {
         return "GameTable{" +
                 "deck=" + deck +
-                ", sideDeck=" + sideDeck +
                 ", players=" + Arrays.toString(players) +
                 ", tableInfo=" + info +
                 '}';
