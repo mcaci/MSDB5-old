@@ -1,12 +1,13 @@
 package game.factory.cardset;
 
+import game.cardset.CardSet;
 import game.cardset.card.Card;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by nikiforos on 29/08/15.
@@ -14,22 +15,31 @@ import static org.junit.Assert.assertTrue;
 public abstract class CardSetFactoryTest {
 
     final CardSetFactory cardSetFactoryTestObject;
+    CardSet mockCardSet;
 
     CardSetFactoryTest(CardSetFactory cardSetFactoryTestObject) {
         this.cardSetFactoryTestObject = cardSetFactoryTestObject;
     }
 
-    public abstract Collection<Card> getCardSet();
-
-    @Test
-    public void testOnSize() throws Exception {
-        int deckSize = getCardSet().size();
-        assertTrue("Deck size should be greater than 0", deckSize > 0);
+    @After
+    public void tearDown() throws Exception {
+        System.out.println(mockCardSet.toString());
     }
 
     @Test
+    public void testOnSize() throws Exception {
+        int cardSetSize = mockCardSet.getCardSet().size();
+        assertTrue("Deck size should be greater than 0", cardSetSize > 0);
+        testOnConcreteSize(cardSetSize);
+    }
+
+    protected abstract void testOnConcreteSize(int cardSetSize);
+
+    @Test
     public void testOnContent() throws Exception {
-        Collection<Card> cards = getCardSet();
+        assertNotNull(mockCardSet);
+        assertNotNull(mockCardSet.getCardSet());
+        Collection<Card> cards = mockCardSet.getCardSet();
         for (Card card : cards) {
             assertTrue(card.isValid());
         }
@@ -37,7 +47,7 @@ public abstract class CardSetFactoryTest {
 
     @Test
     public void testAllCardsAreDifferent() throws Exception {
-        Collection<Card> cards = getCardSet();
+        Collection<Card> cards = mockCardSet.getCardSet();
 
         Object[] cardArray = cards.toArray();
         for (int i = 0; i < cardArray.length; i++) {

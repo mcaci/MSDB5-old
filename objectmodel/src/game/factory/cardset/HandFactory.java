@@ -8,13 +8,6 @@ import game.cardset.Hand;
 public class HandFactory extends CardSetFactory {
 
     /**
-     * Creates factory for empty hand
-     */
-    public HandFactory() {
-        super(0);
-    }
-
-    /**
      * Creates factory for side deck aware hand
      */
     public HandFactory(boolean isSizeDeckPresent) {

@@ -1,9 +1,7 @@
 package game.factory.cardset;
 
 import game.cardset.Hand;
-import game.cardset.card.Card;
 import org.junit.After;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -11,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by nikiforos on 08/09/15.
@@ -19,13 +16,12 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(Parameterized.class)
 public class HandFactoryTest extends CardSetFactoryTest {
 
-    private final Hand mockHand;
-    private boolean isSizeDeckPresent;
+    private boolean isSideDeckPresent;
 
-    public HandFactoryTest(boolean isSizeDeckPresent) {
-        super(new HandFactory(isSizeDeckPresent));
-        this.isSizeDeckPresent = isSizeDeckPresent;
-        this.mockHand = ((HandFactory) cardSetFactoryTestObject).createHand();
+    public HandFactoryTest(boolean isSideDeckPresent) {
+        super(new HandFactory(isSideDeckPresent));
+        this.isSideDeckPresent = isSideDeckPresent;
+        this.mockCardSet = ((HandFactory) this.cardSetFactoryTestObject).createHand();
     }
 
     @Parameterized.Parameters
@@ -36,33 +32,27 @@ public class HandFactoryTest extends CardSetFactoryTest {
         });
     }
 
-    @Override
-    public Collection<Card> getCardSet() {
-        return mockHand.getCardSet();
-    }
-
     @After
     public void tearDown() throws Exception {
         System.out.println("HandFactoryTest: showing hand after creation");
-        System.out.println(mockHand.toString());
+        super.tearDown();
     }
 
-    @Test
-    public void testGetCreatedHand() throws Exception {
-        assertNotNull(mockHand);
-        assertNotNull(mockHand.getCardSet());
-        if (isSizeDeckPresent) {
+    @Override
+    public void testOnConcreteSize(int deckSize) {
+        if (this.isSideDeckPresent) {
             assertEquals("Size doesn't correspond to test value " + Hand.WITH_SIDE_DECK_HAND_SIZE,
                     Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    mockHand.getCardSet().size());
+                    mockCardSet.getCardSet().size());
         } else {
             assertEquals("Size doesn't correspond to test value " + Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
                     Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    mockHand.getCardSet().size());
+                    mockCardSet.getCardSet().size());
         }
     }
 
+
     public Hand getMockHand() {
-        return mockHand;
+        return (Hand) mockCardSet;
     }
 }
