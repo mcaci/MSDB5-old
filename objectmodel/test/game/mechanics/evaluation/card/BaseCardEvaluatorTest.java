@@ -52,10 +52,7 @@ public abstract class BaseCardEvaluatorTest {
         Card secondCard = new MockCard();
         CardNumber first = inputCard.getCardNumber();
         CardNumber second = secondCard.getCardNumber();
-//        System.out.println("Second card is: " + secondCard); // TODO: to replace with logs
         while (first.equals(second)) {
-
-//            System.out.println("Second card is: " + secondCard); // TODO: to replace with logs
             secondCard = new MockCard();
             second = secondCard.getCardNumber();
         }
