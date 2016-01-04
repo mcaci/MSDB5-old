@@ -31,7 +31,7 @@ public class IHandEvaluatorTest {
     }
 
     @Parameterized.Parameters
-    public static Collection<?> primeNumbers() {
+    public static Collection<?> initParams() {
         return Arrays.asList(new Object[][]{
                 {DummyHandEvaluator.class},
                 {SimpleWeightedSumEvaluator.class},
