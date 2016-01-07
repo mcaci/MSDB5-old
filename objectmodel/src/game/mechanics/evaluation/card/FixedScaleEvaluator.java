@@ -8,10 +8,11 @@ import game.cardset.card.Card;
 public class FixedScaleEvaluator implements ICardEvaluator {
     @Override
     public int evaluateCard(Card card) {
+        final int weight = card.getCardNumber().getWeight();
         int points = card.getCardNumber().pointsForTheCard();
         if (points == 0) {
             points++;
         }
-        return points * card.getCardNumber().getWeight();
+        return points * weight;
     }
 }

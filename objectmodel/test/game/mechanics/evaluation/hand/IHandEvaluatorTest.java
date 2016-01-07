@@ -33,9 +33,10 @@ public class IHandEvaluatorTest {
     @Parameterized.Parameters
     public static Collection<?> initParams() {
         return Arrays.asList(new Object[][]{
-                {DummyHandEvaluator.class},
-                {SimpleWeightedSumEvaluator.class},
-                {HandSuitEvaluator.class}
+//                {DummyHandEvaluator.class},
+//                {SimpleWeightedSumEvaluator.class},
+//                {HandSuitEvaluator.class},
+                {HandAnalyzerEvaluator.class}
         });
     }
 
