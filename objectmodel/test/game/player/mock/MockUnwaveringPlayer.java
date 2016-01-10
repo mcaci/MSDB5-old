@@ -8,6 +8,7 @@ import game.mechanics.analysis.card.ICardAnalyzer;
 import game.mechanics.analysis.hand.HandAnalysisData;
 import game.mechanics.analysis.hand.HandAnalyzer;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,18 +28,26 @@ public class MockUnwaveringPlayer extends MockPlayer {
 
         Map<CardSuit, Integer> evaluationPerSuit = suitEvaluated(handToEvaluate);
 
-        int evaluatedMaxScore = internalLogicThatUsesAnalysisDataAndHandEvaluationMap(analysisData, evaluationPerSuit);
+        int evaluatedMaxScore = evaluationFunction(analysisData, evaluationPerSuit);
 
         return evaluatedMaxScore;
     }
 
-    private int internalLogicThatUsesAnalysisDataAndHandEvaluationMap(HandAnalysisData analysisData, Map<CardSuit, Integer> evaluationPerSuit) {
-        // TODO: incomplete
+    private int evaluationFunction(HandAnalysisData analysisData, Map<CardSuit, Integer> evaluationPerSuit) {
+        int value = 60;
+
+        int suitDensityAdder = Math.round(2 * analysisData.getSuitDensity());
+        int weaknessIndexAdder = 12 / analysisData.getWeaknessIndex();
+        int distanceFromSecondAdder = 3 * analysisData.getDistanceFromSecond();
+
+        int suitHighestValue = Collections.max(evaluationPerSuit.values());
 
         System.out.println(analysisData);
         System.out.println(evaluationPerSuit);
 
-        return 60;
+        int total = value + suitDensityAdder + weaknessIndexAdder + distanceFromSecondAdder + suitHighestValue;
+
+        return Math.round(0.85F * total);
     }
 
     private Map<CardSuit, Integer> suitEvaluated(Hand handToEvaluate) {
