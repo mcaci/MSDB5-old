@@ -1,4 +1,4 @@
-package game.mechanics.evaluation.card;
+package game.mechanics.analysis.card;
 
 import game.cardset.Deck;
 import game.cardset.card.Card;

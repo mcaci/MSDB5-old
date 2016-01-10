@@ -1,9 +1,9 @@
-package game.mechanics.evaluation.hand;
+package game.player.characteristic;
 
 import game.cardset.Hand;
 
 /**
- * Created by nikiforos on 10/09/15.
+ * Created by nikiforos on 10/01/16.
  */
 public interface IHandEvaluator {
 
