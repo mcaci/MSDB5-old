@@ -18,7 +18,7 @@ import java.util.Map;
 public class MockUnwaveringPlayer extends MockPlayer {
 
     public MockUnwaveringPlayer() {
-        super(0F, 7);
+        super(0F, 5);
     }
 
     @Override
