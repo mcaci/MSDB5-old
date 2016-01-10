@@ -2,13 +2,15 @@ package game.player;
 
 import game.cardset.Hand;
 import game.player.characteristic.IAuctionPersonality;
+import game.player.characteristic.IHandEvaluator;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionStatus;
+
 
 /**
  * Created by nikiforos on 30/08/15.
  */
-public abstract class Player implements IAuctionPersonality {
+public abstract class Player implements IAuctionPersonality, IHandEvaluator {
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private final Hand hand = new Hand();
@@ -49,4 +51,13 @@ public abstract class Player implements IAuctionPersonality {
         this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
+    /**
+     * To be implemented by concrete players
+     */
+    @Deprecated
+
+    @Override
+    public int evaluateHand(Hand handToEvaluate) {
+        return 61;
+    }
 }

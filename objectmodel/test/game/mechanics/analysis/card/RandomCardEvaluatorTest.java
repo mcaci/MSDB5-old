@@ -1,4 +1,4 @@
-package game.mechanics.evaluation.card;
+package game.mechanics.analysis.card;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

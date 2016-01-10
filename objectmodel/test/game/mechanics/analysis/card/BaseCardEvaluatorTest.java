@@ -1,4 +1,4 @@
-package game.mechanics.evaluation.card;
+package game.mechanics.analysis.card;
 
 import game.cardset.card.Card;
 import game.cardset.card.CardNumber;
@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
  */
 public abstract class BaseCardEvaluatorTest {
 
-    final static Class[] EVAL_IMPL_CLASSES = {DummyCardEvaluator.class, FixedScaleEvaluator.class};
-    ICardEvaluator iCardEvaluatorTestObject;
+    final static Class[] EVAL_IMPL_CLASSES = {FixedScaleAnalyzer.class};
+    ICardAnalyzer iCardAnalyzerTestObject;
     Class<?> implClass;
     Card inputCard = new MockCard();
     int evaluation = 0;
@@ -25,13 +25,13 @@ public abstract class BaseCardEvaluatorTest {
     @Before
     public void setUp() throws Exception {
         Constructor<?> constructor = implClass.getConstructor();
-        iCardEvaluatorTestObject = (ICardEvaluator) constructor.newInstance();
-        evaluation = iCardEvaluatorTestObject.evaluateCard(inputCard);
+        iCardAnalyzerTestObject = (ICardAnalyzer) constructor.newInstance();
+        evaluation = iCardAnalyzerTestObject.analyze(inputCard);
     }
 
     @After
     public void tearDown() throws Exception {
-        System.out.println("Card Evaluated with " + iCardEvaluatorTestObject.getClass().getSimpleName() + ": " + this.inputCard + ", value: " + evaluation);
+        System.out.println("Card Evaluated with " + iCardAnalyzerTestObject.getClass().getSimpleName() + ": " + this.inputCard + ", value: " + evaluation);
     }
 
     @Test
@@ -41,7 +41,7 @@ public abstract class BaseCardEvaluatorTest {
 
     @Test
     public void testConsistency() throws Exception {
-        int secondEvaluation = iCardEvaluatorTestObject.evaluateCard(inputCard);
+        int secondEvaluation = iCardAnalyzerTestObject.analyze(inputCard);
         assertEquals("Second evaluation <" + secondEvaluation +
                         "> is not the same as the first one <" + evaluation + ">",
                 evaluation, secondEvaluation);
@@ -56,7 +56,7 @@ public abstract class BaseCardEvaluatorTest {
             secondCard = new MockCard();
             second = secondCard.getCardNumber();
         }
-        int valueForSecondCard = iCardEvaluatorTestObject.evaluateCard(secondCard);
+        int valueForSecondCard = iCardAnalyzerTestObject.analyze(secondCard);
         if (first.getWeight() > second.getWeight()) {
             assertTrue("Evaluation for card " + inputCard + "that is " +
                             evaluation + " should not be less than " +

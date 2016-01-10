@@ -1,13 +1,14 @@
-package game.mechanics.evaluation.card;
+package game.mechanics.analysis.card;
 
 import game.cardset.card.Card;
 
 /**
  * Created by nikiforos on 29/12/15.
  */
-public class FixedScaleEvaluator implements ICardEvaluator {
+public class FixedScaleAnalyzer implements ICardAnalyzer {
+
     @Override
-    public int evaluateCard(Card card) {
+    public int analyze(Card card) {
         final int weight = card.getCardNumber().getWeight();
         int points = card.getCardNumber().pointsForTheCard();
         if (points == 0) {

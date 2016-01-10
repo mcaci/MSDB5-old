@@ -12,7 +12,7 @@ public class GameTableInfo {
     public static final int NO_SIDE_DECK_SIZE = 0;
 
     private int auctionScore = 0;
-    private Card compagno = null;
+    private Card pairedPlayerCard = null;
 
     public int getAuctionScore() {
         return auctionScore;
@@ -22,19 +22,19 @@ public class GameTableInfo {
         this.auctionScore = auctionScore;
     }
 
-    public Card getCompagno() {
-        return compagno;
+    public Card getPairedPlayerCard() {
+        return pairedPlayerCard;
     }
 
-    public void setCompagno(Card compagno) {
-        this.compagno = compagno;
+    public void setPairedPlayerCard(Card pairedPlayerCard) {
+        this.pairedPlayerCard = pairedPlayerCard;
     }
 
     @Override
     public String toString() {
         return "GameTableInfo{" +
                 "auctionScore=" + auctionScore +
-                ", compagno=" + compagno +
+                ", pairedPlayerCard=" + pairedPlayerCard +
                 '}';
     }
 }

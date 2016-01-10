@@ -1,4 +1,4 @@
-package game.mechanics.analysis;
+package game.mechanics.analysis.hand;
 
 import game.cardset.card.CardSuit;
 

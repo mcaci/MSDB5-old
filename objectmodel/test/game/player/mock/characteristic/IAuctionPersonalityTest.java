@@ -5,9 +5,6 @@ import game.player.characteristic.IAuctionPersonality;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionScore;
 import game.player.info.AuctionStatus;
-import game.player.mock.MockClassicPlayer;
-import game.player.mock.MockCowardPlayer;
-import game.player.mock.MockUnwaveringPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +23,10 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class IAuctionPersonalityTest {
 
-    private final static Class[] PERS_IMPL_CLASSES = {MockClassicPlayer.class, MockCowardPlayer.class, MockUnwaveringPlayer.class};
     private final static byte[] SCORES_TO_TEST = {0, 60, 89, 119, 120};
 
     private IAuctionPersonality iAuctionPersonalityTestObject;
     private int startingScore;
-
 
     private Class<?> implClass;
 
@@ -43,9 +38,9 @@ public class IAuctionPersonalityTest {
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
 
-        Object[][] params = new Object[PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
+        Object[][] params = new Object[CommonData.PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
         int i = 0;
-        for (Class personalityClass : PERS_IMPL_CLASSES) {
+        for (Class personalityClass : CommonData.PERS_IMPL_CLASSES) {
             for (byte score : SCORES_TO_TEST) {
                 params[i] = new Object[2];
                 params[i][0] = personalityClass;

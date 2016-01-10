@@ -1,7 +1,10 @@
-package game.mechanics.evaluation.hand;
+package game.player.mock.characteristic;
 
 import game.cardset.Hand;
 import game.factory.cardset.HandFactoryTest;
+import game.player.characteristic.IHandEvaluator;
+import game.player.mock.MockClassicPlayer;
+import game.player.mock.MockUnwaveringPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,10 +36,9 @@ public class IHandEvaluatorTest {
     @Parameterized.Parameters
     public static Collection<?> initParams() {
         return Arrays.asList(new Object[][]{
-//                {DummyHandEvaluator.class},
-//                {SimpleWeightedSumEvaluator.class},
-//                {HandSuitEvaluator.class},
-                {HandAnalyzerEvaluator.class}
+                {MockClassicPlayer.class},
+                {MockClassicPlayer.class},
+                {MockUnwaveringPlayer.class}
         });
     }
 
