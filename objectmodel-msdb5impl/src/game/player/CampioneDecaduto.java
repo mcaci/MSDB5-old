@@ -43,8 +43,13 @@ public class CampioneDecaduto extends Player {
 
     int decideNextScore(int currentScore) {
         int nextScore = ++currentScore;
-        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE);
+        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE + 1);
         nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
         return nextScore;
+    }
+
+    @Override
+    public int evaluateHand(Hand handToEvaluate) {
+        return 61;
     }
 }

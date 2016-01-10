@@ -29,7 +29,10 @@ public class Rialzatore extends Player {
     }
 
     int decideNextScore(int currentScore) {
-        return currentScore + SCORE_INCREMENT;
+        int nextScore = ++currentScore;
+        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE + 1);
+        nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
+        return nextScore;
     }
 
     AuctionScore chooseNextScore(Hand hand, int currentScore) {
@@ -37,5 +40,10 @@ public class Rialzatore extends Player {
         final int nextScore = decideNextScore(currentScore);
         auctionScore.setSafeScore(nextScore);
         return auctionScore;
+    }
+
+    @Override
+    public int evaluateHand(Hand handToEvaluate) {
+        return 80;
     }
 }

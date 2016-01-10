@@ -51,13 +51,4 @@ public abstract class Player implements IAuctionPersonality, IHandEvaluator {
         this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
-    /**
-     * To be implemented by concrete players
-     */
-    @Deprecated
-
-    @Override
-    public int evaluateHand(Hand handToEvaluate) {
-        return 61;
-    }
 }

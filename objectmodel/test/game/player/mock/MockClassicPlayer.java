@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class MockClassicPlayer extends MockPlayer {
 
     public MockClassicPlayer() {
-        super(0.4F, 1);
+        super(0.5F, 2);
     }
 
     @Override

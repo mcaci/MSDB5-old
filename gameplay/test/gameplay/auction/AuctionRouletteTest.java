@@ -1,6 +1,6 @@
 package gameplay.auction;
 
-import game.factory.table.GameTableFactoryTest;
+import game.factory.table.PreparedGameTableFactoryTest;
 import game.player.Player;
 import game.player.info.AuctionScore;
 import game.player.mock.MockUnwaveringPlayer;
@@ -25,7 +25,7 @@ public class AuctionRouletteTest {
     @Before
     public void setUp() throws Exception {
         auctionRouletteTest = new AuctionRoulette();
-        inputOutputGameTable = new GameTableFactoryTest().getMockGameTable();
+        inputOutputGameTable = new PreparedGameTableFactoryTest(true).getMockGameTable();
     }
 
     @After
@@ -75,7 +75,7 @@ public class AuctionRouletteTest {
         // verify the score of the game table
         int auctionScore = inputOutputGameTable.getInfo().getAuctionScore();
         assertTrue(auctionScore <= AuctionScore.MAX_SCORE);
-        assertTrue(auctionScore >= AuctionScore.MIN_SCORE);
+        assertTrue(auctionScore > AuctionScore.MIN_SCORE);
     }
 
     @Test
