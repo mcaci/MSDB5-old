@@ -27,6 +27,4 @@ public class MSDB5WebController {
 
 		return "index";
 	}
-
-	
 }
