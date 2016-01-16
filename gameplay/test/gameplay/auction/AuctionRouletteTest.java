@@ -73,9 +73,7 @@ public class AuctionRouletteTest {
         performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
 
         // verify the score of the game table
-        int auctionScore = inputOutputGameTable.getInfo().getAuctionScore();
-        assertTrue(auctionScore <= AuctionScore.MAX_SCORE);
-        assertTrue(auctionScore > AuctionScore.MIN_SCORE);
+        scoreValidation(inputOutputGameTable.getInfo().getAuctionScore());
     }
 
     @Test
@@ -103,7 +101,6 @@ public class AuctionRouletteTest {
         return isThereOneWinnerFourFolded;
     }
 
-
     private int getIndexOfWinner(Player[] players) {
         Player[] inputOutputPlayers = players;
         int winnerIndex = -1;
@@ -116,6 +113,7 @@ public class AuctionRouletteTest {
         }
         return winnerIndex;
     }
+
 
     private void performGlobalVerification(Player[] players) {
         // 1) all the players scores are different (excpet if score is 60)
@@ -179,6 +177,11 @@ public class AuctionRouletteTest {
                 }
             }
         }
+    }
+
+    private void scoreValidation(int auctionScore) {
+        assertTrue(auctionScore <= AuctionScore.MAX_SCORE);
+        assertTrue(auctionScore > AuctionScore.MIN_SCORE);
     }
 
 }

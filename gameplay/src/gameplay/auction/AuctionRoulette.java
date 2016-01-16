@@ -1,5 +1,6 @@
 package gameplay.auction;
 
+import game.cardset.Deck;
 import game.cardset.card.Card;
 import game.player.Player;
 import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
@@ -40,8 +41,10 @@ public class AuctionRoulette {
             }
 
             // 2.1) turn card if side deck is present
-            if (gameTable.getInfo().isSideDeckPresent()) {
-                turnCardFromSideDeck(currentScore, playerScore);
+            if (gameTable.getInfo().isSideDeckPresent() &&
+                    playerScore >= ScoreForTurningSideDeckCard.nextTurningAt(currentScore).getEquivalentInteger()) {
+                turnCardFromSideDeck(gameTable.getDeck());
+                System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
             }
 
             // 3) set next player to do the auction
@@ -56,8 +59,9 @@ public class AuctionRoulette {
         setWinner(players, auctionScore);
     }
 
-    private Card turnCardFromSideDeck(int currentScore, int playerScore) {
-        // TODO: verify conditions and turn card
+    private Card turnCardFromSideDeck(Deck sideDeck) {
+        /* TODO: turn card, implies also that players can see it and adapt their evaluation to the card seen
+         * for now it will just be a print to see that it is called */
         return null;
     }
 
