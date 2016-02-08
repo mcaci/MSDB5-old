@@ -34,7 +34,7 @@ public abstract class MockPlayer extends Player {
             throw new AuctionOnScoreOutOfBoundsException();
         }
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (!auctionInfo.getAuctionStatus().hasFolded()) {
+        if (!hasFolded()) {
             if (decideToContinueAuction()) {
                 auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
                 auctionInfo.setAuctionScore(chooseNextScore(currentScore));
@@ -72,7 +72,7 @@ public abstract class MockPlayer extends Player {
         assertTrue(this.tellScore() >= AuctionScore.MIN_SCORE);
         assertTrue(this.tellScore() <= AuctionScore.MAX_SCORE);
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
-        assertFalse(this.getAuctionInfo().getAuctionStatus().actionWasDone());
+        assertFalse(this.hasActed());
     }
 
 }

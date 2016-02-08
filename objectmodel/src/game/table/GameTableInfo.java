@@ -1,6 +1,7 @@
 package game.table;
 
 import game.cardset.card.Card;
+import game.player.Player;
 import game.player.info.AuctionScore;
 
 /**
@@ -15,6 +16,7 @@ public class GameTableInfo {
     private int auctionScore = AuctionScore.MIN_SCORE;
     private Card pairedPlayerCard = null;
     private boolean sideDeckPresent = false;
+    private Player auctionWinner = null;
 
     public int getAuctionScore() {
         return auctionScore;
@@ -40,12 +42,21 @@ public class GameTableInfo {
         this.sideDeckPresent = sideDeckPresent;
     }
 
+    public Player getAuctionWinner() {
+        return auctionWinner;
+    }
+
+    public void setAuctionWinner(Player auctionWinner) {
+        this.auctionWinner = auctionWinner;
+    }
+
     @Override
     public String toString() {
         return "GameTableInfo{" +
                 "auctionScore=" + auctionScore +
                 ", pairedPlayerCard=" + pairedPlayerCard +
                 ", sideDeckPresent=" + sideDeckPresent +
+                ", auctionWinner=" + auctionWinner +
                 '}';
     }
 }

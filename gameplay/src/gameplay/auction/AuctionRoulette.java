@@ -56,7 +56,8 @@ public class AuctionRoulette {
         }
         // 5) set last player remaining as winner
         final int auctionScore = gameTable.getInfo().getAuctionScore();
-        setWinner(players, auctionScore);
+        Player winner = findWinner(players, auctionScore);
+        gameTable.getInfo().setAuctionWinner(winner);
     }
 
     private Card turnCardFromSideDeck(Deck sideDeck) {
@@ -65,7 +66,7 @@ public class AuctionRoulette {
         return null;
     }
 
-    private void setWinner(Player[] players, int auctionScore) {
+    private Player findWinner(Player[] players, int auctionScore) {
         Player winner = null;
         for (int i = 0; i < players.length; i++) {
             if (players[i].getAuctionInfo().getAuctionScore().getScore() == auctionScore) {
@@ -73,6 +74,7 @@ public class AuctionRoulette {
             }
         }
         winner.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
+        return winner;
     }
 
     private boolean isAuctionOver(GameTable gameTable) {
