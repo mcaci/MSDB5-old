@@ -14,7 +14,7 @@ import game.player.info.AuctionStatus;
  * cerchi di fare Cappotto (ovvero chiamare la posta a 120), il poveraccio verrà a sua volta Accappottato per colpa
  * di un Re di spade che lo farà abdicare miseramente. I suoi ex sudditi lo compiangono ancora.
  */
-public class CampioneDecaduto extends Player {
+public class CampioneDecaduto extends ConcretePlayer {
 
 
     private static final float CHANCE_TO_FOLD = 0.4F;

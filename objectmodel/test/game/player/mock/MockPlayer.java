@@ -1,5 +1,7 @@
 package game.player.mock;
 
+import game.cardset.card.Card;
+import game.cardset.card.MockCard;
 import game.player.Player;
 import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import game.player.info.AuctionInfo;
@@ -43,6 +45,11 @@ public abstract class MockPlayer extends Player {
             }
         }
         return auctionInfo;
+    }
+
+    @Override
+    public Card chooseCompanionCard() {
+        return new MockCard();
     }
 
     private AuctionScore chooseNextScore(int currentScore) {
