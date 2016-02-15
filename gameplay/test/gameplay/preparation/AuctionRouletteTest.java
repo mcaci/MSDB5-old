@@ -1,4 +1,4 @@
-package gameplay.auction;
+package gameplay.preparation;
 
 import game.factory.table.PreparedGameTableFactoryTest;
 import game.player.Player;
@@ -68,7 +68,7 @@ public class AuctionRouletteTest {
         // output game table
         auctionRouletteTest.execute(inputOutputGameTable);
 
-        // the auction should be over at the end, all tests are done by auction round test
+        // the preparation should be over at the end, all tests are done by preparation round test
         performGlobalVerification(inputOutputGameTable.getPlayers());
         performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
 
@@ -152,7 +152,7 @@ public class AuctionRouletteTest {
         }
         // 1) check there is a winner and four folded
         testWinnerCase(players, winnerIndex);
-        // 2) the winner has the greater auction score
+        // 2) the winner has the greater preparation score
         testWinnerScore(players, winnerIndex);
     }
 
@@ -172,7 +172,7 @@ public class AuctionRouletteTest {
             for (int i = 0; i < players.length; i++) {
                 if (i != winnerIndex) {
                     final Player player = players[i];
-                    assertTrue(player.toString() + " is not the winner so its auction score should be inferior",
+                    assertTrue(player.toString() + " is not the winner so its preparation score should be inferior",
                             winnerScore > player.getAuctionInfo().getAuctionScore().getScore());
                 }
             }

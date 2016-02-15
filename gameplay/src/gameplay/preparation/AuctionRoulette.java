@@ -1,4 +1,4 @@
-package gameplay.auction;
+package gameplay.preparation;
 
 import game.cardset.Deck;
 import game.cardset.card.Card;
@@ -17,6 +17,7 @@ public class AuctionRoulette {
 
     public void execute(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
+        final boolean sideDeckPresent = gameTable.getInfo().isSideDeckPresent();
         int playerInTurnIndex = 0;
 
         boolean isAuctionOver = false;
@@ -25,7 +26,7 @@ public class AuctionRoulette {
             // 1) player takes his decision
             int currentScore = gameTable.getInfo().getAuctionScore();
 
-            AuctionInfo actionResult;
+            AuctionInfo actionResult; // useless to keep it
             try {
                 actionResult = playerInTurn.performAuctionAction(currentScore);
             } catch (AuctionOnScoreOutOfBoundsException e) {
@@ -41,23 +42,31 @@ public class AuctionRoulette {
             }
 
             // 2.1) turn card if side deck is present
-            if (gameTable.getInfo().isSideDeckPresent() &&
+            if (sideDeckPresent &&
                     playerScore >= ScoreForTurningSideDeckCard.nextTurningAt(currentScore).getEquivalentInteger()) {
                 turnCardFromSideDeck(gameTable.getDeck());
                 System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
             }
 
-            // 3) set next player to do the auction
+            // 3) set next player to do the preparation
             playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
             playerInTurn = players[playerInTurnIndex];
 
-            // 4) verify auction is still ongoing
+            // 4) verify preparation is still ongoing
             isAuctionOver = isAuctionOver(gameTable);
         }
         // 5) set last player remaining as winner
         final int auctionScore = gameTable.getInfo().getAuctionScore();
         Player winner = findWinner(players, auctionScore);
         gameTable.getInfo().setAuctionWinner(winner);
+
+        // 6) winner chooses companion
+        Card companionCard = winner.chooseCompanionCard();
+
+        // 7)
+        if (sideDeckPresent) {
+            winner.swapCardsWithSideDeck(gameTable.getDeck());
+        }
     }
 
     private Card turnCardFromSideDeck(Deck sideDeck) {

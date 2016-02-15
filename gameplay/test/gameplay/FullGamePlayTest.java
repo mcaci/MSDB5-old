@@ -4,7 +4,7 @@ import game.cardset.card.Card;
 import game.factory.table.PreparedGameTableFactoryTest;
 import game.player.Player;
 import game.table.GameTable;
-import gameplay.auction.AuctionRoulette;
+import gameplay.preparation.AuctionRoulette;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

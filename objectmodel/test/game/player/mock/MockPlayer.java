@@ -1,5 +1,6 @@
 package game.player.mock;
 
+import game.cardset.Deck;
 import game.cardset.card.Card;
 import game.cardset.card.MockCard;
 import game.player.Player;
@@ -57,6 +58,11 @@ public abstract class MockPlayer extends Player {
         final int nextScore = decideNextScore(currentScore);
         auctionScore.setSafeScore(nextScore);
         return auctionScore;
+    }
+
+    @Override
+    public void swapCardsWithSideDeck(Deck deck) {
+        return; // TODO: mock implementation
     }
 
     private int decideNextScore(int currentScore) {

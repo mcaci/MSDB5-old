@@ -1,10 +1,7 @@
-package game.player.mock.characteristic;
+package game.player.characteristic;
 
 import game.cardset.Hand;
 import game.factory.cardset.HandFactoryTest;
-import game.player.characteristic.IHandEvaluator;
-import game.player.mock.MockClassicPlayer;
-import game.player.mock.MockUnwaveringPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,32 +18,36 @@ import static org.junit.Assert.assertTrue;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class IHandEvaluatorTest {
+public class IPersonalityInGameTest {
 
-    private IHandEvaluator iHandEvaluatorTestObject;
+    private IPersonalityForPreparation iHandEvaluatorTestObject;
 
     private Class<?> implClass;
     private Hand inputHand;
     private int handEvaluation;
 
-    public IHandEvaluatorTest(Class implClass) {
+    public IPersonalityInGameTest(Class implClass) {
         this.implClass = implClass;
     }
 
     @Parameterized.Parameters
-    public static Collection<?> initParams() {
-        return Arrays.asList(new Object[][]{
-                {MockClassicPlayer.class},
-                {MockClassicPlayer.class},
-                {MockUnwaveringPlayer.class}
-        });
+    public static Collection<?> initParameters() {
+
+        Object[][] params = new Object[CommonData.PERS_IMPL_CLASSES.length][];
+        int i = 0;
+        for (Class personalityClass : CommonData.PERS_IMPL_CLASSES) {
+            params[i] = new Object[1];
+            params[i][0] = personalityClass;
+            i++;
+        }
+        return Arrays.asList(params);
     }
 
     @Before
     public void setUp() throws Exception {
         inputHand = new HandFactoryTest(true).getMockHand();
         Constructor<?> constructor = implClass.getConstructor();
-        iHandEvaluatorTestObject = (IHandEvaluator) constructor.newInstance();
+        iHandEvaluatorTestObject = (IPersonalityForPreparation) constructor.newInstance();
         handEvaluation = iHandEvaluatorTestObject.evaluateHand(inputHand);
     }
 

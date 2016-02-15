@@ -1,4 +1,4 @@
-package gameplay.auction;
+package gameplay.preparation;
 
 /**
  * Created by nikiforos on 16/01/16.

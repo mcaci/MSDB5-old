@@ -1,9 +1,8 @@
 package game.player;
 
 import game.cardset.Hand;
-import game.player.characteristic.IAuctionPersonality;
-import game.player.characteristic.ICompanionChooser;
-import game.player.characteristic.IHandEvaluator;
+import game.player.characteristic.IPersonalityForPreparation;
+import game.player.characteristic.IPersonalityInGame;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionStatus;
 
@@ -11,7 +10,7 @@ import game.player.info.AuctionStatus;
 /**
  * Created by nikiforos on 30/08/15.
  */
-public abstract class Player implements IAuctionPersonality, IHandEvaluator, ICompanionChooser {
+public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private final Hand hand = new Hand();

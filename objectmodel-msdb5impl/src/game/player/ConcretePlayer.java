@@ -1,5 +1,6 @@
 package game.player;
 
+import game.cardset.Deck;
 import game.cardset.Hand;
 import game.cardset.card.Card;
 import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
@@ -23,5 +24,10 @@ public abstract class ConcretePlayer extends Player {
     @Override
     public int evaluateHand(Hand handToEvaluate) {
         return 0;
+    }
+
+    @Override
+    public void swapCardsWithSideDeck(Deck deck) {
+        return; // TODO: real impl
     }
 }
