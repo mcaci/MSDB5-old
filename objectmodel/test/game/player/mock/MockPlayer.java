@@ -82,8 +82,8 @@ public abstract class MockPlayer extends Player {
         assertNotNull(this.getHand());
         assertTrue(this.getHand().isEmpty()); // Hand is empty at player creation
         assertNotNull(this.getAuctionInfo());
-        assertTrue(this.tellScore() >= AuctionScore.MIN_SCORE);
-        assertTrue(this.tellScore() <= AuctionScore.MAX_SCORE);
+        assertTrue(this.tellAuctionScore() >= AuctionScore.MIN_SCORE);
+        assertTrue(this.tellAuctionScore() <= AuctionScore.MAX_SCORE);
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
         assertFalse(this.hasActed());
     }

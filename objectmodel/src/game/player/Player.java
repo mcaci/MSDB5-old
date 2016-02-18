@@ -5,6 +5,7 @@ import game.player.characteristic.IPersonalityForPreparation;
 import game.player.characteristic.IPersonalityInGame;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionStatus;
+import game.player.info.ScoreCountInfo;
 
 
 /**
@@ -14,6 +15,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private final Hand hand = new Hand();
+    private final ScoreCountInfo postGameInfo = new ScoreCountInfo();
 
     public Hand getHand() {
         return this.hand;
@@ -43,7 +45,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         return auctionInfo.getAuctionStatus().hasFolded();
     }
 
-    public byte tellScore() {
+    public byte tellAuctionScore() {
         return this.auctionInfo.getAuctionScore().getScore();
     }
 
@@ -51,4 +53,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
+    public int tellScore() {
+        return this.postGameInfo.getScore();
+    }
 }
