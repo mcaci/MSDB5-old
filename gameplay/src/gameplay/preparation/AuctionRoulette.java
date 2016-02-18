@@ -63,10 +63,13 @@ public class AuctionRoulette {
         // 6) winner chooses companion
         Card companionCard = winner.chooseCompanionCard();
 
-        // 7)
+        // 7) mix with side deck
         if (sideDeckPresent) {
             winner.swapCardsWithSideDeck(gameTable.getDeck());
         }
+
+        // 8) confirm companion card
+        gameTable.getInfo().setPairedPlayerCard(companionCard);
     }
 
     private Card turnCardFromSideDeck(Deck sideDeck) {

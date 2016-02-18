@@ -4,6 +4,7 @@ import game.cardset.card.Card;
 import game.factory.table.PreparedGameTableFactoryTest;
 import game.player.Player;
 import game.table.GameTable;
+import gameplay.hostilities.HostilitiesRoulette;
 import gameplay.preparation.AuctionRoulette;
 import org.junit.After;
 import org.junit.Before;
@@ -16,16 +17,12 @@ import static org.junit.Assert.assertNotNull;
  */
 public class FullGamePlayTest {
 
-    private AuctionRoulette auctionRouletteTest;
     private GameTable inputOutputGameTable;
-
     private String stepName;
 
     @Before
     public void setUp() throws Exception {
-        auctionRouletteTest = new AuctionRoulette();
         inputOutputGameTable = new PreparedGameTableFactoryTest(true).getMockGameTable();
-
         stepName = "";
     }
 
@@ -38,24 +35,20 @@ public class FullGamePlayTest {
     @Test
     public void step1() throws Exception {
         stepName = "Preparation (auction, choosing suit, managing side deck, choosing number/card)";
+        AuctionRoulette auctionRouletteTest = new AuctionRoulette();
         auctionRouletteTest.execute(inputOutputGameTable);
 
         Player auctionWinner = inputOutputGameTable.getInfo().getAuctionWinner();
         assertNotNull(auctionWinner);
-        System.out.println("Auction winner: " + auctionWinner);
-
-        Card companionCard = auctionWinner.chooseCompanionCard();
+        Card companionCard = inputOutputGameTable.getInfo().getPairedPlayerCard();
         assertNotNull(companionCard);
-        System.out.println("Companion card: " + companionCard);
-
-//        Player companion = playerFinder.findCompanion();
     }
 
     @Test
     public void step2() throws Exception {
         step1();
-
         stepName = "Hostilities (play all rounds until all card are played)";
+        HostilitiesRoulette hostilitiesRouletteTest = new HostilitiesRoulette();
     }
 
     @Test
