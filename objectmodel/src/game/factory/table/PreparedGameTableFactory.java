@@ -29,6 +29,8 @@ public class PreparedGameTableFactory extends GameTableFactory {
         Deck gameDeck = gameTable.getDeck();
         distributeCardsToPlayers(gameDeck, players, useSideDeck);
 
+        gameTable.getInfo().setSideDeckPresent(useSideDeck);
+
         return gameTable;
     }
 

@@ -1,7 +1,7 @@
 package game.player.mock.characteristic;
 
 import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
-import game.player.characteristic.IAuctionPersonality;
+import game.player.characteristic.IPersonalityForPreparation;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionScore;
 import game.player.info.AuctionStatus;
@@ -21,16 +21,16 @@ import static org.junit.Assert.*;
  * Created by nikiforos on 10/09/15.
  */
 @RunWith(Parameterized.class)
-public class IAuctionPersonalityTest {
+public class PerformAuctionActionTest {
 
     private final static byte[] SCORES_TO_TEST = {0, 60, 89, 119, 120};
 
-    private IAuctionPersonality iAuctionPersonalityTestObject;
+    private IPersonalityForPreparation iPersonalityForPreparationTestObject;
     private int startingScore;
 
     private Class<?> implClass;
 
-    public IAuctionPersonalityTest(Class<?> implClass, byte startingScore) {
+    public PerformAuctionActionTest(Class<?> implClass, byte startingScore) {
         this.implClass = implClass;
         this.startingScore = startingScore;
     }
@@ -54,12 +54,12 @@ public class IAuctionPersonalityTest {
     @Before
     public void setUp() throws Exception {
         Constructor<?> constructor = implClass.getConstructor();
-        iAuctionPersonalityTestObject = (IAuctionPersonality) constructor.newInstance();
+        iPersonalityForPreparationTestObject = (IPersonalityForPreparation) constructor.newInstance();
     }
 
     @After
     public void tearDown() throws Exception {
-        System.out.println("Auction personality tested with personality " + iAuctionPersonalityTestObject.getClass().getSimpleName() + " in " + this.iAuctionPersonalityTestObject);
+        System.out.println("Auction personality tested with personality " + iPersonalityForPreparationTestObject.getClass().getSimpleName() + " in " + this.iPersonalityForPreparationTestObject);
         System.out.println("And with starting score of " + startingScore);
     }
 
@@ -69,7 +69,7 @@ public class IAuctionPersonalityTest {
         AuctionInfo infoAfterAction = null;
         boolean raisedCorrectly = false;
         try {
-            infoAfterAction = iAuctionPersonalityTestObject.performAuctionAction(startingScore);
+            infoAfterAction = iPersonalityForPreparationTestObject.performAuctionAction(startingScore);
         } catch (AuctionOnScoreOutOfBoundsException ex) {
             raisedCorrectly = startingScore < AuctionScore.MIN_SCORE || startingScore >= AuctionScore.MAX_SCORE;
         }

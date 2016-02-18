@@ -1,5 +1,8 @@
 package game.player.mock;
 
+import game.cardset.Deck;
+import game.cardset.card.Card;
+import game.cardset.card.MockCard;
 import game.player.Player;
 import game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import game.player.info.AuctionInfo;
@@ -34,7 +37,7 @@ public abstract class MockPlayer extends Player {
             throw new AuctionOnScoreOutOfBoundsException();
         }
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (!auctionInfo.getAuctionStatus().hasFolded()) {
+        if (!hasFolded()) {
             if (decideToContinueAuction()) {
                 auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
                 auctionInfo.setAuctionScore(chooseNextScore(currentScore));
@@ -45,11 +48,21 @@ public abstract class MockPlayer extends Player {
         return auctionInfo;
     }
 
+    @Override
+    public Card chooseCompanionCard() {
+        return new MockCard();
+    }
+
     private AuctionScore chooseNextScore(int currentScore) {
         final AuctionScore auctionScore = new AuctionScore();
         final int nextScore = decideNextScore(currentScore);
         auctionScore.setSafeScore(nextScore);
         return auctionScore;
+    }
+
+    @Override
+    public void swapCardsWithSideDeck(Deck deck) {
+        return; // TODO: mock implementation
     }
 
     private int decideNextScore(int currentScore) {
@@ -69,10 +82,10 @@ public abstract class MockPlayer extends Player {
         assertNotNull(this.getHand());
         assertTrue(this.getHand().isEmpty()); // Hand is empty at player creation
         assertNotNull(this.getAuctionInfo());
-        assertTrue(this.tellScore() >= AuctionScore.MIN_SCORE);
-        assertTrue(this.tellScore() <= AuctionScore.MAX_SCORE);
+        assertTrue(this.tellAuctionScore() >= AuctionScore.MIN_SCORE);
+        assertTrue(this.tellAuctionScore() <= AuctionScore.MAX_SCORE);
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
-        assertFalse(this.getAuctionInfo().getAuctionStatus().actionWasDone());
+        assertFalse(this.hasActed());
     }
 
 }

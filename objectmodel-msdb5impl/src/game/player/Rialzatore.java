@@ -14,9 +14,7 @@ import game.player.info.AuctionStatus;
  * e provoca un senso misto di stizza e vomito in tutti i presenti.
  * Sfortunatamente gioca in casa quindi non può essere contraddetto.
  */
-public class Rialzatore extends Player {
-
-    private static final int SCORE_INCREMENT = 7;
+public class Rialzatore extends ConcretePlayer {
 
     @Override
     public AuctionInfo performAuctionAction(int currentScore) {

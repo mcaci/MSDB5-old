@@ -14,7 +14,7 @@ import game.player.info.AuctionStatus;
  * Il picco massimo si raggiunge in un caso di Cappotto durante il quale con una sola sua mossa si decide l'intera partita:
  * il suo prossimo regalo di compleanno sarà un cappio portatile, completo di Boia gonfiabile.
  */
-public class Dubbioso extends Player {
+public class Dubbioso extends ConcretePlayer {
 
     private static final float CHANCE_TO_FOLD = 0.4F;
 

@@ -14,7 +14,7 @@ import game.player.info.AuctionStatus;
  * la distruzione mentale degli altri giocatori (il Dubbioso in testa). Il giorno in cui qualcuno scoprirà la sua
  * tecnica di gioco probabilmente sarà stato tutto vanificato dall'apocalisse del 2012.
  */
-public class Ambiguo extends Player {
+public class Ambiguo extends ConcretePlayer {
 
     private static final float CHANCE_TO_FOLD = 0.4F;
 

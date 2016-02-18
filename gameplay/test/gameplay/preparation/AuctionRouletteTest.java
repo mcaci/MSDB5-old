@@ -1,4 +1,4 @@
-package gameplay.auction;
+package gameplay.preparation;
 
 import game.factory.table.PreparedGameTableFactoryTest;
 import game.player.Player;
@@ -64,29 +64,27 @@ public class AuctionRouletteTest {
     }
 
     @Test
-    public void testPerformAuctionRoulette() throws Exception {
+    public void testExecute() throws Exception {
         // output game table
         auctionRouletteTest.execute(inputOutputGameTable);
 
-        // the auction should be over at the end, all tests are done by auction round test
+        // the preparation should be over at the end, all tests are done by preparation round test
         performGlobalVerification(inputOutputGameTable.getPlayers());
         performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
 
         // verify the score of the game table
-        int auctionScore = inputOutputGameTable.getInfo().getAuctionScore();
-        assertTrue(auctionScore <= AuctionScore.MAX_SCORE);
-        assertTrue(auctionScore > AuctionScore.MIN_SCORE);
+        scoreValidation(inputOutputGameTable.getInfo().getAuctionScore());
     }
 
     @Test
-    public void testPerformAuctionRoulette_WithUnwaveringPlayer() throws Exception {
+    public void testExecute_WithUnwaveringPlayer() throws Exception {
         Player[] players = inputOutputGameTable.getPlayers();
         players[0] = new MockUnwaveringPlayer();
         players[1] = new MockUnwaveringPlayer();
         players[2] = new MockUnwaveringPlayer();
         players[3] = new MockUnwaveringPlayer();
         players[4] = new MockUnwaveringPlayer();
-        testPerformAuctionRoulette();
+        testExecute();
     }
 
     private boolean testWinnerCase(Player[] players) {
@@ -103,7 +101,6 @@ public class AuctionRouletteTest {
         return isThereOneWinnerFourFolded;
     }
 
-
     private int getIndexOfWinner(Player[] players) {
         Player[] inputOutputPlayers = players;
         int winnerIndex = -1;
@@ -116,6 +113,7 @@ public class AuctionRouletteTest {
         }
         return winnerIndex;
     }
+
 
     private void performGlobalVerification(Player[] players) {
         // 1) all the players scores are different (excpet if score is 60)
@@ -154,7 +152,7 @@ public class AuctionRouletteTest {
         }
         // 1) check there is a winner and four folded
         testWinnerCase(players, winnerIndex);
-        // 2) the winner has the greater auction score
+        // 2) the winner has the greater preparation score
         testWinnerScore(players, winnerIndex);
     }
 
@@ -174,11 +172,16 @@ public class AuctionRouletteTest {
             for (int i = 0; i < players.length; i++) {
                 if (i != winnerIndex) {
                     final Player player = players[i];
-                    assertTrue(player.toString() + " is not the winner so its auction score should be inferior",
+                    assertTrue(player.toString() + " is not the winner so its preparation score should be inferior",
                             winnerScore > player.getAuctionInfo().getAuctionScore().getScore());
                 }
             }
         }
+    }
+
+    private void scoreValidation(int auctionScore) {
+        assertTrue(auctionScore <= AuctionScore.MAX_SCORE);
+        assertTrue(auctionScore > AuctionScore.MIN_SCORE);
     }
 
 }

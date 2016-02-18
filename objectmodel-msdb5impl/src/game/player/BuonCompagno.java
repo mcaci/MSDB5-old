@@ -15,7 +15,7 @@ import game.player.info.AuctionStatus;
  * un buon compagno. L'unico problema di questo giocatore (che poi sono io) è che a briscola in 5 non si gioca a soldi,
  * quindi questo è il solo motivo della sua vittoria. Sta ancora maledicendo chi ha inventato il Poker Texano.
  */
-public class BuonCompagno extends Player {
+public class BuonCompagno extends ConcretePlayer {
     private static final float CHANCE_TO_FOLD = 0.4F;
 
     @Override

@@ -1,19 +1,21 @@
 package game.player;
 
 import game.cardset.Hand;
-import game.player.characteristic.IAuctionPersonality;
-import game.player.characteristic.IHandEvaluator;
+import game.player.characteristic.IPersonalityForPreparation;
+import game.player.characteristic.IPersonalityInGame;
 import game.player.info.AuctionInfo;
 import game.player.info.AuctionStatus;
+import game.player.info.ScoreCountInfo;
 
 
 /**
  * Created by nikiforos on 30/08/15.
  */
-public abstract class Player implements IAuctionPersonality, IHandEvaluator {
+public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private final Hand hand = new Hand();
+    private final ScoreCountInfo postGameInfo = new ScoreCountInfo();
 
     public Hand getHand() {
         return this.hand;
@@ -43,7 +45,7 @@ public abstract class Player implements IAuctionPersonality, IHandEvaluator {
         return auctionInfo.getAuctionStatus().hasFolded();
     }
 
-    public byte tellScore() {
+    public byte tellAuctionScore() {
         return this.auctionInfo.getAuctionScore().getScore();
     }
 
@@ -51,4 +53,7 @@ public abstract class Player implements IAuctionPersonality, IHandEvaluator {
         this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
+    public int tellScore() {
+        return this.postGameInfo.getScore();
+    }
 }
