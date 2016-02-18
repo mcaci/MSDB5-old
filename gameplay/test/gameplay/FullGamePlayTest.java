@@ -6,10 +6,12 @@ import game.player.Player;
 import game.table.GameTable;
 import gameplay.hostilities.HostilitiesRoulette;
 import gameplay.preparation.AuctionRoulette;
+import gameplay.scorecount.ScoreCountRoulette;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -49,12 +51,22 @@ public class FullGamePlayTest {
         step1();
         stepName = "Hostilities (play all rounds until all card are played)";
         HostilitiesRoulette hostilitiesRouletteTest = new HostilitiesRoulette();
+        hostilitiesRouletteTest.execute(inputOutputGameTable);
+        for (Player player : inputOutputGameTable.getPlayers()) {
+            assertEquals(0, player.getHand().size());
+        }
     }
 
     @Test
     public void step3() throws Exception {
         step2();
-
         stepName = "Score count (count all points and determine winners)";
+        ScoreCountRoulette scoreCountRouletteTest = new ScoreCountRoulette();
+        scoreCountRouletteTest.execute(inputOutputGameTable);
+        int sumOfScores = 0;
+        for (Player player : inputOutputGameTable.getPlayers()) {
+            sumOfScores += player.tellScore();
+        }
+        assertEquals(120, sumOfScores);
     }
 }

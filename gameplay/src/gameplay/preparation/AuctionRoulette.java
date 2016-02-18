@@ -9,11 +9,12 @@ import game.player.info.AuctionScore;
 import game.player.info.AuctionStatus;
 import game.table.GameTable;
 import game.table.GameTableInfo;
+import gameplay.GameRoulette;
 
 /**
  * Created by nikiforos on 18/09/15.
  */
-public class AuctionRoulette {
+public class AuctionRoulette implements GameRoulette {
 
     public void execute(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
@@ -36,7 +37,7 @@ public class AuctionRoulette {
             }
 
             // 2) update game table
-            int playerScore = playerInTurn.tellScore();
+            int playerScore = playerInTurn.tellAuctionScore();
             if (currentScore < playerScore) {
                 gameTable.getInfo().setAuctionScore(playerScore);
             }

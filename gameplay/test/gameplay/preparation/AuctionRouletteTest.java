@@ -64,7 +64,7 @@ public class AuctionRouletteTest {
     }
 
     @Test
-    public void testPerformAuctionRoulette() throws Exception {
+    public void testExecute() throws Exception {
         // output game table
         auctionRouletteTest.execute(inputOutputGameTable);
 
@@ -77,14 +77,14 @@ public class AuctionRouletteTest {
     }
 
     @Test
-    public void testPerformAuctionRoulette_WithUnwaveringPlayer() throws Exception {
+    public void testExecute_WithUnwaveringPlayer() throws Exception {
         Player[] players = inputOutputGameTable.getPlayers();
         players[0] = new MockUnwaveringPlayer();
         players[1] = new MockUnwaveringPlayer();
         players[2] = new MockUnwaveringPlayer();
         players[3] = new MockUnwaveringPlayer();
         players[4] = new MockUnwaveringPlayer();
-        testPerformAuctionRoulette();
+        testExecute();
     }
 
     private boolean testWinnerCase(Player[] players) {
