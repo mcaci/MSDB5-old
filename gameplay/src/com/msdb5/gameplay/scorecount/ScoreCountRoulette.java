@@ -8,7 +8,6 @@ import com.msdb5.gameplay.GameRoulette;
  */
 public class ScoreCountRoulette implements GameRoulette {
 
-    @Override
     public void execute(GameTable gameTable) {
 
     }
