@@ -1,8 +1,9 @@
-package com.msdb5.game.player;
+package com.msdb5.game.player.ia.player;
 
 import com.msdb5.game.cardset.Deck;
 import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.cardset.card.Card;
+import com.msdb5.game.player.Player;
 import com.msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import com.msdb5.game.player.info.AuctionInfo;
 

@@ -1,4 +1,4 @@
-package com.msdb5.game.player;
+package com.msdb5.game.player.ia.player;
 
 import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.player.info.AuctionInfo;
@@ -7,14 +7,15 @@ import com.msdb5.game.player.info.AuctionStatus;
 
 /**
  * Created by nikiforos on 11/09/15.
- * L'Ambiguo: Sarebbe necessario un intero trattato per cercare di spiegare bene la psiche (molto labile)
- * di questo strano essere vivente. Le sue caratteristiche principali sono due: non la smette un attimo di parlare
- * (e incazzarsi senza motivo) e cerca di confondere in tutti i modi chi invece dovrebbe aiutare.
- * Quando è un Compagno le sue sono principalmente mosse da Non-Compagno e viceversa, con ,come conseguenza,
- * la distruzione mentale degli altri giocatori (il Dubbioso in testa). Il giorno in cui qualcuno scoprirà la sua
- * tecnica di gioco probabilmente sarà stato tutto vanificato dall'apocalisse del 2012.
+ * Il Campione Decaduto / l'Accappottato: La doppia designazione di questo mistico Personaggio è dovuta alle sue regali origini.
+ * In tempi remoti era il padrone incontrastato del gioco e si sapeva già dall'inizio che avrebbe vinto tutto ciò
+ * che c'era da vincere, ma da un po' di tempo a questa parte il suo titolo nobiliare ha perso di valore.
+ * Tenta in tutti i modi di raggiungere gli antichi fasti ma nonostante per ben due volte con la mano quasi servita
+ * cerchi di fare Cappotto (ovvero chiamare la posta a 120), il poveraccio verrà a sua volta Accappottato per colpa
+ * di un Re di spade che lo farà abdicare miseramente. I suoi ex sudditi lo compiangono ancora.
  */
-public class Ambiguo extends ConcretePlayer {
+public class CampioneDecaduto extends ConcretePlayer {
+
 
     private static final float CHANCE_TO_FOLD = 0.4F;
 

@@ -1,8 +1,9 @@
 package com.msdb5.gameplay;
 
 import com.msdb5.game.cardset.card.Card;
-import com.msdb5.game.factory.table.PreparedGameTableFactoryTest;
+import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
+import com.msdb5.game.player.ia.player.*;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.gameplay.hostilities.HostilitiesRoulette;
 import com.msdb5.gameplay.preparation.AuctionRoulette;
@@ -24,7 +25,8 @@ public class FullGamePlayTest {
 
     @Before
     public void setUp() throws Exception {
-        inputOutputGameTable = new PreparedGameTableFactoryTest(true).getMockGameTable();
+        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         stepName = "";
     }
 

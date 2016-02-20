@@ -1,6 +1,8 @@
 package com.msdb5.gameplay.scorecount;
 
-import com.msdb5.game.factory.table.PreparedGameTableFactoryTest;
+import com.msdb5.game.factory.table.PreparedGameTableFactory;
+import com.msdb5.game.player.Player;
+import com.msdb5.game.player.ia.player.*;
 import com.msdb5.game.table.GameTable;
 import org.junit.After;
 import org.junit.Before;
@@ -16,8 +18,9 @@ public class ScoreCountRouletteTest {
 
     @Before
     public void setUp() throws Exception {
+        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         scoreCountRouletteTest = new ScoreCountRoulette();
-        inputOutputGameTable = new PreparedGameTableFactoryTest(true).getMockGameTable();
 
     }
 

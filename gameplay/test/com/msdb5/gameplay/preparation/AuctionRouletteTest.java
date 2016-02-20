@@ -1,9 +1,9 @@
 package com.msdb5.gameplay.preparation;
 
-import com.msdb5.game.factory.table.PreparedGameTableFactoryTest;
+import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
+import com.msdb5.game.player.ia.player.*;
 import com.msdb5.game.player.info.AuctionScore;
-import com.msdb5.game.player.mock.MockUnwaveringPlayer;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.game.table.GameTableInfo;
 import org.junit.After;
@@ -24,8 +24,9 @@ public class AuctionRouletteTest {
 
     @Before
     public void setUp() throws Exception {
+        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         auctionRouletteTest = new AuctionRoulette();
-        inputOutputGameTable = new PreparedGameTableFactoryTest(true).getMockGameTable();
     }
 
     @After
@@ -74,17 +75,6 @@ public class AuctionRouletteTest {
 
         // verify the score of the game table
         scoreValidation(inputOutputGameTable.getInfo().getAuctionScore());
-    }
-
-    @Test
-    public void testExecute_WithUnwaveringPlayer() throws Exception {
-        Player[] players = inputOutputGameTable.getPlayers();
-        players[0] = new MockUnwaveringPlayer();
-        players[1] = new MockUnwaveringPlayer();
-        players[2] = new MockUnwaveringPlayer();
-        players[3] = new MockUnwaveringPlayer();
-        players[4] = new MockUnwaveringPlayer();
-        testExecute();
     }
 
     private boolean testWinnerCase(Player[] players) {

@@ -1,7 +1,8 @@
-package com.msdb5.game.player.characteristic;
+package com.msdb5.game.player.mock.characteristic;
 
 import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.factory.cardset.HandFactoryTest;
+import com.msdb5.game.player.characteristic.IPersonalityForPreparation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

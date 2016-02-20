@@ -1,4 +1,4 @@
-package com.msdb5.game.player;
+package com.msdb5.game.player.ia.player;
 
 import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.player.info.AuctionInfo;

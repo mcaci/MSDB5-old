@@ -1,5 +1,7 @@
-package com.msdb5.game.player.characteristic;
+package com.msdb5.game.player.mock.characteristic;
 
+import com.msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
+import com.msdb5.game.player.characteristic.IPersonalityForPreparation;
 import com.msdb5.game.player.info.AuctionInfo;
 import com.msdb5.game.player.info.AuctionScore;
 import com.msdb5.game.player.info.AuctionStatus;
