@@ -8,5 +8,5 @@ import com.msdb5.game.table.GameTable;
  */
 public interface GameRoulette {
 
-    void execute(GameTable gameTable);
+    void executeOn(GameTable gameTable);
 }

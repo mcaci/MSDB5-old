@@ -40,11 +40,11 @@ public class FullGamePlayTest {
     public void step1() throws Exception {
         stepName = "Preparation (auction, choosing suit, managing side deck, choosing number/card)";
         AuctionRoulette auctionRouletteTest = new AuctionRoulette();
-        auctionRouletteTest.execute(inputOutputGameTable);
+        auctionRouletteTest.executeOn(inputOutputGameTable);
 
-        Player auctionWinner = inputOutputGameTable.getInfo().getAuctionWinner();
+        Player auctionWinner = inputOutputGameTable.getGameTableInfo().getAuctionWinner();
         assertNotNull(auctionWinner);
-        Card companionCard = inputOutputGameTable.getInfo().getPairedPlayerCard();
+        Card companionCard = inputOutputGameTable.getGameTableInfo().getPairedPlayerCard();
         assertNotNull(companionCard);
     }
 
@@ -53,7 +53,7 @@ public class FullGamePlayTest {
         step1();
         stepName = "Hostilities (play all rounds until all card are played)";
         HostilitiesRoulette hostilitiesRouletteTest = new HostilitiesRoulette();
-        hostilitiesRouletteTest.execute(inputOutputGameTable);
+        hostilitiesRouletteTest.executeOn(inputOutputGameTable);
         for (Player player : inputOutputGameTable.getPlayers()) {
             assertEquals(0, player.getHand().size());
         }
@@ -64,7 +64,7 @@ public class FullGamePlayTest {
         step2();
         stepName = "Score count (count all points and determine winners)";
         ScoreCountRoulette scoreCountRouletteTest = new ScoreCountRoulette();
-        scoreCountRouletteTest.execute(inputOutputGameTable);
+        scoreCountRouletteTest.executeOn(inputOutputGameTable);
         int sumOfScores = 0;
         for (Player player : inputOutputGameTable.getPlayers()) {
             sumOfScores += player.tellScore();

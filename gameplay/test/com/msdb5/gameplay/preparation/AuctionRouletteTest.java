@@ -67,14 +67,14 @@ public class AuctionRouletteTest {
     @Test
     public void testExecute() throws Exception {
         // output game table
-        auctionRouletteTest.execute(inputOutputGameTable);
+        auctionRouletteTest.executeOn(inputOutputGameTable);
 
         // the preparation should be over at the end, all tests are done by preparation round test
         performGlobalVerification(inputOutputGameTable.getPlayers());
         performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
 
         // verify the score of the game table
-        scoreValidation(inputOutputGameTable.getInfo().getAuctionScore());
+        scoreValidation(inputOutputGameTable.getGameTableInfo().getAuctionScore());
     }
 
     private boolean testWinnerCase(Player[] players) {

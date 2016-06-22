@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 /**
  * Created by nikiforos on 18/02/16.
  */
@@ -21,6 +23,6 @@ public class HostilitiesRouletteTest {
 
     @Test
     public void testExecute() throws Exception {
-
+        fail("Not implemented yet");
     }
 }
