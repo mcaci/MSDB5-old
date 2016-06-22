@@ -9,18 +9,15 @@ import java.util.List;
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class Hand extends CardSet<List<Card>> {
+public class Hand extends CardSet2 {
 
+    public static final int EMPTY_HAND_SIZE = 0;
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;
     public static final int WITHOUT_SIDE_DECK_HAND_SIZE = 8;
 
     public Hand(Collection<Card> deckCards) {
-        this();
+        super(new LinkedList<Card>());
         this.getCardSet().addAll(deckCards);
-    }
-
-    public Hand() {
-        super(new LinkedList<>());
     }
 
     public void add(Card card) {

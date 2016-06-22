@@ -8,6 +8,13 @@ import com.msdb5.game.cardset.Hand;
 public class HandFactory extends CardSetFactory {
 
     /**
+     * Creates factory for side deck with size info
+     */
+    public HandFactory(int handSize) {
+        super(handSize);
+    }
+
+    /**
      * Creates factory for side deck aware hand
      */
     public HandFactory(boolean isSizeDeckPresent) {

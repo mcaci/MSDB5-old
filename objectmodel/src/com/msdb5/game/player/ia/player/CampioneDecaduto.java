@@ -14,42 +14,4 @@ import com.msdb5.game.player.info.AuctionStatus;
  * cerchi di fare Cappotto (ovvero chiamare la posta a 120), il poveraccio verrà a sua volta Accappottato per colpa
  * di un Re di spade che lo farà abdicare miseramente. I suoi ex sudditi lo compiangono ancora.
  */
-public class CampioneDecaduto extends ConcretePlayer {
-
-
-    private static final float CHANCE_TO_FOLD = 0.4F;
-
-    @Override
-    public AuctionInfo performAuctionAction(int currentScore) {
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (!auctionInfo.getAuctionStatus().hasFolded()) {
-            final double randomFlag = Math.random();
-            if (randomFlag > CHANCE_TO_FOLD) {
-                auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
-                auctionInfo.setAuctionScore(chooseNextScore(this.getHand(), currentScore));
-            } else {
-                auctionInfo.setAuctionStatus(AuctionStatus.FOLDED);
-            }
-        }
-        return auctionInfo;
-    }
-
-    AuctionScore chooseNextScore(Hand hand, int currentScore) {
-        final AuctionScore auctionScore = new AuctionScore();
-        final int nextScore = decideNextScore(currentScore);
-        auctionScore.setSafeScore(nextScore);
-        return auctionScore;
-    }
-
-    int decideNextScore(int currentScore) {
-        int nextScore = ++currentScore;
-        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE + 1);
-        nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
-        return nextScore;
-    }
-
-    @Override
-    public int evaluateHand(Hand handToEvaluate) {
-        return 61;
-    }
-}
+public class CampioneDecaduto extends ConcretePlayer {}

@@ -1,6 +1,7 @@
 package com.msdb5.game.player;
 
 import com.msdb5.game.cardset.Hand;
+import com.msdb5.game.factory.cardset.HandFactory;
 import com.msdb5.game.player.characteristic.IPersonalityForPreparation;
 import com.msdb5.game.player.characteristic.IPersonalityInGame;
 import com.msdb5.game.player.info.AuctionInfo;
@@ -14,7 +15,7 @@ import com.msdb5.game.player.info.ScoreCountInfo;
 public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
-    private final Hand hand = new Hand();
+    private final Hand hand = new HandFactory(Hand.EMPTY_HAND_SIZE).createHand();
     private final ScoreCountInfo postGameInfo = new ScoreCountInfo();
 
     public Hand getHand() {
@@ -53,7 +54,11 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
     }
 
-    public int tellScore() {
+    public byte tellScore() {
         return this.postGameInfo.getScore();
+    }
+
+    public void setScore(byte score) {
+        this.postGameInfo.setScore(score);
     }
 }

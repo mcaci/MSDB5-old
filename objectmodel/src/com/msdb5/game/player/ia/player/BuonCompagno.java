@@ -16,40 +16,4 @@ import com.msdb5.game.player.info.AuctionStatus;
  * quindi questo è il solo motivo della sua vittoria. Sta ancora maledicendo chi ha inventato il Poker Texano.
  */
 public class BuonCompagno extends ConcretePlayer {
-    private static final float CHANCE_TO_FOLD = 0.4F;
-
-    @Override
-    public AuctionInfo performAuctionAction(int currentScore) {
-        final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (!auctionInfo.getAuctionStatus().hasFolded()) {
-            final double randomFlag = Math.random();
-            if (randomFlag > CHANCE_TO_FOLD) {
-                auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
-                auctionInfo.setAuctionScore(chooseNextScore(this.getHand(), currentScore));
-            } else {
-                auctionInfo.setAuctionStatus(AuctionStatus.FOLDED);
-            }
-        }
-        return auctionInfo;
-    }
-
-    AuctionScore chooseNextScore(Hand hand, int currentScore) {
-        final AuctionScore auctionScore = new AuctionScore();
-        final int nextScore = decideNextScore(currentScore);
-        auctionScore.setSafeScore(nextScore);
-        return auctionScore;
-    }
-
-    int decideNextScore(int currentScore) {
-        int nextScore = ++currentScore;
-        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE + 1);
-        nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
-        return nextScore;
-    }
-
-
-    @Override
-    public int evaluateHand(Hand handToEvaluate) {
-        return 61;
-    }
 }

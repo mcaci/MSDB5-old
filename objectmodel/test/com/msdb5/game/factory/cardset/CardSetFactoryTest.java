@@ -1,6 +1,7 @@
 package com.msdb5.game.factory.cardset;
 
 import com.msdb5.game.cardset.CardSet;
+import com.msdb5.game.cardset.CardSet2;
 import com.msdb5.game.cardset.card.Card;
 import org.junit.After;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 public abstract class CardSetFactoryTest {
 
     final CardSetFactory cardSetFactoryTestObject;
-    CardSet mockCardSet;
+    CardSet2 mockCardSet;
 
     CardSetFactoryTest(CardSetFactory cardSetFactoryTestObject) {
         this.cardSetFactoryTestObject = cardSetFactoryTestObject;
