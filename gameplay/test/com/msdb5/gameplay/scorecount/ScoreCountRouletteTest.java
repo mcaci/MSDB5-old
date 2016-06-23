@@ -1,6 +1,10 @@
 package com.msdb5.gameplay.scorecount;
 
+import com.msdb5.game.cardset.CardSet;
+import com.msdb5.game.cardset.Deck;
 import com.msdb5.game.cardset.Hand;
+import com.msdb5.game.cardset.card.Card;
+import com.msdb5.game.factory.cardset.DeckFactory;
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
 import com.msdb5.game.player.ia.player.*;
@@ -9,9 +13,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import java.util.Collection;
+import java.util.Iterator;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by nikiforos on 18/02/16.
@@ -23,11 +28,20 @@ public class ScoreCountRouletteTest {
 
     @Before
     public void setUp() throws Exception {
-        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
-        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
+        Player[] testPlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        assignMockCardPilesToPlayers(testPlayers);
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(testPlayers);
         ScoreCountRoulette scoreCountRouletteTest = new ScoreCountRoulette();
         scoreCountRouletteTest.executeOn(inputOutputGameTable);
 
+    }
+
+    private void assignMockCardPilesToPlayers(Player[] testPlayers) {
+        CardSet cardSet = new DeckFactory().createDeck();
+        for (Card card : cardSet.getCardSet()) {
+            int playerIndex = (int) (Math.random() * testPlayers.length);
+            testPlayers[playerIndex].addToCardPile(card);
+        }
     }
 
     @After
@@ -58,8 +72,19 @@ public class ScoreCountRouletteTest {
     @Test
     public void testScoreBeingSumOfValues() throws Exception {
         Player[] players = inputOutputGameTable.getPlayers();
-        byte overallScore = 0;
-        Hand cardPile = players[0].getHand();
-        fail("test not implemented yet");
+        byte playerScore = players[0].tellScore();
+        byte sumOfPoints = getSumOfPoints(players[0]);
+        assertEquals("The score counted is not the sum of all the points of the card collected", playerScore, sumOfPoints);
+    }
+
+    private byte getSumOfPoints(Player player) {
+        byte sumOfPoints = 0;
+        CardSet cardPile = player.getCardPile();
+        Collection<Card> cards = cardPile.getCardSet();
+        assertNotNull(cards);
+        for (Card card : cards) {
+            sumOfPoints += card.pointsForTheCard();
+        }
+        return sumOfPoints;
     }
 }
