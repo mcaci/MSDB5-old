@@ -1,6 +1,6 @@
 package com.msdb5.game.player.mock.characteristic;
 
-import com.msdb5.game.player.ia.player.*;
+import com.msdb5.game.player.ai.*;
 import com.msdb5.game.player.mock.MockClassicPlayer;
 import com.msdb5.game.player.mock.MockCowardPlayer;
 import com.msdb5.game.player.mock.MockUnwaveringPlayer;

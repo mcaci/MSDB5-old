@@ -1,8 +1,10 @@
-package com.msdb5.game.player.ia.player;
+package com.msdb5.game.player.ai;
 
 import com.msdb5.game.cardset.Deck;
 import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.cardset.card.Card;
+import com.msdb5.game.cardset.card.CardNumber;
+import com.msdb5.game.cardset.card.CardSuit;
 import com.msdb5.game.player.Player;
 import com.msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import com.msdb5.game.player.info.AuctionInfo;
@@ -51,7 +53,8 @@ public abstract class ConcretePlayer extends Player {
 
     @Override
     public Card chooseCompanionCard() {
-        return null;
+        // TODO: insert better logic for card choice
+        return new Card(CardNumber.DUE, CardSuit.SPADE);
     }
 
     @Override

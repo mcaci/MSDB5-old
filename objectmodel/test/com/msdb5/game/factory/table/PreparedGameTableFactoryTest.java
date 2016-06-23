@@ -50,7 +50,7 @@ public class PreparedGameTableFactoryTest extends GameTableFactoryTest {
         if (isSideDeckUsed) {
             sideDeckSize = GameTableInfo.SIDE_DECK_SIZE;
         }
-        assertEquals("At the end of the preparation the deck should have " + sideDeckSize + " cards",
+        assertEquals("At the end of the pregame the deck should have " + sideDeckSize + " cards",
                 sideDeckSize, deckSize);
     }
 

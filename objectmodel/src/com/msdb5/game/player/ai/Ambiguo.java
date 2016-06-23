@@ -1,9 +1,4 @@
-package com.msdb5.game.player.ia.player;
-
-import com.msdb5.game.cardset.Hand;
-import com.msdb5.game.player.info.AuctionInfo;
-import com.msdb5.game.player.info.AuctionScore;
-import com.msdb5.game.player.info.AuctionStatus;
+package com.msdb5.game.player.ai;
 
 /**
  * Created by nikiforos on 11/09/15.
