@@ -2,7 +2,7 @@ package com.msdb5.gameplay.pregame;
 
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
-import com.msdb5.game.player.ia.player.*;
+import com.msdb5.game.player.ai.*;
 import com.msdb5.game.player.info.AuctionScore;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.game.table.GameTableInfo;

@@ -5,7 +5,7 @@ import com.msdb5.game.cardset.card.Card;
 import com.msdb5.game.factory.cardset.DeckFactory;
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
-import com.msdb5.game.player.ia.player.*;
+import com.msdb5.game.player.ai.*;
 import com.msdb5.game.table.GameTable;
 import org.junit.After;
 import org.junit.Before;

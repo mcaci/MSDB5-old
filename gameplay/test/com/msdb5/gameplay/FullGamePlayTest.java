@@ -3,7 +3,7 @@ package com.msdb5.gameplay;
 import com.msdb5.game.cardset.card.Card;
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
-import com.msdb5.game.player.ia.player.*;
+import com.msdb5.game.player.ai.*;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.gameplay.ingame.HostilitiesRoulette;
 import com.msdb5.gameplay.pregame.AuctionRoulette;
@@ -25,8 +25,8 @@ public class FullGamePlayTest {
 
     @Before
     public void setUp() throws Exception {
-        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
-        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
+        Player[] testPlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(testPlayers);
         stepName = "";
     }
 

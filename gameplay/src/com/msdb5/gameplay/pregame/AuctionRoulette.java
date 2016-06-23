@@ -27,9 +27,8 @@ public class AuctionRoulette implements GameRoulette {
             // 1) player takes his decision
             int currentScore = gameTable.getGameTableInfo().getAuctionScore();
 
-            AuctionInfo actionResult; // useless to keep it
             try {
-                actionResult = playerInTurn.performAuctionAction(currentScore);
+                playerInTurn.performAuctionAction(currentScore);
             } catch (AuctionOnScoreOutOfBoundsException e) {
                 // TODO: replace with logger and rethrow e
                 System.out.println(currentScore);
