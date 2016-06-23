@@ -4,12 +4,11 @@ import com.msdb5.game.cardset.card.Card;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class Hand extends CardSet2 {
+public class Hand extends CardSet {
 
     public static final int EMPTY_HAND_SIZE = 0;
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;

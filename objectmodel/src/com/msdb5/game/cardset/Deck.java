@@ -11,7 +11,7 @@ import java.util.Queue;
 /**
  * Created by nikiforos on 23/08/15.
  */
-public class Deck extends CardSet2 {
+public class Deck extends CardSet {
 
     public static final int DECK_DEFAULT_SIZE = CardNumber.values().length * CardSuit.values().length;
 

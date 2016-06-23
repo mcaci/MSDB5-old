@@ -7,15 +7,15 @@ import java.util.Collection;
 /**
  * Created by nikiforos on 16/09/15.
  */
-public abstract class CardSet<T extends Collection<Card>> {
+public abstract class CardSet {
 
-    private final T cardSet;
+    private final Collection<Card> cardSet;
 
-    public CardSet(T cardSet) {
+    public CardSet(Collection<Card> cardSet) {
         this.cardSet = cardSet;
     }
 
-    public T getCardSet() {
+    public Collection<Card> getCardSet() {
         return cardSet;
     }
 
