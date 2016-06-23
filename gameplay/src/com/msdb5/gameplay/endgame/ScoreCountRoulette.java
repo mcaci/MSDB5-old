@@ -1,12 +1,10 @@
-package com.msdb5.gameplay.scorecount;
+package com.msdb5.gameplay.endgame;
 
 import com.msdb5.game.cardset.CardSet;
 import com.msdb5.game.cardset.card.Card;
 import com.msdb5.game.player.Player;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.gameplay.GameRoulette;
-
-import java.util.Collection;
 
 /**
  * Created by nikiforos on 18/02/16.

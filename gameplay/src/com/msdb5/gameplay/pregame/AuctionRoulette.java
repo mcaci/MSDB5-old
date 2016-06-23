@@ -1,4 +1,4 @@
-package com.msdb5.gameplay.preparation;
+package com.msdb5.gameplay.pregame;
 
 import com.msdb5.game.cardset.Deck;
 import com.msdb5.game.cardset.card.Card;
@@ -49,11 +49,11 @@ public class AuctionRoulette implements GameRoulette {
                 System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
             }
 
-            // 3) set next player to do the preparation
+            // 3) set next player to do the pregame
             playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
             playerInTurn = players[playerInTurnIndex];
 
-            // 4) verify preparation is still ongoing
+            // 4) verify pregame is still ongoing
             isAuctionOver = isAuctionOver(gameTable);
         }
         // 5) set last player remaining as winner

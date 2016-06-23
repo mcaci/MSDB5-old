@@ -1,4 +1,4 @@
-package com.msdb5.gameplay.hostilities;
+package com.msdb5.gameplay.ingame;
 
 import org.junit.After;
 import org.junit.Before;

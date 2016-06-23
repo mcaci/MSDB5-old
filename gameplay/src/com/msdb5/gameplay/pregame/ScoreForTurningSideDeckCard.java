@@ -1,4 +1,4 @@
-package com.msdb5.gameplay.preparation;
+package com.msdb5.gameplay.pregame;
 
 /**
  * Created by nikiforos on 16/01/16.

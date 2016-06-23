@@ -1,8 +1,6 @@
-package com.msdb5.gameplay.scorecount;
+package com.msdb5.gameplay.endgame;
 
 import com.msdb5.game.cardset.CardSet;
-import com.msdb5.game.cardset.Deck;
-import com.msdb5.game.cardset.Hand;
 import com.msdb5.game.cardset.card.Card;
 import com.msdb5.game.factory.cardset.DeckFactory;
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
@@ -14,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
