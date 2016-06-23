@@ -13,4 +13,11 @@ public class ScoreCountInfo {
     public void setScore(byte score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "ScoreCountInfo{" +
+                "score=" + score +
+                '}';
+    }
 }

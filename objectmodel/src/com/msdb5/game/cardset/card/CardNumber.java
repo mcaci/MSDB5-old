@@ -6,14 +6,14 @@ package com.msdb5.game.cardset.card;
 public enum CardNumber {
     ASSO(10) {
         @Override
-        public int pointsForTheCard() {
+        public byte pointsForTheCard() {
             return 11;
         }
     },
     DUE(1),
     TRE(9) {
         @Override
-        public int pointsForTheCard() {
+        public byte pointsForTheCard() {
             return 10;
         }
     },
@@ -23,19 +23,19 @@ public enum CardNumber {
     SETTE(5),
     DONNA(6) {
         @Override
-        public int pointsForTheCard() {
+        public byte pointsForTheCard() {
             return 2;
         }
     },
     CAVALLO(7) {
         @Override
-        public int pointsForTheCard() {
+        public byte pointsForTheCard() {
             return 3;
         }
     },
     RE(8) {
         @Override
-        public int pointsForTheCard() {
+        public byte pointsForTheCard() {
             return 4;
         }
     };
@@ -46,7 +46,7 @@ public enum CardNumber {
         this.weight = weight;
     }
 
-    public int pointsForTheCard() {
+    public byte pointsForTheCard() {
         return 0;
     }
 

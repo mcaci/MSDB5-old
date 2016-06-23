@@ -23,10 +23,4 @@ public class Hand extends CardSet {
         this.getCardSet().add(card);
     }
 
-    @Override
-    public String toString() {
-        return "Hand{" +
-                super.toString() +
-                '}';
-    }
 }

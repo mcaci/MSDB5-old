@@ -21,6 +21,10 @@ public class Card {
         return cardNumber;
     }
 
+    public byte pointsForTheCard() {
+        return cardNumber.pointsForTheCard();
+    }
+
     public boolean isValid() {
         return cardSuit != null && cardNumber != null;
     }

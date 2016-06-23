@@ -30,10 +30,4 @@ public class Deck extends CardSet {
         return card;
     }
 
-    @Override
-    public String toString() {
-        return "Deck{" +
-                super.toString() +
-                "}";
-    }
 }
