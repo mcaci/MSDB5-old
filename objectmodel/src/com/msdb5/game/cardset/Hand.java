@@ -3,24 +3,22 @@ package com.msdb5.game.cardset;
 import com.msdb5.game.cardset.card.Card;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class Hand extends CardSet<List<Card>> {
+public class Hand extends CardPlaySet<List<Card>> {
 
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;
     public static final int WITHOUT_SIDE_DECK_HAND_SIZE = 8;
 
-    public Hand(Collection<Card> deckCards) {
-        this();
-        this.getCardSet().addAll(deckCards);
+    public Hand() {
+        super();
     }
 
-    public Hand() {
-        super(new LinkedList<>());
+    public Hand(Collection<Card> handCards) {
+        super(handCards);
     }
 
     public void add(Card card) {

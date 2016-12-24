@@ -8,7 +8,7 @@ import com.msdb5.game.cardset.Deck;
 public class DeckFactory extends CardSetFactory {
 
     public DeckFactory() {
-        super(Deck.DECK_DEFAULT_SIZE);
+        super(Deck.DEFAULT_DECK_SIZE);
     }
 
     public Deck createDeck() {

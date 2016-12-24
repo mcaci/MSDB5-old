@@ -26,7 +26,7 @@ public class AllCardsEvaluatorTest extends BaseCardEvaluatorTest {
 
     @Parameterized.Parameters
     public static Collection<?> parameters() {
-        Object[][] params = new Object[EVAL_IMPL_CLASSES.length * Deck.DECK_DEFAULT_SIZE][];
+        Object[][] params = new Object[EVAL_IMPL_CLASSES.length * Deck.DEFAULT_DECK_SIZE][];
         Iterator<Card> cardsIterator = FULL_DECK.getCardSet().iterator();
         for (int i = 0; i < params.length; i++) {
             params[i] = new Object[2];

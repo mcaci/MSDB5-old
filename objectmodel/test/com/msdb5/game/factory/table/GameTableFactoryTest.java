@@ -9,7 +9,7 @@ import com.msdb5.game.table.GameTable;
 import org.junit.After;
 import org.junit.Test;
 
-import static com.msdb5.game.cardset.Deck.DECK_DEFAULT_SIZE;
+import static com.msdb5.game.cardset.Deck.DEFAULT_DECK_SIZE;
 import static com.msdb5.game.table.GameTableInfo.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -59,7 +59,7 @@ public class GameTableFactoryTest {
     }
 
     void testOnDeckSize(int deckSize) {
-        assertEquals("The size of the deck should be " + DECK_DEFAULT_SIZE, deckSize, DECK_DEFAULT_SIZE);
+        assertEquals("The size of the deck should be " + DEFAULT_DECK_SIZE, deckSize, DEFAULT_DECK_SIZE);
     }
 
     public GameTable getMockGameTable() {

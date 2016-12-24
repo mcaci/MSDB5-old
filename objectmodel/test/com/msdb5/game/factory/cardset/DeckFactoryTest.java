@@ -23,7 +23,7 @@ public class DeckFactoryTest extends CardSetFactoryTest {
 
     @Override
     public void testOnConcreteSize(int deckSize) {
-        assertEquals("Size doesn't correspond to test value " + Deck.DECK_DEFAULT_SIZE, Deck.DECK_DEFAULT_SIZE,
+        assertEquals("Size doesn't correspond to test value " + Deck.DEFAULT_DECK_SIZE, Deck.DEFAULT_DECK_SIZE,
                 deckSize);
     }
 

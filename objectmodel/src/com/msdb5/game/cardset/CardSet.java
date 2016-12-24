@@ -11,12 +11,12 @@ public abstract class CardSet<T extends Collection<Card>> {
 
     private final T cardSet;
 
-    public CardSet(T cardSet) {
+    CardSet(T cardSet) {
         this.cardSet = cardSet;
     }
 
     public T getCardSet() {
-        return cardSet;
+        return this.cardSet;
     }
 
     public boolean isEmpty() {
