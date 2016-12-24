@@ -1,8 +1,8 @@
-package com.msdb5.gameplay.preparation;
+package com.msdb5.gameplay.pregame;
 
 import com.msdb5.game.factory.table.PreparedGameTableFactory;
 import com.msdb5.game.player.Player;
-import com.msdb5.game.player.ia.player.*;
+import com.msdb5.game.player.ai.*;
 import com.msdb5.game.player.info.AuctionScore;
 import com.msdb5.game.table.GameTable;
 import com.msdb5.game.table.GameTableInfo;
@@ -67,14 +67,14 @@ public class AuctionRouletteTest {
     @Test
     public void testExecute() throws Exception {
         // output game table
-        auctionRouletteTest.execute(inputOutputGameTable);
+        auctionRouletteTest.executeOn(inputOutputGameTable);
 
-        // the preparation should be over at the end, all tests are done by preparation round test
+        // the pregame should be over at the end, all tests are done by pregame round test
         performGlobalVerification(inputOutputGameTable.getPlayers());
         performSpecificLastRoundVerification(inputOutputGameTable.getPlayers());
 
         // verify the score of the game table
-        scoreValidation(inputOutputGameTable.getInfo().getAuctionScore());
+        scoreValidation(inputOutputGameTable.getGameTableInfo().getAuctionScore());
     }
 
     private boolean testWinnerCase(Player[] players) {
@@ -142,7 +142,7 @@ public class AuctionRouletteTest {
         }
         // 1) check there is a winner and four folded
         testWinnerCase(players, winnerIndex);
-        // 2) the winner has the greater preparation score
+        // 2) the winner has the greater pregame score
         testWinnerScore(players, winnerIndex);
     }
 
@@ -162,7 +162,7 @@ public class AuctionRouletteTest {
             for (int i = 0; i < players.length; i++) {
                 if (i != winnerIndex) {
                     final Player player = players[i];
-                    assertTrue(player.toString() + " is not the winner so its preparation score should be inferior",
+                    assertTrue(player.toString() + " is not the winner so its pregame score should be inferior",
                             winnerScore > player.getAuctionInfo().getAuctionScore().getScore());
                 }
             }

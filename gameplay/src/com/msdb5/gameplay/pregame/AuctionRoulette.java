@@ -1,4 +1,4 @@
-package com.msdb5.gameplay.preparation;
+package com.msdb5.gameplay.pregame;
 
 import com.msdb5.game.cardset.Deck;
 import com.msdb5.game.cardset.card.Card;
@@ -16,20 +16,19 @@ import com.msdb5.gameplay.GameRoulette;
  */
 public class AuctionRoulette implements GameRoulette {
 
-    public void execute(GameTable gameTable) {
+    public void executeOn(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
-        final boolean sideDeckPresent = gameTable.getInfo().isSideDeckPresent();
+        final boolean sideDeckPresent = gameTable.getGameTableInfo().isSideDeckPresent();
         int playerInTurnIndex = 0;
 
         boolean isAuctionOver = false;
         Player playerInTurn = players[playerInTurnIndex];
         while (!isAuctionOver) {
             // 1) player takes his decision
-            int currentScore = gameTable.getInfo().getAuctionScore();
+            int currentScore = gameTable.getGameTableInfo().getAuctionScore();
 
-            AuctionInfo actionResult; // useless to keep it
             try {
-                actionResult = playerInTurn.performAuctionAction(currentScore);
+                playerInTurn.performAuctionAction(currentScore);
             } catch (AuctionOnScoreOutOfBoundsException e) {
                 // TODO: replace with logger and rethrow e
                 System.out.println(currentScore);
@@ -39,7 +38,7 @@ public class AuctionRoulette implements GameRoulette {
             // 2) update game table
             int playerScore = playerInTurn.tellAuctionScore();
             if (currentScore < playerScore) {
-                gameTable.getInfo().setAuctionScore(playerScore);
+                gameTable.getGameTableInfo().setAuctionScore(playerScore);
             }
 
             // 2.1) turn card if side deck is present
@@ -49,17 +48,17 @@ public class AuctionRoulette implements GameRoulette {
                 System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
             }
 
-            // 3) set next player to do the preparation
+            // 3) set next player to do the pregame
             playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
             playerInTurn = players[playerInTurnIndex];
 
-            // 4) verify preparation is still ongoing
+            // 4) verify pregame is still ongoing
             isAuctionOver = isAuctionOver(gameTable);
         }
         // 5) set last player remaining as winner
-        final int auctionScore = gameTable.getInfo().getAuctionScore();
+        final int auctionScore = gameTable.getGameTableInfo().getAuctionScore();
         Player winner = findWinner(players, auctionScore);
-        gameTable.getInfo().setAuctionWinner(winner);
+        gameTable.getGameTableInfo().setAuctionWinner(winner);
 
         // 6) winner chooses companion
         Card companionCard = winner.chooseCompanionCard();
@@ -70,7 +69,7 @@ public class AuctionRoulette implements GameRoulette {
         }
 
         // 8) confirm companion card
-        gameTable.getInfo().setPairedPlayerCard(companionCard);
+        gameTable.getGameTableInfo().setPairedPlayerCard(companionCard);
     }
 
     private Card turnCardFromSideDeck(Deck sideDeck) {
@@ -92,7 +91,7 @@ public class AuctionRoulette implements GameRoulette {
 
     private boolean isAuctionOver(GameTable gameTable) {
         final int foldedCount = gameTable.getFoldedCount();
-        final int auctionScore = gameTable.getInfo().getAuctionScore();
+        final int auctionScore = gameTable.getGameTableInfo().getAuctionScore();
         return foldedCount == 4 || auctionScore >= AuctionScore.MAX_SCORE;
     }
 

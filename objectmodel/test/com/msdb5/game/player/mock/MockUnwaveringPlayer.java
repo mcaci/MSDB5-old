@@ -68,13 +68,16 @@ public class MockUnwaveringPlayer extends MockPlayer {
 
     private Map<CardSuit, Integer> getCardSuitIntegerMap(Hand handToEvaluate) {
         Map<CardSuit, Integer> sumSuitEvaluation = new HashMap<>();
+        for (CardSuit cardSuit : CardSuit.values()) {
+            sumSuitEvaluation.put(cardSuit, 0);
+        }
 
         ICardAnalyzer cardAnalyzer = new FixedScaleAnalyzer();
 
         for (Card card :
                 handToEvaluate.getCardSet()) {
             CardSuit cardSuit = card.getCardSuit();
-            Integer currentValue = sumSuitEvaluation.getOrDefault(cardSuit, 0);
+            Integer currentValue = sumSuitEvaluation.get(cardSuit);
             int evaluateCard = cardAnalyzer.analyze(card);
             sumSuitEvaluation.put(cardSuit, currentValue + evaluateCard);
         }

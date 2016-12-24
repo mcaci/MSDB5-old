@@ -1,4 +1,4 @@
-package com.msdb5.gameplay.hostilities;
+package com.msdb5.gameplay.ingame;
 
 import com.msdb5.game.table.GameTable;
 import com.msdb5.gameplay.GameRoulette;
@@ -9,6 +9,6 @@ import com.msdb5.gameplay.GameRoulette;
 public class HostilitiesRoulette implements GameRoulette {
 
 
-    public void execute(GameTable inputOutputGameTable) {
+    public void executeOn(GameTable inputOutputGameTable) {
     }
 }

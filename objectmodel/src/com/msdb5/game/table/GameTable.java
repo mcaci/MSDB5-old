@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class GameTable {
 
-    private final GameTableInfo info = new GameTableInfo();
+    private final GameTableInfo gameTableInfo = new GameTableInfo();
     private Deck deck;
     private Player[] players;
 
@@ -30,8 +30,8 @@ public class GameTable {
         this.players = players;
     }
 
-    public GameTableInfo getInfo() {
-        return info;
+    public GameTableInfo getGameTableInfo() {
+        return gameTableInfo;
     }
 
     public void setWinningPlayer() {
@@ -59,7 +59,7 @@ public class GameTable {
         return "GameTable{" +
                 "deck=" + deck +
                 ", players=" + Arrays.toString(players) +
-                ", tableInfo=" + info +
+                ", tableInfo=" + gameTableInfo +
                 '}';
     }
 }

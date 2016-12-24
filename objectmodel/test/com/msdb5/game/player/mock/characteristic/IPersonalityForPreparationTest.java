@@ -26,13 +26,13 @@ public class IPersonalityForPreparationTest {
     private final static byte[] SCORES_TO_TEST = {0, 60, 89, 119, 120};
 
     private IPersonalityForPreparation iPersonalityForPreparationTestObject;
-    private int startingScore;
+    private byte currentAuctionScore;
 
     private Class<?> implClass;
 
-    public IPersonalityForPreparationTest(Class<?> implClass, byte startingScore) {
+    public IPersonalityForPreparationTest(Class<?> implClass, byte currentAuctionScore) {
         this.implClass = implClass;
-        this.startingScore = startingScore;
+        this.currentAuctionScore = currentAuctionScore;
     }
 
     @Parameterized.Parameters
@@ -60,20 +60,20 @@ public class IPersonalityForPreparationTest {
     @After
     public void tearDown() throws Exception {
         System.out.println("Auction personality tested with personality " + iPersonalityForPreparationTestObject.getClass().getSimpleName() + " in " + this.iPersonalityForPreparationTestObject);
-        System.out.println("And with starting score of " + startingScore);
+        System.out.println("And with starting score of " + currentAuctionScore);
     }
 
     @Test
     public void testValidity() throws Exception {
 
         AuctionInfo infoAfterAction = null;
-        boolean raisedCorrectly = false;
+        boolean raisedIncorrectly = false;
         try {
-            infoAfterAction = iPersonalityForPreparationTestObject.performAuctionAction(startingScore);
+            infoAfterAction = iPersonalityForPreparationTestObject.performAuctionAction(currentAuctionScore);
         } catch (AuctionOnScoreOutOfBoundsException ex) {
-            raisedCorrectly = startingScore < AuctionScore.MIN_SCORE || startingScore >= AuctionScore.MAX_SCORE;
+            raisedIncorrectly = currentAuctionScore < AuctionScore.MIN_SCORE || currentAuctionScore >= AuctionScore.MAX_SCORE;
         }
-        if (raisedCorrectly) {
+        if (raisedIncorrectly) {
             assertNull(infoAfterAction);
         } else {
             assertNotNull(infoAfterAction);
@@ -82,9 +82,9 @@ public class IPersonalityForPreparationTest {
             if (!statusAfterAction.actionWasDone()) {
                 fail("Action should always be taken");
             } else if (statusAfterAction.hasFolded()) {
-                assertTrue(startingScore >= scoreAfterAction.getScore());
+                assertTrue(currentAuctionScore >= scoreAfterAction.getScore());
             } else {
-                assertTrue(startingScore < scoreAfterAction.getScore());
+                assertTrue(currentAuctionScore < scoreAfterAction.getScore());
             }
         }
     }

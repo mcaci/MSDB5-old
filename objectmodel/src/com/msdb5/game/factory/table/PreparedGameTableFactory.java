@@ -6,6 +6,7 @@ import com.msdb5.game.cardset.card.Card;
 import com.msdb5.game.player.Player;
 import com.msdb5.game.table.GameTable;
 
+import java.util.Collection;
 import java.util.Queue;
 
 /**
@@ -29,22 +30,23 @@ public class PreparedGameTableFactory extends GameTableFactory {
         Deck gameDeck = gameTable.getDeck();
         distributeCardsToPlayers(gameDeck, players, useSideDeck);
 
-        gameTable.getInfo().setSideDeckPresent(useSideDeck);
+        gameTable.getGameTableInfo().setSideDeckPresent(useSideDeck);
 
         return gameTable;
     }
 
     private void distributeCardsToPlayers(Deck gameDeck, Player[] players, boolean useSideDeck) {
-        Queue<Card> deck = gameDeck.getCardSet();
-        int size = gameDeck.getCardSet().size();
+        int size = gameDeck.size();
         if (useSideDeck) {
             size -= SIDE_DECK_SIZE;
         }
         for (int i = 0; i < size; i++) {
             Player player = players[i % NUMBER_OF_PLAYERS];
             Hand playerHand = player.getHand();
-            Card cardToAdd = deck.remove();
-            playerHand.add(cardToAdd);
+            Card cardToAdd = gameDeck.drawCard();
+            if (cardToAdd != null) {
+                playerHand.add(cardToAdd);
+            }
         }
     }
 }
