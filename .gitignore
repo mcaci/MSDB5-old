@@ -5,3 +5,5 @@
 
 # ignore intellij proj files
 *.iml
+*.idea
+/out/
