@@ -30,8 +30,7 @@ public class AllCardsEvaluatorTest extends BaseCardEvaluatorTest {
         Iterator<Card> cardsIterator = FULL_DECK.getCardSet().iterator();
         for (int i = 0; i < params.length; i++) {
             params[i] = new Object[2];
-            int implIndex = (i < 40 ? 0 : 1);
-            params[i][0] = EVAL_IMPL_CLASSES[implIndex];
+            params[i][0] = EVAL_IMPL_CLASSES[i / Deck.DEFAULT_DECK_SIZE];
             Card nextCard = cardsIterator.next();
             params[i][1] = nextCard;
             if (!cardsIterator.hasNext()) {
