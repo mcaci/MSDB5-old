@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -40,11 +41,9 @@ public abstract class CardSetFactoryTest {
     public void testOnContent() throws Exception {
         assertNotNull(mockCardSet);
         assertNotNull(mockCardSet.getCardSet());
-        Collection<?> cards = mockCardSet.getCardSet();
-        for (Object card : cards) {
-            assertTrue(card instanceof Card);
-            assertTrue(((Card) card).isValid());
-        }
+        assertFalse(mockCardSet.isEmpty());
+        Stream<Card> cards = mockCardSet.getCardSet().stream();
+        assertTrue(cards.allMatch(c -> c.isValid()));
     }
 
     @Test
