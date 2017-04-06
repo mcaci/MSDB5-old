@@ -33,17 +33,21 @@ public class PreparedGameTableFactory extends GameTableFactory {
         return gameTable;
     }
 
-    private void distributeCardsToPlayers(Deck gameDeck, Player[] players, boolean useSideDeck) {
-        Queue<Card> deck = gameDeck.getCardSet();
-        int size = gameDeck.getCardSet().size();
+    private void distributeCardsToPlayers(Deck deck, Player[] players, boolean useSideDeck) {
+        int numberOfCardsToDistribute = getNumberOfCardsToDistribute(deck.size(), useSideDeck);
+        Queue<Card> deckQueue = deck.getCardSet();
+        for (int i = 0; i < numberOfCardsToDistribute; i++) {
+            Player player = players[i % NUMBER_OF_PLAYERS];
+            Hand playerHand = player.getHand();
+            Card cardToAdd = deckQueue.remove();
+            playerHand.add(cardToAdd);
+        }
+    }
+
+    private int getNumberOfCardsToDistribute(int size, boolean useSideDeck) {
         if (useSideDeck) {
             size -= SIDE_DECK_SIZE;
         }
-        for (int i = 0; i < size; i++) {
-            Player player = players[i % NUMBER_OF_PLAYERS];
-            Hand playerHand = player.getHand();
-            Card cardToAdd = deck.remove();
-            playerHand.add(cardToAdd);
-        }
+        return size;
     }
 }
