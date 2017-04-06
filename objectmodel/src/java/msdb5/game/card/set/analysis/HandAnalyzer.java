@@ -7,6 +7,7 @@ import msdb5.game.card.CardSuit;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 29/12/15.
@@ -20,7 +21,7 @@ public class HandAnalyzer {
     }
 
     public HandAnalysisData analyze() {
-        final int[] cardCountPerSuit = countCardsPerSuit();
+        final int[] cardCountPerSuit = countCardsPerSuit(handToEvaluate.getCardSet().stream());
         final float averageCardsPerSuit = averageCountPerSuit(cardCountPerSuit);
         final boolean[] suitsWeakness = moreThanAverageCountPerSuit(cardCountPerSuit, averageCardsPerSuit);
         final int weaknessIndex = weaknessIndex(suitsWeakness);
@@ -38,22 +39,18 @@ public class HandAnalyzer {
 
     private Map<CardSuit, Integer> storeEvaluation(int[] suitEvaluation) {
         final Map<CardSuit, Integer> suitEvaluationMap = new TreeMap<>();
-//        final float handSize = handToEvaluate.size();
         final int suitSize = CardSuit.values().length;
 
         for (int i = 0; i < suitSize; i++) {
-            suitEvaluationMap.put(CardSuit.values()[i], suitEvaluation[i]); // / handSize);
+            suitEvaluationMap.put(CardSuit.values()[i], suitEvaluation[i]);
         }
 
         return suitEvaluationMap;
     }
 
-    private int[] countCardsPerSuit() {
-        final int suitSize = CardSuit.values().length;
-        final int[] handSuitCount = new int[suitSize];
-        for (Card card : handToEvaluate.getCardSet()) {
-            handSuitCount[card.getCardSuit().ordinal()]++;
-        }
+    private int[] countCardsPerSuit(Stream<Card> cardStream) {
+        final int[] handSuitCount = new int[CardSuit.values().length];
+        cardStream.forEach(card -> handSuitCount[card.getCardSuit().ordinal()]++);
         return handSuitCount;
     }
 
