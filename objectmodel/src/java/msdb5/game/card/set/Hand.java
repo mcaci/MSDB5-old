@@ -15,7 +15,7 @@ public class Hand extends CardSet<List<Card>> {
     public static final int EMPTY_HAND_SIZE = 0;
 
     public Hand() {
-        this(new ArrayList<Card>(EMPTY_HAND_SIZE));
+        this(new ArrayList<>(EMPTY_HAND_SIZE));
     }
 
     public Hand(List<Card> handCards) {
