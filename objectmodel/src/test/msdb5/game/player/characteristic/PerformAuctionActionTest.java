@@ -1,5 +1,8 @@
 package msdb5.game.player.characteristic;
 
+import msdb5.game.player.MockClassicPlayer;
+import msdb5.game.player.MockCowardPlayer;
+import msdb5.game.player.MockUnwaveringPlayer;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionScore;
 import msdb5.game.player.info.AuctionStatus;
@@ -22,6 +25,7 @@ import static org.junit.Assert.*;
 public class PerformAuctionActionTest {
 
     private final static byte[] SCORES_TO_TEST = {0, 60, 89, 119, 120};
+    private static final Class[] PERS_IMPL_CLASSES = {MockClassicPlayer.class, MockCowardPlayer.class, MockUnwaveringPlayer.class};
 
     private IPersonalityForPreparation iPersonalityForPreparationTestObject;
     private int startingScore;
@@ -36,12 +40,16 @@ public class PerformAuctionActionTest {
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
 
-        Object[][] params = new Object[SCORES_TO_TEST.length][];
+
+        Object[][] params = new Object[PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
         int i = 0;
+        for (Class personalityClass : PERS_IMPL_CLASSES) {
             for (byte score : SCORES_TO_TEST) {
                 params[i] = new Object[2];
-                params[i][0] = score;
+                params[i][0] = personalityClass;
+                params[i][1] = score;
                 i++;
+            }
         }
         return Arrays.asList(params);
     }

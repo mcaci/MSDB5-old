@@ -7,7 +7,6 @@ import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.player.info.ScoreCountInfo;
 
-
 /**
  * Created by nikiforos on 30/08/15.
  */
@@ -57,5 +56,4 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         return this.postGameInfo.getScore();
     }
 
-    public abstract int evaluateHand(Hand handToEvaluate);
 }
