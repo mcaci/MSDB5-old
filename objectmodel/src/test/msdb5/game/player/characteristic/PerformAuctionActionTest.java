@@ -36,15 +36,12 @@ public class PerformAuctionActionTest {
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
 
-        Object[][] params = new Object[onData.PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
+        Object[][] params = new Object[SCORES_TO_TEST.length][];
         int i = 0;
-        for (Class personalityClass : onData.PERS_IMPL_CLASSES) {
             for (byte score : SCORES_TO_TEST) {
                 params[i] = new Object[2];
-                params[i][0] = personalityClass;
-                params[i][1] = score;
+                params[i][0] = score;
                 i++;
-            }
         }
         return Arrays.asList(params);
     }

@@ -9,6 +9,7 @@ import msdb5.game.card.set.analysis.HandAnalyzer;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
 import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
 
@@ -42,19 +43,16 @@ public class MockUnwaveringPlayer extends MockPlayer {
     }
 
     private int getSuitHighestValue(Hand hand) {
-        BiConsumer<Map<CardSuit, Integer>, Card> cardSuitMapper = getMapCardBiConsumer();
+        BiConsumer<Map<CardSuit, Integer>, Card> cardSuitMapper = collectSummedCardValuesInMap();
         Stream<Card> cardStream = hand.getCardSet().stream();
         Optional<Integer> max = cardStream.collect(HashMap::new, cardSuitMapper, Map::putAll).values().stream().max(Integer::compareTo);
         return (max.isPresent() ? max.get() : 0);
     }
 
-    private BiConsumer<Map<CardSuit, Integer>, Card> getMapCardBiConsumer() {
+    private BiConsumer<Map<CardSuit, Integer>, Card> collectSummedCardValuesInMap() {
         return (Map<CardSuit, Integer> map, Card card) -> {
-            CardSuit cardSuit = card.getCardSuit();
-            Integer currentValue = map.getOrDefault(cardSuit, 0);
-            int cardEvaluation = new FixedScaleAnalyzer().analyze(card);
-            int finalValue = (int) ((currentValue + cardEvaluation) / 20.0) * 3;
-            map.put(cardSuit, finalValue);
+            BinaryOperator<Integer> sum = (currentValue, cardEvaluation) -> (int) ((currentValue + cardEvaluation) / 20.0) * 3;
+            map.merge(card.getCardSuit(), new FixedScaleAnalyzer().analyze(card), sum);
         };
     }
 }

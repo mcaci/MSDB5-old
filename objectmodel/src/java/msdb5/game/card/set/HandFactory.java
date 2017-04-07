@@ -1,5 +1,7 @@
 package msdb5.game.card.set;
 
+import java.util.ArrayList;
+
 /**
  * Created by nikiforos on 08/09/15.
  */
@@ -13,6 +15,6 @@ public class HandFactory extends CardSetFactory {
     }
 
     public Hand createHand() {
-        return new Hand(createCardSet());
+        return new Hand(new ArrayList<>(super.createCardSet()));
     }
 }

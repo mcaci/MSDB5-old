@@ -18,6 +18,4 @@ public interface IPersonalityForPreparation {
 
     Card chooseCompanionCard();
 
-    int evaluateHand(Hand handToEvaluate);
-
 }

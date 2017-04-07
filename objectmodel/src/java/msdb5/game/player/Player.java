@@ -56,4 +56,6 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public int tellScore() {
         return this.postGameInfo.getScore();
     }
+
+    public abstract int evaluateHand(Hand handToEvaluate);
 }
