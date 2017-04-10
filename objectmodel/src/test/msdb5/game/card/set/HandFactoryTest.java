@@ -1,7 +1,5 @@
 package msdb5.game.card.set;
 
-import msdb5.game.card.set.Hand;
-import msdb5.game.card.set.HandFactory;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -22,7 +20,6 @@ public class HandFactoryTest extends CardSetFactoryTest {
     public HandFactoryTest(boolean isSideDeckPresent) {
         super(new HandFactory(isSideDeckPresent));
         this.isSideDeckPresent = isSideDeckPresent;
-        this.mockCardSet = ((HandFactory) this.cardSetFactoryTestObject).createHand();
     }
 
     @Parameterized.Parameters
@@ -41,19 +38,23 @@ public class HandFactoryTest extends CardSetFactoryTest {
 
     @Override
     public void testOnConcreteSize(int deckSize) {
-        if (this.isSideDeckPresent) {
-            assertEquals("Size doesn't correspond to test value " + Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    Hand.WITH_SIDE_DECK_HAND_SIZE,
-                    mockCardSet.getCardSet().size());
-        } else {
-            assertEquals("Size doesn't correspond to test value " + Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    Hand.WITHOUT_SIDE_DECK_HAND_SIZE,
-                    mockCardSet.getCardSet().size());
-        }
+        int expectedDeckSize = getExpectedDeckSize();
+        assertEquals("Size doesn't correspond to test value " + expectedDeckSize,
+                expectedDeckSize,
+                deckSize);
     }
 
+    private int getExpectedDeckSize() {
+        int expectedDeckSize = 0;
+        if (this.isSideDeckPresent) {
+            expectedDeckSize = Hand.WITH_SIDE_DECK_HAND_SIZE;
+        } else {
+            expectedDeckSize = Hand.WITHOUT_SIDE_DECK_HAND_SIZE;
+        }
+        return expectedDeckSize;
+    }
 
     public Hand getMockHand() {
-        return (Hand) mockCardSet;
+        return (Hand) getMockCardSet();
     }
 }

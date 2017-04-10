@@ -1,5 +1,6 @@
 package msdb5.game.player.characteristic;
 
+import msdb5.game.player.MockClassicPlayer;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionScore;
 import msdb5.game.player.info.AuctionStatus;
@@ -9,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -26,33 +26,26 @@ public class PerformAuctionActionTest {
     private IPersonalityForPreparation iPersonalityForPreparationTestObject;
     private int startingScore;
 
-    private Class<?> implClass;
-
-    public PerformAuctionActionTest(Class<?> implClass, byte startingScore) {
-        this.implClass = implClass;
+    public PerformAuctionActionTest(byte startingScore) {
         this.startingScore = startingScore;
     }
 
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
 
-        Object[][] params = new Object[onData.PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
+        Object[][] params = new Object[SCORES_TO_TEST.length][];
         int i = 0;
-        for (Class personalityClass : onData.PERS_IMPL_CLASSES) {
             for (byte score : SCORES_TO_TEST) {
-                params[i] = new Object[2];
-                params[i][0] = personalityClass;
-                params[i][1] = score;
+                params[i] = new Object[1];
+                params[i][0] = score;
                 i++;
-            }
         }
         return Arrays.asList(params);
     }
 
     @Before
     public void setUp() throws Exception {
-        Constructor<?> constructor = implClass.getConstructor();
-        iPersonalityForPreparationTestObject = (IPersonalityForPreparation) constructor.newInstance();
+        iPersonalityForPreparationTestObject = new MockClassicPlayer();
     }
 
     @After

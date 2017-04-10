@@ -20,6 +20,8 @@ abstract class CardSetFactory {
         this.cardSetSize = cardSetSize;
     }
 
+    public abstract CardSet create();
+
     Collection<Card> createCardSet() {
         Collection<Card> localCardSet = Collections.emptyList();
         if (cardSetSize > 0) {

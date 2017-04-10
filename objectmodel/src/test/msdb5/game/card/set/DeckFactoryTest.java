@@ -1,7 +1,5 @@
 package msdb5.game.card.set;
 
-import msdb5.game.card.set.Deck;
-import msdb5.game.card.set.DeckFactory;
 import org.junit.After;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +11,6 @@ public class DeckFactoryTest extends CardSetFactoryTest {
 
     public DeckFactoryTest() {
         super(new DeckFactory());
-        this.mockCardSet = ((DeckFactory) this.cardSetFactoryTestObject).createDeck();
     }
 
     @After
@@ -29,7 +26,7 @@ public class DeckFactoryTest extends CardSetFactoryTest {
     }
 
     public Deck getMockDeck() {
-        return (Deck) mockCardSet;
+        return (Deck) getMockCardSet();
     }
 
 }

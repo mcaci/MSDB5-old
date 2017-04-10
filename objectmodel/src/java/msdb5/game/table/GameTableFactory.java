@@ -22,7 +22,7 @@ public class GameTableFactory {
 
     private Deck createDeck() {
         DeckFactory deckFactory = new DeckFactory();
-        return deckFactory.createDeck();
+        return deckFactory.create();
     }
 
 }
