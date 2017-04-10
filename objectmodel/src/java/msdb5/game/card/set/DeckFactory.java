@@ -11,8 +11,8 @@ public class DeckFactory extends CardSetFactory {
         super(Deck.DEFAULT_DECK_SIZE);
     }
 
-    @Override
-    public Deck create() {
+    public Deck createDeck() {
         return new Deck(new ArrayDeque<>(super.createCardSet()));
     }
+
 }

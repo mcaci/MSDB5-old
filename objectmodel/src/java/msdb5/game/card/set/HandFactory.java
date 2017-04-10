@@ -14,8 +14,7 @@ public class HandFactory extends CardSetFactory {
         super(isSizeDeckPresent ? Hand.WITH_SIDE_DECK_HAND_SIZE : Hand.WITHOUT_SIDE_DECK_HAND_SIZE);
     }
 
-    @Override
-    public CardSet create() {
+    public Hand createHand() {
         return new Hand(new ArrayList<>(super.createCardSet()));
     }
 }

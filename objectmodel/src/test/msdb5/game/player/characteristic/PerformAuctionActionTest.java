@@ -1,6 +1,8 @@
 package msdb5.game.player.characteristic;
 
 import msdb5.game.player.MockClassicPlayer;
+import msdb5.game.player.MockCowardPlayer;
+import msdb5.game.player.MockUnwaveringPlayer;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionScore;
 import msdb5.game.player.info.AuctionStatus;
@@ -10,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -22,30 +25,39 @@ import static org.junit.Assert.*;
 public class PerformAuctionActionTest {
 
     private final static byte[] SCORES_TO_TEST = {0, 60, 89, 119, 120};
+    private static final Class[] PERS_IMPL_CLASSES = {MockClassicPlayer.class, MockCowardPlayer.class, MockUnwaveringPlayer.class};
 
     private IPersonalityForPreparation iPersonalityForPreparationTestObject;
     private int startingScore;
 
-    public PerformAuctionActionTest(byte startingScore) {
+    private Class<?> implClass;
+
+    public PerformAuctionActionTest(Class<?> implClass, byte startingScore) {
+        this.implClass = implClass;
         this.startingScore = startingScore;
     }
 
     @Parameterized.Parameters
     public static Collection<?> initParameters() {
 
-        Object[][] params = new Object[SCORES_TO_TEST.length][];
+
+        Object[][] params = new Object[PERS_IMPL_CLASSES.length * SCORES_TO_TEST.length][];
         int i = 0;
+        for (Class personalityClass : PERS_IMPL_CLASSES) {
             for (byte score : SCORES_TO_TEST) {
-                params[i] = new Object[1];
-                params[i][0] = score;
+                params[i] = new Object[2];
+                params[i][0] = personalityClass;
+                params[i][1] = score;
                 i++;
+            }
         }
         return Arrays.asList(params);
     }
 
     @Before
     public void setUp() throws Exception {
-        iPersonalityForPreparationTestObject = new MockClassicPlayer();
+        Constructor<?> constructor = implClass.getConstructor();
+        iPersonalityForPreparationTestObject = (IPersonalityForPreparation) constructor.newInstance();
     }
 
     @After

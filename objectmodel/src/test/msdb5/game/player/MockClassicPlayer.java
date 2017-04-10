@@ -16,10 +16,4 @@ public class MockClassicPlayer extends MockPlayer {
         super(0.5F, 2);
     }
 
-    @Override
-    public int evaluateHand(Hand handToEvaluate) {
-        ICardAnalyzer cardEvaluator = new FixedScaleAnalyzer();
-        Stream<Card> cards = handToEvaluate.getCardSet().stream();
-        return cards.mapToInt(cardEvaluator::analyze).map((int cardValue) -> (int) (cardValue /20.0) * 3).sum();
-    }
 }
