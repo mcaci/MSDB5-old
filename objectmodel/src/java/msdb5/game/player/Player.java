@@ -7,13 +7,15 @@ import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.player.info.ScoreCountInfo;
 
+import java.util.HashSet;
+
 /**
  * Created by nikiforos on 30/08/15.
  */
 public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
 
     private final AuctionInfo auctionInfo = new AuctionInfo();
-    private final Hand hand = new Hand();
+    private final Hand hand = new Hand(new HashSet<>());
     private final ScoreCountInfo postGameInfo = new ScoreCountInfo();
 
     public Hand getHand() {
@@ -21,7 +23,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     }
 
     public AuctionInfo getAuctionInfo() {
-        return auctionInfo;
+        return this.auctionInfo;
     }
 
     @Override

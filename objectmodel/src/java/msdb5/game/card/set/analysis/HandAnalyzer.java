@@ -1,13 +1,10 @@
 package msdb5.game.card.set.analysis;
 
-import msdb5.game.card.set.Hand;
-import msdb5.game.card.Card;
 import msdb5.game.card.CardSuit;
+import msdb5.game.card.set.Hand;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 29/12/15.
@@ -21,67 +18,35 @@ public class HandAnalyzer {
     }
 
     public HandAnalysisData analyze() {
-        final int[] cardCountPerSuit = countCardsPerSuit(handToEvaluate.getCardSet().stream());
-        final float averageCardsPerSuit = averageCountPerSuit(cardCountPerSuit);
-        final boolean[] suitsWeakness = moreThanAverageCountPerSuit(cardCountPerSuit, averageCardsPerSuit);
-        final int weaknessIndex = weaknessIndex(suitsWeakness);
-        final Map<CardSuit, Integer> countMap = storeEvaluation(cardCountPerSuit);
+        final Map<CardSuit, Integer> countMap = this.handToEvaluate.getCardSet().stream().collect(
+                HashMap::new,
+                (map, card) -> map.merge(card.getCardSuit(), 1, (a, b) -> a + b),
+                HashMap::putAll);
+        return new HandAnalysisData(countMap, this::averageCountPerSuit, this::getWeaknessIndex, this::getDistanceFromSecond);
+    }
 
-        Arrays.sort(cardCountPerSuit);
-        final int highestSuitIndex = 3;
-        final int secondBestSuitIndex = 2;
-        final int distanceFromSecond = cardCountPerSuit[highestSuitIndex] - cardCountPerSuit[secondBestSuitIndex];
+    private float averageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
+        return (float) handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+    }
 
-        final HandAnalysisData suitAnalysis = new HandAnalysisData(countMap, averageCardsPerSuit, weaknessIndex, distanceFromSecond);
-        return suitAnalysis;
+    private int getWeaknessIndex(Map<CardSuit, Integer> cardCountPerSuit) {
+        final Map<CardSuit, Boolean> suitsWeakness = moreThanAverageCountPerSuit(cardCountPerSuit);
+        return suitsWeakness.values().stream().mapToInt((weakness) -> (weakness ? 1 : 0)).sum();
     }
 
 
-    private Map<CardSuit, Integer> storeEvaluation(int[] suitEvaluation) {
-        final Map<CardSuit, Integer> suitEvaluationMap = new TreeMap<>();
-        final int suitSize = CardSuit.values().length;
-
-        for (int i = 0; i < suitSize; i++) {
-            suitEvaluationMap.put(CardSuit.values()[i], suitEvaluation[i]);
-        }
-
-        return suitEvaluationMap;
-    }
-
-    private int[] countCardsPerSuit(Stream<Card> cardStream) {
-        final int[] handSuitCount = new int[CardSuit.values().length];
-        cardStream.forEach(card -> handSuitCount[card.getCardSuit().ordinal()]++);
-        return handSuitCount;
-    }
-
-    private float averageCountPerSuit(int[] handSuitCount) {
-        float total = 0F;
-        int weight = 0;
-        for (int count : handSuitCount) {
-            if (count > 0) {
-                total += count;
-                weight++;
-            }
-        }
-        return total / weight;
-    }
-
-    private boolean[] moreThanAverageCountPerSuit(int[] handSuitCount, float avgCardsPerSuit) {
-        final int suitSize = CardSuit.values().length;
-        boolean[] moreThanAverage = new boolean[suitSize];
-        for (int i = 0; i < suitSize; i++) {
-            moreThanAverage[i] = handSuitCount[i] >= avgCardsPerSuit;
+    private Map<CardSuit, Boolean> moreThanAverageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
+        float avgCardsPerSuit = (float) handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+        Map<CardSuit, Boolean> moreThanAverage = new HashMap<>();
+        for (CardSuit suit : handSuitCount.keySet()) {
+            Integer count = handSuitCount.get(suit);
+            moreThanAverage.put(suit, count >= avgCardsPerSuit);
         }
         return moreThanAverage;
     }
 
-    private int weaknessIndex(boolean[] suitWeakness) {
-        int weaknessIndex = 0;
-        for (boolean weakness :
-                suitWeakness) {
-            if (weakness) weaknessIndex++;
-        }
-        return weaknessIndex;
+    private int getDistanceFromSecond(Map<CardSuit, Integer> cardCountPerSuit) {
+        return cardCountPerSuit.values().stream().sorted().limit(2).reduce((a, b) -> b - a).orElseGet(() -> 0);
     }
 
     @Override
