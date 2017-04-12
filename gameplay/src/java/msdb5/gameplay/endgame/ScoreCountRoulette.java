@@ -18,7 +18,7 @@ public class ScoreCountRoulette implements GameRoulette {
 //                playerScore += card.pointsForTheCard();
 //            }
 
-            player.setScore(playerScore);
+//            player.setScore(playerScore);
         }
     }
 }
