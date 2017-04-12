@@ -2,8 +2,11 @@ package msdb5.gameplay.pregame;
 
 import msdb5.game.player.Player;
 import msdb5.game.table.GameTable;
+import msdb5.game.table.PreparedGameTableFactory;
+import msdb5.gameplay.player.*;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -20,9 +23,9 @@ public class AuctionRouletteTest {
 
     @Before
     public void setUp() throws Exception {
-//        Player[] fakePlayers = {new Ambiguo(), new Buonagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
-//        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
-//        auctionRouletteTest = new AuctionRoulette();
+        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
+        auctionRouletteTest = new AuctionRoulette();
     }
 
     @After
@@ -49,6 +52,7 @@ public class AuctionRouletteTest {
     public void testSetNextPlayerToGo() throws Exception {
         Method method = AuctionRoulette.class.getDeclaredMethod("setNextPlayerToGo", int.class);
         method.setAccessible(true);
+
         int index = 0;
 //        int newIndex = (int) method.invoke(auctionRouletteTest, index);
 //
@@ -60,6 +64,7 @@ public class AuctionRouletteTest {
 //        }
     }
 
+    @Ignore
     @Test
     public void testExecute() throws Exception {
         // output game table

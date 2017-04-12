@@ -2,6 +2,7 @@ package msdb5.gameplay.ingame;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
@@ -21,6 +22,7 @@ public class HostilitiesRouletteTest {
 
     }
 
+    @Ignore
     @Test
     public void testExecute() throws Exception {
         fail("Not implemented yet");
