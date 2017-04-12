@@ -1,7 +1,5 @@
 package msdb5.gameplay.endgame;
 
-import msdb5.game.cardset.CardSet;
-import msdb5.game.cardset.card.Card;
 import msdb5.game.player.Player;
 import msdb5.game.table.GameTable;
 import msdb5.gameplay.GameRoulette;
@@ -16,10 +14,9 @@ public class ScoreCountRoulette implements GameRoulette {
         for (Player player : players) {
             byte playerScore = 0;
 
-            CardSet cardPile = player.getCardPile();
-            for (Card card : cardPile.getCardSet()) {
-                playerScore += card.pointsForTheCard();
-            }
+//            for (Card card : player.getCardPile()) {
+//                playerScore += card.pointsForTheCard();
+//            }
 
             player.setScore(playerScore);
         }
