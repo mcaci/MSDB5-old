@@ -34,25 +34,25 @@ public class GameTable {
         return info;
     }
 
-    public void setWinningPlayer() {
-        for (int i = 0; i < this.players.length; i++) {
-            final Player player = players[i];
-            if (!player.hasFolded()) {
-                player.setAsAuctionWinner();
-            }
-        }
-    }
-
-    public int getFoldedCount() {
-        int foldedCount = 0;
-        for (int i = 0; i < this.players.length; i++) {
-            final Player player = players[i];
-            if (player.hasFolded()) {
-                foldedCount++;
-            }
-        }
-        return foldedCount;
-    }
+//    public void setWinningPlayer() {
+//        for (int i = 0; i < this.players.length; i++) {
+//            final Player player = players[i];
+//            if (!player.hasFolded()) {
+//                player.setAuctionStatusAs();
+//            }
+//        }
+//    }
+//
+//    public int getFoldedCount() {
+//        int foldedCount = 0;
+//        for (int i = 0; i < this.players.length; i++) {
+//            final Player player = players[i];
+//            if (player.hasFolded()) {
+//                foldedCount++;
+//            }
+//        }
+//        return foldedCount;
+//    }
 
     @Override
     public String toString() {

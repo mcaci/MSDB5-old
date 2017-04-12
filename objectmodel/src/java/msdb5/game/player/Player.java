@@ -5,18 +5,20 @@ import msdb5.game.player.characteristic.IPersonalityForPreparation;
 import msdb5.game.player.characteristic.IPersonalityInGame;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
-import msdb5.game.player.info.ScoreCountInfo;
 
 import java.util.HashSet;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Created by nikiforos on 30/08/15.
  */
 public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
 
+    public static final byte MIN_AUCTION_SCORE = 60;
+    public static final byte MAX_AUCTION_SCORE = 120;
     private final AuctionInfo auctionInfo = new AuctionInfo();
     private final Hand hand = new Hand(new HashSet<>());
-    private final ScoreCountInfo postGameInfo = new ScoreCountInfo();
 
     public Hand getHand() {
         return this.hand;
@@ -34,28 +36,16 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
                 '}';
     }
 
-    public boolean hasActed() {
-        return auctionInfo.getAuctionStatus().actionWasDone();
-    }
-
-    public boolean isWinner() {
-        return auctionInfo.getAuctionStatus().isWinner();
-    }
-
-    public boolean hasFolded() {
-        return auctionInfo.getAuctionStatus().hasFolded();
+    public boolean getAuctionStatusFor(Predicate<AuctionStatus> statusPredicate) {
+        return statusPredicate.test(this.auctionInfo.getAuctionStatus());
     }
 
     public byte tellAuctionScore() {
-        return this.auctionInfo.getAuctionScore().getScore();
+        return (byte) this.auctionInfo.getAuctionScore();
     }
 
-    public void setAsAuctionWinner() {
-        this.getAuctionInfo().setAuctionStatus(AuctionStatus.AUCTION_WINNER);
-    }
-
-    public int tellScore() {
-        return this.postGameInfo.getScore();
+    public void setAuctionStatusAs(Supplier<AuctionStatus> statusSupplier) {
+        this.getAuctionInfo().setAuctionStatus(statusSupplier.get());
     }
 
 }

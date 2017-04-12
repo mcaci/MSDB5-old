@@ -3,8 +3,8 @@ package msdb5.game.player.characteristic;
 import msdb5.game.player.MockClassicPlayer;
 import msdb5.game.player.MockCowardPlayer;
 import msdb5.game.player.MockUnwaveringPlayer;
+import msdb5.game.player.ScoreWithinBoundsTest;
 import msdb5.game.player.info.AuctionInfo;
-import msdb5.game.player.info.AuctionScore;
 import msdb5.game.player.info.AuctionStatus;
 import org.junit.After;
 import org.junit.Before;
@@ -70,25 +70,36 @@ public class PerformAuctionActionTest {
     public void testValidity() throws Exception {
 
         AuctionInfo infoAfterAction = null;
-        boolean raisedCorrectly = false;
+        boolean exceptionWasRaisedCorrectly = false;
         try {
             infoAfterAction = iPersonalityForPreparationTestObject.performAuctionAction(startingScore);
         } catch (AuctionOnScoreOutOfBoundsException ex) {
-            raisedCorrectly = startingScore < AuctionScore.MIN_SCORE || startingScore >= AuctionScore.MAX_SCORE;
+              exceptionWasRaisedCorrectly = ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(startingScore,
+                      ScoreWithinBoundsTest.lowerThanMax.negate().or(ScoreWithinBoundsTest.sameOrGreaterThanMin.negate()));
         }
-        if (raisedCorrectly) {
+        if (exceptionWasRaisedCorrectly) {
             assertNull(infoAfterAction);
         } else {
             assertNotNull(infoAfterAction);
-            AuctionStatus statusAfterAction = infoAfterAction.getAuctionStatus();
-            AuctionScore scoreAfterAction = infoAfterAction.getAuctionScore();
-            if (!statusAfterAction.actionWasDone()) {
-                fail("Action should always be taken");
-            } else if (statusAfterAction.hasFolded()) {
-                assertTrue(startingScore >= scoreAfterAction.getScore());
-            } else {
-                assertTrue(startingScore < scoreAfterAction.getScore());
-            }
+            verifyThatActionWasTaken(infoAfterAction);
+        }
+    }
+
+    private void verifyThatActionWasTaken(AuctionInfo infoAfterAction) {
+        AuctionStatus statusAfterAction = infoAfterAction.getAuctionStatus();
+        int scoreAfterAction = infoAfterAction.getAuctionScore();
+        if (statusAfterAction.actionWasDone()) {
+            verifyScoreValidity(statusAfterAction, scoreAfterAction);
+        } else {
+            fail("Action should always be taken");
+        }
+    }
+
+    private void verifyScoreValidity(AuctionStatus statusAfterAction, int scoreAfterAction) {
+        if (statusAfterAction.hasFolded()) {
+            assertTrue(startingScore >= scoreAfterAction);
+        } else {
+            assertTrue(startingScore < scoreAfterAction);
         }
     }
 

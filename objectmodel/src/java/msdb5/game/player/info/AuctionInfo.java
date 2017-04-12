@@ -1,23 +1,25 @@
 package msdb5.game.player.info;
 
+import msdb5.game.player.Player;
+
 /**
  * Created by nikiforos on 04/09/15.
  */
 public class AuctionInfo {
 
-    private AuctionScore auctionScore;
+    private int auctionScore;
     private AuctionStatus auctionStatus;
 
     public AuctionInfo() {
-        auctionScore = new AuctionScore();
+        auctionScore = Player.MIN_AUCTION_SCORE;
         auctionStatus = AuctionStatus.NOT_STARTED;
     }
 
-    public AuctionScore getAuctionScore() {
+    public int getAuctionScore() {
         return auctionScore;
     }
 
-    public void setAuctionScore(AuctionScore auctionScore) {
+    public void setAuctionScore(int auctionScore) {
         this.auctionScore = auctionScore;
     }
 

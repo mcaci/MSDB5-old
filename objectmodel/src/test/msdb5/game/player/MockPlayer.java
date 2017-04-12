@@ -1,15 +1,15 @@
 package msdb5.game.player;
 
-import msdb5.game.card.set.Deck;
 import msdb5.game.card.Card;
 import msdb5.game.card.MockCard;
-import msdb5.game.player.Player;
+import msdb5.game.card.set.Deck;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
-import msdb5.game.player.info.AuctionScore;
 import msdb5.game.player.info.AuctionStatus;
 import org.junit.After;
 import org.junit.Test;
+
+import java.util.function.IntUnaryOperator;
 
 import static org.junit.Assert.*;
 
@@ -33,11 +33,11 @@ public abstract class MockPlayer extends Player {
 
     @Override
     public AuctionInfo performAuctionAction(int currentScore) throws AuctionOnScoreOutOfBoundsException {
-        if (currentScore < AuctionScore.MIN_SCORE || currentScore >= AuctionScore.MAX_SCORE) {
+        if (currentScore < Player.MIN_AUCTION_SCORE || currentScore >= Player.MAX_AUCTION_SCORE) {
             throw new AuctionOnScoreOutOfBoundsException();
         }
         final AuctionInfo auctionInfo = this.getAuctionInfo();
-        if (!hasFolded()) {
+        if (!this.getAuctionStatusFor(AuctionStatus::hasFolded)) {
             if (decideToContinueAuction()) {
                 auctionInfo.setAuctionStatus(AuctionStatus.IN_AUCTION);
                 auctionInfo.setAuctionScore(chooseNextScore(currentScore));
@@ -53,23 +53,22 @@ public abstract class MockPlayer extends Player {
         return new MockCard();
     }
 
-    private AuctionScore chooseNextScore(int currentScore) {
-        final AuctionScore auctionScore = new AuctionScore();
-        final int nextScore = decideNextScore(currentScore);
-        auctionScore.setSafeScore(nextScore);
-        return auctionScore;
+    private int chooseNextScore(int currentScore) {
+        return decideNextScore(currentScore, (score) -> {
+            int scoreToCompute = score + scoreIncrement;
+            scoreToCompute = Math.max(scoreToCompute, Player.MIN_AUCTION_SCORE);
+            scoreToCompute = Math.min(scoreToCompute, Player.MAX_AUCTION_SCORE);
+            return scoreToCompute;
+        });
+    }
+
+    protected int decideNextScore(int currentScore, IntUnaryOperator operation){
+        return operation.applyAsInt(currentScore);
     }
 
     @Override
     public void swapCardsWithSideDeck(Deck deck) {
         return; // TODO: mock implementation
-    }
-
-    private int decideNextScore(int currentScore) {
-        int nextScore = currentScore + scoreIncrement;
-        nextScore = Math.max(nextScore, AuctionScore.MIN_SCORE);
-        nextScore = Math.min(nextScore, AuctionScore.MAX_SCORE);
-        return nextScore;
     }
 
     private boolean decideToContinueAuction() {
@@ -82,10 +81,16 @@ public abstract class MockPlayer extends Player {
         assertNotNull(this.getHand());
         assertTrue(this.getHand().isEmpty()); // Hand is empty at player creation
         assertNotNull(this.getAuctionInfo());
-        assertTrue(this.tellAuctionScore() >= AuctionScore.MIN_SCORE);
-        assertTrue(this.tellAuctionScore() <= AuctionScore.MAX_SCORE);
+        assertTrue(ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(this.tellAuctionScore(), ScoreWithinBoundsTest.sameOrGreaterThanMin));
+        assertTrue(ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(this.tellAuctionScore(), ScoreWithinBoundsTest.sameOrLowerThanMax));
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
-        assertFalse(this.hasActed());
+        assertFalse(this.getAuctionStatusFor(AuctionStatus::actionWasDone));
+        assertFalse(this.getAuctionStatusFor(AuctionStatus::isWinner));
+    }
+
+    @Test
+    public void testSetAsWinner() throws Exception {
+        this.setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
     }
 
 }
