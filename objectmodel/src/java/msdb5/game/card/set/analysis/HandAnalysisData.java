@@ -16,13 +16,6 @@ public class HandAnalysisData {
     private final int weaknessIndex;
     private final int distanceFromSecond;
 
-    public HandAnalysisData(Map<CardSuit, Integer> suitStrengthMap, float suitDensity, int weaknessIndex, int distanceFromSecond) {
-        this.suitStrengthMap = suitStrengthMap;
-        this.suitDensity = suitDensity;
-        this.weaknessIndex = weaknessIndex;
-        this.distanceFromSecond = distanceFromSecond;
-    }
-
     public HandAnalysisData(Map<CardSuit, Integer> suitStrengthMap, ToDoubleFunction<Map<CardSuit, Integer>> suitDensity, ToIntFunction<Map<CardSuit, Integer>> weaknessIndex, ToIntFunction<Map<CardSuit, Integer>> distanceFromSecond) {
         this.suitStrengthMap = suitStrengthMap;
         this.suitDensity = (float) suitDensity.applyAsDouble(suitStrengthMap);
