@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by nikiforos on 29/08/15.
@@ -26,19 +29,20 @@ abstract class CardSetFactory {
     public abstract CardSet create();
 
     Collection<Card> createCardSet() {
-        List<Card> localCardSet = createSortedCardSet();
-        shuffleCardSet(localCardSet);
-        return localCardSet.subList(0, this.cardSetSize);
+        IntStream cardsIds = IntStream.range(0, cardSetSize);
+        List<Card> cards = cardsIds.mapToObj(getCardFunction()).collect(Collectors.toCollection(LinkedList<Card>::new));
+        shuffleCardSet(cards);
+        return cards;
     }
 
-    private List<Card> createSortedCardSet() {
-        List<Card> localCardSet = new LinkedList<>();
-        for (CardNumber number : CardNumber.values()) {
-            for (CardSuit suit : CardSuit.values()) {
-                localCardSet.add(new Card(number, suit));
-            }
-        }
-        return localCardSet;
+    private IntFunction<Card> getCardFunction() {
+        return id -> {
+            CardNumber[] numbers = CardNumber.values();
+            CardSuit[] suits = CardSuit.values();
+            final CardNumber number = numbers[id % numbers.length];
+            final CardSuit suit = suits[id / numbers.length];
+            return new Card(number, suit);
+        };
     }
 
     private void shuffleCardSet(List<Card> cardList) {
