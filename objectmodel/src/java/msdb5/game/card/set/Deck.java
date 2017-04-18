@@ -13,7 +13,7 @@ public class Deck extends CardSet<Queue<Card>> {
 
     public static final int DEFAULT_DECK_SIZE = CardNumber.values().length * CardSuit.values().length;
 
-    public Deck(Queue<Card> deckCards) {
+    Deck(Queue<Card> deckCards) {
         super(deckCards);
     }
 
