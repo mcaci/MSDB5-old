@@ -1,17 +1,14 @@
 package msdb5.game.player.analysis;
 
 import msdb5.game.card.Card;
-import msdb5.game.card.CardSuit;
 import msdb5.game.card.analysis.FixedScaleAnalyzer;
 import msdb5.game.card.set.Hand;
 import msdb5.game.card.set.analysis.HandAnalysisData;
 import msdb5.game.card.set.analysis.HandAnalyzer;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -24,28 +21,24 @@ public class ComplexHandEvaluator implements IHandEvaluator {
     @Override
     public int evaluate(Hand hand) {
         int value = 60;
-        HandAnalyzer analyzer = new HandAnalyzer(hand);
-        HandAnalysisData analysisData = analyzer.analyze();
+        FixedScaleAnalyzer cardAnalyzer = new FixedScaleAnalyzer();
+        HandAnalysisData analysisData = new HandAnalyzer(hand).analyze();
         int suitDensityAdder = Math.round(2 * analysisData.getSuitDensity());
         int weaknessIndexAdder = 12 / analysisData.getWeaknessIndex();
         int distanceFromSecondAdder = 3 * analysisData.getDistanceFromSecond();
-        int suitHighestValue = getSuitHighestValue(hand);
+        int suitHighestValue = getSuitHighestValue(hand.getCardSet().stream(), cardAnalyzer::analyze);
         int total = value + suitDensityAdder + weaknessIndexAdder + distanceFromSecondAdder + suitHighestValue;
 
         return Math.round(0.5F * total);
     }
 
-    private int getSuitHighestValue(Hand hand) {
-        BiConsumer<Map<CardSuit, Integer>, Card> cardSuitMapper = collectSummedCardValuesInMap();
-        Stream<Card> cardStream = hand.getCardSet().stream();
-        Optional<Integer> max = cardStream.collect(HashMap::new, cardSuitMapper, Map::putAll).values().stream().max(Integer::compareTo);
-        return (max.isPresent() ? max.get() : 0);
-    }
-
-    private BiConsumer<Map<CardSuit, Integer>, Card> collectSummedCardValuesInMap() {
-        return (Map<CardSuit, Integer> map, Card card) -> {
-            BinaryOperator<Integer> sum = (currentValue, cardEvaluation) -> (int) ((currentValue + cardEvaluation) * WEIGHT);
-            map.merge(card.getCardSuit(), new FixedScaleAnalyzer().analyze(card), sum);
-        };
+    private int getSuitHighestValue(Stream<Card> cardStream, Function<Card, Integer> cardAnalyzerFunction) {
+        BinaryOperator<Integer> weightedSumOperator = (currentValue, cardEvaluation) -> (int) ((currentValue + cardEvaluation) * WEIGHT);
+        return cardStream.
+                collect(Collectors.toMap(Card::getCardSuit, cardAnalyzerFunction, weightedSumOperator)).
+                values().
+                stream().
+                max(Integer::compareTo).
+                orElseGet(() -> 0);
     }
 }
