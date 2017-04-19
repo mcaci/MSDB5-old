@@ -24,8 +24,8 @@ public class HandAnalyzer {
         return new HandAnalysisData(countMap, this::averageCountPerSuit, this::getWeaknessIndex, this::getDistanceFromSecond);
     }
 
-    private float averageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        return (float) handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+    private double averageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
+        return handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
     }
 
     private int getWeaknessIndex(Map<CardSuit, Integer> cardCountPerSuit) {
@@ -35,7 +35,7 @@ public class HandAnalyzer {
 
 
     private Map<CardSuit, Boolean> moreThanAverageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        double avgCardsPerSuit = handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+        double avgCardsPerSuit = handSuitCount.values().stream().mapToInt(count -> count).average().orElseGet(() -> 0.0);
         Map<CardSuit, Boolean> moreThanAverage = new HashMap<>();
         for (CardSuit suit : handSuitCount.keySet()) {
             moreThanAverage.put(suit, handSuitCount.get(suit) >= avgCardsPerSuit);
@@ -44,7 +44,9 @@ public class HandAnalyzer {
     }
 
     private int getDistanceFromSecond(Map<CardSuit, Integer> cardCountPerSuit) {
-        return cardCountPerSuit.values().stream().sorted().limit(2).reduce((a, b) -> b - a).orElseGet(() -> 0);
+        int firstAndSecondSuitQuantity = 2;
+        return cardCountPerSuit.values().stream().sorted().limit(firstAndSecondSuitQuantity).
+                reduce((a, b) -> b - a).orElseGet(() -> 0);
     }
 
     @Override
