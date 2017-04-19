@@ -12,43 +12,15 @@ public class GameTableInfo {
     public static final byte SIDE_DECK_SIZE = 5;
     public static final byte NO_SIDE_DECK_SIZE = 0;
     public static final byte MIN_AUCTION_SCORE = 60;
-    public static final byte MAX_AUCTION_SCORE = 120;
+//    public static final byte MAX_AUCTION_SCORE = 120;
 
     private int auctionScore = MIN_AUCTION_SCORE;
     private Card pairedPlayerCard = null;
     private boolean sideDeckPresent = false;
     private Player auctionWinner = null;
 
-    public int getAuctionScore() {
-        return auctionScore;
-    }
-
-    public void setAuctionScore(int auctionScore) {
-        this.auctionScore = auctionScore;
-    }
-
-    public Card getPairedPlayerCard() {
-        return pairedPlayerCard;
-    }
-
-    public void setPairedPlayerCard(Card pairedPlayerCard) {
-        this.pairedPlayerCard = pairedPlayerCard;
-    }
-
-    public boolean isSideDeckPresent() {
-        return sideDeckPresent;
-    }
-
     public void setSideDeckPresent(boolean sideDeckPresent) {
         this.sideDeckPresent = sideDeckPresent;
-    }
-
-    public Player getAuctionWinner() {
-        return auctionWinner;
-    }
-
-    public void setAuctionWinner(Player auctionWinner) {
-        this.auctionWinner = auctionWinner;
     }
 
     @Override

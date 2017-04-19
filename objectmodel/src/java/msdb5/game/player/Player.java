@@ -1,5 +1,6 @@
 package msdb5.game.player;
 
+import msdb5.game.card.set.Deck;
 import msdb5.game.card.set.Hand;
 import msdb5.game.player.characteristic.IPersonalityForPreparation;
 import msdb5.game.player.characteristic.IPersonalityInGame;
@@ -48,4 +49,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         this.getAuctionInfo().setAuctionStatus(statusSupplier.get());
     }
 
+    public void drawCard(Deck fromDeck) {
+        this.getHand().add(fromDeck.giveOneCard());
+    }
 }

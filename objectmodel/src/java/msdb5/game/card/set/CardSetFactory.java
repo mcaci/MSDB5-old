@@ -42,8 +42,4 @@ abstract class CardSetFactory {
             return new Card(number, suit);
         };
     }
-
-    public Supplier<Collection<Card>> getContainerSupplier() {
-        return containerSupplier;
-    }
 }

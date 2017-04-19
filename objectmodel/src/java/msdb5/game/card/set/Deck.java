@@ -17,6 +17,10 @@ public class Deck extends CardSet<Queue<Card>> {
         super(deckCards);
     }
 
+    public Card giveOneCard() {
+        return this.getCardSet().poll();
+    }
+
     @Override
     public String toString() {
         return "Deck{" +

@@ -19,12 +19,16 @@ public abstract class CardSet<T extends Collection<Card>> {
         return this.cardSet;
     }
 
+    public boolean contains(Card toDraw) {
+        return this.cardSet.contains(toDraw);
+    }
+
     public boolean isEmpty() {
         return this.cardSet.isEmpty();
     }
 
     public int size() {
-        return cardSet.size();
+        return this.cardSet.size();
     }
 
     @Override
