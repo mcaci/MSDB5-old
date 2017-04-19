@@ -9,7 +9,7 @@ import msdb5.game.player.Player;
  */
 public class GameTableFactory {
 
-    public GameTable create(Player[] players) {
+    public GameTable create(Player... players) {
         GameTable gameTable = new GameTable();
 
         Deck deck = createDeck();

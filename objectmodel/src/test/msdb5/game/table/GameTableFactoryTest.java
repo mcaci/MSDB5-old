@@ -1,10 +1,10 @@
 package msdb5.game.table;
 
 import msdb5.game.card.set.Deck;
-import msdb5.game.player.Player;
 import msdb5.game.player.MockClassicPlayer;
 import msdb5.game.player.MockCowardPlayer;
 import msdb5.game.player.MockUnwaveringPlayer;
+import msdb5.game.player.Player;
 import org.junit.After;
 import org.junit.Test;
 
@@ -41,24 +41,26 @@ public class GameTableFactoryTest {
     }
 
     @Test
-    public void testOnDeck() throws Exception {
-        // test for the created game
+    public void testDeckCreatedIsNotNull() throws Exception {
         Deck tableDeck = mockGameTable.getDeck();
         assertNotNull(tableDeck);
-        testOnDeckSize(tableDeck.getCardSet().size());
     }
 
     @Test
-    public void testOnPlayers() throws Exception {
-        // test for the created players
-        Player[] players = mockGameTable.getPlayers();
-        assertNotNull(players);
-        int numberOfPlayers = players.length;
-        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, numberOfPlayers, NUMBER_OF_PLAYERS);
+    public void testDeckIsCreated() throws Exception {
+        Deck tableDeck = mockGameTable.getDeck();
+        assertEquals("The size of the deck should be " + DEFAULT_DECK_SIZE, tableDeck.getCardSet().size(), DEFAULT_DECK_SIZE);
     }
 
-    void testOnDeckSize(int deckSize) {
-        assertEquals("The size of the deck should be " + DEFAULT_DECK_SIZE, deckSize, DEFAULT_DECK_SIZE);
+    @Test
+    public void testPlayersCreatedNotNull() throws Exception {
+        Player[] players = mockGameTable.getPlayers();
+        assertNotNull(players);
+    }
+
+    @Test
+    public void testPlayersAreCreated() throws Exception {
+        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, mockGameTable.getPlayers().length, NUMBER_OF_PLAYERS);
     }
 
     public GameTable getMockGameTable() {
