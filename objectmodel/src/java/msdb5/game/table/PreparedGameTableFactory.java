@@ -1,11 +1,9 @@
 package msdb5.game.table;
 
 import msdb5.game.card.set.Deck;
-import msdb5.game.card.set.Hand;
-import msdb5.game.card.Card;
 import msdb5.game.player.Player;
 
-import java.util.Queue;
+import java.util.stream.IntStream;
 
 /**
  * Created by nikiforos on 31/08/15.
@@ -34,20 +32,8 @@ public class PreparedGameTableFactory extends GameTableFactory {
     }
 
     private void distributeCardsToPlayers(Deck deck, Player[] players, boolean useSideDeck) {
-        int numberOfCardsToDistribute = getNumberOfCardsToDistribute(deck.size(), useSideDeck);
-        Queue<Card> deckQueue = deck.getCardSet();
-        for (int i = 0; i < numberOfCardsToDistribute; i++) {
-            Player player = players[i % NUMBER_OF_PLAYERS];
-            Hand playerHand = player.getHand();
-            Card cardToAdd = deckQueue.remove();
-            playerHand.add(cardToAdd);
-        }
-    }
-
-    private int getNumberOfCardsToDistribute(int size, boolean useSideDeck) {
-        if (useSideDeck) {
-            size -= SIDE_DECK_SIZE;
-        }
-        return size;
+        IntStream.iterate(0, id -> (id + 1) % NUMBER_OF_PLAYERS).
+                limit(useSideDeck? deck.size() - SIDE_DECK_SIZE : deck.size()).
+                forEach(value -> players[value].drawCard(deck));
     }
 }
