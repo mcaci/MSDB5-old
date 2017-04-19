@@ -1,8 +1,7 @@
 package msdb5.game.table;
 
+import msdb5.game.card.set.Deck;
 import msdb5.game.player.Player;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -43,17 +42,10 @@ public class PreparedGameTableFactoryTest extends GameTableFactoryTest {
                 forEach(handSize -> assertTrue("Hand should be between 7 and 8 cards and instead is of " + handSize, handSize == 7 || handSize == 8));
     }
 
-    @Ignore
-    @Test
+    @Override
     public void testDeckIsCreated() throws Exception {
-        super.testDeckIsCreated();
-        // test for the created game
-        int sideDeckSize = GameTableInfo.NO_SIDE_DECK_SIZE;
-        if (isSideDeckUsed) {
-            sideDeckSize = GameTableInfo.SIDE_DECK_SIZE;
-        }
-        assertEquals("At the end of the preparation the deck should have " + sideDeckSize + " cards",
-                sideDeckSize, this.getMockGameTable().getDeck().size());
+        Deck tableDeck = this.getMockGameTable().getDeck();
+        int deckSize = this.isSideDeckUsed ? GameTableInfo.SIDE_DECK_SIZE : GameTableInfo.NO_SIDE_DECK_SIZE;
+        assertEquals("The size of the deck should be " + deckSize, tableDeck.getCardSet().size(), deckSize);
     }
-
 }
