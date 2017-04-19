@@ -5,6 +5,7 @@ import msdb5.game.card.set.Hand;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by nikiforos on 29/12/15.
@@ -18,10 +19,8 @@ public class HandAnalyzer {
     }
 
     public HandAnalysisData analyze() {
-        final Map<CardSuit, Integer> countMap = this.handToEvaluate.getCardSet().stream().collect(
-                HashMap::new,
-                (map, card) -> map.merge(card.getCardSuit(), 1, (a, b) -> a + b),
-                HashMap::putAll);
+        final Map<CardSuit, Integer> countMap = this.handToEvaluate.getCardSet().stream().
+                collect(Collectors.toMap(card -> card.getCardSuit(), card -> 1, Integer::sum));
         return new HandAnalysisData(countMap, this::averageCountPerSuit, this::getWeaknessIndex, this::getDistanceFromSecond);
     }
 
@@ -36,11 +35,10 @@ public class HandAnalyzer {
 
 
     private Map<CardSuit, Boolean> moreThanAverageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        float avgCardsPerSuit = (float) handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+        double avgCardsPerSuit = handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
         Map<CardSuit, Boolean> moreThanAverage = new HashMap<>();
         for (CardSuit suit : handSuitCount.keySet()) {
-            Integer count = handSuitCount.get(suit);
-            moreThanAverage.put(suit, count >= avgCardsPerSuit);
+            moreThanAverage.put(suit, handSuitCount.get(suit) >= avgCardsPerSuit);
         }
         return moreThanAverage;
     }
