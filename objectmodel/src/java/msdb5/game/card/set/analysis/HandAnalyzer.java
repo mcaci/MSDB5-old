@@ -28,7 +28,7 @@ public class HandAnalyzer {
     }
 
     private double averageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        return handSuitCount.values().stream().mapToDouble(count -> count).average().orElseGet(() -> 0.0);
+        return handSuitCount.values().stream().mapToDouble(Integer::doubleValue).average().orElseGet(() -> 0.0);
     }
 
     private int getWeaknessIndex(Map<CardSuit, Integer> cardCountPerSuit) {
@@ -38,7 +38,7 @@ public class HandAnalyzer {
 
 
     private Map<CardSuit, Boolean> moreThanAverageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        double avgCardsPerSuit = handSuitCount.values().stream().mapToInt(count -> count).average().orElseGet(() -> 0.0);
+        double avgCardsPerSuit = handSuitCount.values().stream().mapToInt(Integer::intValue).average().orElseGet(() -> 0.0);
         Map<CardSuit, Boolean> moreThanAverage = new HashMap<>();
         for (CardSuit suit : handSuitCount.keySet()) {
             moreThanAverage.put(suit, handSuitCount.get(suit) >= avgCardsPerSuit);
@@ -51,7 +51,7 @@ public class HandAnalyzer {
         IntSummaryStatistics countStatistics = cardCountPerSuit.values().stream().
                 sorted().
                 limit(firstAndSecondSuitQuantity).
-                mapToInt(count -> count).
+                mapToInt(Integer::intValue).
                 summaryStatistics();
         return countStatistics.getMax() - countStatistics.getMin();
     }
