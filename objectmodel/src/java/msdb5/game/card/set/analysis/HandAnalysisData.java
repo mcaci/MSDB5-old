@@ -1,10 +1,12 @@
 package msdb5.game.card.set.analysis;
 
 import msdb5.game.card.CardSuit;
+import msdb5.game.card.set.Hand;
 
 import java.util.Map;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 /**
  * Created by nikiforos on 04/01/16.
@@ -16,11 +18,12 @@ public class HandAnalysisData {
     private final int weaknessIndex;
     private final int distanceFromSecond;
 
-    public HandAnalysisData(Map<CardSuit, Integer> suitStrengthMap, ToDoubleFunction<Map<CardSuit, Integer>> suitDensity, ToIntFunction<Map<CardSuit, Integer>> weaknessIndex, ToIntFunction<Map<CardSuit, Integer>> distanceFromSecond) {
-        this.suitStrengthMap = suitStrengthMap;
-        this.suitDensity = (float) suitDensity.applyAsDouble(suitStrengthMap);
-        this.weaknessIndex = weaknessIndex.applyAsInt(suitStrengthMap);
-        this.distanceFromSecond = distanceFromSecond.applyAsInt(suitStrengthMap);
+    public HandAnalysisData(Hand hand, ToDoubleFunction<Hand> suitDensity, ToIntFunction<Hand> weaknessIndex, ToIntFunction<Hand> distanceFromSecond) {
+        this.suitStrengthMap = hand.getCardSet().stream().
+                collect(Collectors.toMap(card -> card.getCardSuit(), card -> 1, Integer::sum));
+        this.suitDensity = (float) suitDensity.applyAsDouble(hand);
+        this.weaknessIndex = weaknessIndex.applyAsInt(hand);
+        this.distanceFromSecond = distanceFromSecond.applyAsInt(hand);
     }
 
     public Map<CardSuit, Integer> getSuitStrengthMap() {

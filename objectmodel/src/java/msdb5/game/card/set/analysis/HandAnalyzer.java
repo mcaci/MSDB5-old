@@ -4,9 +4,6 @@ import msdb5.game.card.Card;
 import msdb5.game.card.CardSuit;
 import msdb5.game.card.set.Hand;
 
-import java.util.IntSummaryStatistics;
-import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -21,29 +18,25 @@ public class HandAnalyzer {
     }
 
     public HandAnalysisData analyze() {
-        final Map<CardSuit, Integer> countMap = this.handToEvaluate.getCardSet().stream().
-                collect(Collectors.groupingBy(Card::getCardSuit, Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
-        return new HandAnalysisData(countMap, this::averageCountPerSuit, this::getWeaknessIndex, this::getDistanceFromSecond);
+        return new HandAnalysisData(handToEvaluate,
+                this::computeSuitDensity,
+                this::getWeaknessIndex,
+                this::getDistanceFromSecond);
     }
 
-    private double averageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        return handSuitCount.values().stream().mapToDouble(Integer::doubleValue).average().orElseGet(() -> 0.0);
+    private double computeSuitDensity(Hand hand) {
+        return hand.size() / (float) CardSuit.values().length;
     }
 
-    private int getWeaknessIndex(Map<CardSuit, Integer> cardCountPerSuit) {
-        double avgCardsPerSuit = cardCountPerSuit.values().stream().mapToInt(Integer::intValue).average().orElse(0.0);
-        Predicate<Integer> valuePredicate = i -> i >= avgCardsPerSuit;
-        return (int) cardCountPerSuit.values().stream().filter(valuePredicate).count();
+    private int getWeaknessIndex(Hand hand) {
+        return 1;
     }
 
-    private int getDistanceFromSecond(Map<CardSuit, Integer> cardCountPerSuit) {
-        int firstAndSecondSuitQuantity = 2;
-        IntSummaryStatistics countStatistics = cardCountPerSuit.values().stream().
-                sorted().
-                limit(firstAndSecondSuitQuantity).
-                mapToInt(Integer::intValue).
-                summaryStatistics();
-        return countStatistics.getMax() - countStatistics.getMin();
+    private int getDistanceFromSecond(Hand hand) {
+        return hand.getCardSet().stream().
+                collect(Collectors.groupingBy(Card::getCardSuit, Collectors.counting()))
+                .values().stream().sorted().limit(2).
+                        reduce((second, first) -> first - second).orElse(0L).intValue();
     }
 
     @Override
