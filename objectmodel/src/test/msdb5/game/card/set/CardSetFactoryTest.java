@@ -44,7 +44,7 @@ public abstract class CardSetFactoryTest {
         assertNotNull(mockCardSet.getCardSet());
         assertFalse(mockCardSet.isEmpty());
         Stream<Card> cards = mockCardSet.getCardSet().stream();
-        assertTrue(cards.allMatch(c -> c.isValid()));
+        assertTrue(cards.allMatch(Card::isValid));
     }
 
     @Test
