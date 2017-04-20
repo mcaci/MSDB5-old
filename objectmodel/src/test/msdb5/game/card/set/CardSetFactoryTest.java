@@ -49,17 +49,10 @@ public abstract class CardSetFactoryTest {
 
     @Test
     public void testAllCardsAreDifferent() throws Exception {
-        Collection<?> cards = mockCardSet.getCardSet();
-
-        Object[] cardArray = cards.toArray();
-        for (int i = 0; i < cardArray.length; i++) {
-            Object cardToSearch = cardArray[i];
-            for (int j = i + 1; j < cardArray.length; j++) {
-                Object cardInSearch = cardArray[j];
-                boolean cardIsFound = cardToSearch.equals(cardInSearch);
-                String message = cardToSearch + " in index " + i + " was found in game in index " + j;
-                assertFalse(message, cardIsFound);
-            }
-        }
+        Collection<Card> cards = mockCardSet.getCardSet();
+        int actualCardSize = cards.size();
+        long expectedCardSize = cards.stream().distinct().count();
+        String message = "The size expected for the card set is " + expectedCardSize + " but it was found to be " + actualCardSize;
+        assertEquals(message, expectedCardSize, actualCardSize);
     }
 }
