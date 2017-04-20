@@ -1,14 +1,13 @@
 package msdb5.game.card.set.analysis;
 
+import msdb5.game.card.Card;
 import msdb5.game.card.CardSuit;
 import msdb5.game.card.set.Hand;
 
-import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 29/12/15.
@@ -23,7 +22,7 @@ public class HandAnalyzer {
 
     public HandAnalysisData analyze() {
         final Map<CardSuit, Integer> countMap = this.handToEvaluate.getCardSet().stream().
-                collect(Collectors.toMap(card -> card.getCardSuit(), card -> 1, Integer::sum));
+                collect(Collectors.groupingBy(Card::getCardSuit, Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
         return new HandAnalysisData(countMap, this::averageCountPerSuit, this::getWeaknessIndex, this::getDistanceFromSecond);
     }
 
@@ -32,18 +31,9 @@ public class HandAnalyzer {
     }
 
     private int getWeaknessIndex(Map<CardSuit, Integer> cardCountPerSuit) {
-        final Map<CardSuit, Boolean> suitsWeakness = moreThanAverageCountPerSuit(cardCountPerSuit);
-        return suitsWeakness.values().stream().mapToInt((weakness) -> (weakness ? 1 : 0)).sum();
-    }
-
-
-    private Map<CardSuit, Boolean> moreThanAverageCountPerSuit(Map<CardSuit, Integer> handSuitCount) {
-        double avgCardsPerSuit = handSuitCount.values().stream().mapToInt(Integer::intValue).average().orElseGet(() -> 0.0);
-        Map<CardSuit, Boolean> moreThanAverage = new HashMap<>();
-        for (CardSuit suit : handSuitCount.keySet()) {
-            moreThanAverage.put(suit, handSuitCount.get(suit) >= avgCardsPerSuit);
-        }
-        return moreThanAverage;
+        double avgCardsPerSuit = cardCountPerSuit.values().stream().mapToInt(Integer::intValue).average().orElse(0.0);
+        Predicate<Integer> valuePredicate = i -> i >= avgCardsPerSuit;
+        return (int) cardCountPerSuit.values().stream().filter(valuePredicate).count();
     }
 
     private int getDistanceFromSecond(Map<CardSuit, Integer> cardCountPerSuit) {
