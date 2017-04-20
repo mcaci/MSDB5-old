@@ -4,8 +4,11 @@ import msdb5.game.card.CardSuit;
 import msdb5.game.card.set.Hand;
 
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 29/12/15.
@@ -45,8 +48,12 @@ public class HandAnalyzer {
 
     private int getDistanceFromSecond(Map<CardSuit, Integer> cardCountPerSuit) {
         int firstAndSecondSuitQuantity = 2;
-        return cardCountPerSuit.values().stream().sorted().limit(firstAndSecondSuitQuantity).
-                reduce((a, b) -> b - a).orElseGet(() -> 0);
+        IntSummaryStatistics countStatistics = cardCountPerSuit.values().stream().
+                sorted().
+                limit(firstAndSecondSuitQuantity).
+                mapToInt(count -> count).
+                summaryStatistics();
+        return countStatistics.getMax() - countStatistics.getMin();
     }
 
     @Override
