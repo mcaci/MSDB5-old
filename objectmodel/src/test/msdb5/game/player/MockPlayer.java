@@ -9,6 +9,7 @@ import msdb5.game.player.info.AuctionStatus;
 import org.junit.After;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntUnaryOperator;
 
 import static org.junit.Assert.*;
@@ -51,6 +52,16 @@ public abstract class MockPlayer extends Player {
     @Override
     public Card chooseCompanionCard() {
         return new MockCard();
+    }
+
+    @Override
+    public int actsOnAuction(AtomicInteger auctionValue) {
+        return auctionValue.getAndIncrement();
+    }
+
+    @Override
+    public int decideAuctionScore(int previousScore) {
+        return chooseNextScore(previousScore);
     }
 
     private int chooseNextScore(int currentScore) {

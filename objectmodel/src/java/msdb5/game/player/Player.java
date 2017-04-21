@@ -8,6 +8,7 @@ import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 
 import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -52,4 +53,8 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public void drawCard(Deck fromDeck) {
         this.getHand().add(fromDeck.giveOneCard());
     }
+
+    public abstract int actsOnAuction(AtomicInteger auctionValue);
+
+    public abstract int decideAuctionScore(int previousScore);
 }
