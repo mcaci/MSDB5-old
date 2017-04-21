@@ -16,14 +16,14 @@ public class AuctionRoulette implements GameRoulette {
 
     public void executeOn(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
-        final boolean sideDeckPresent = gameTable.getInfo().isSideDeckPresent();
+        final boolean sideDeckPresent = false; //gameTable.getInfo().isSideDeckPresent();
         int playerInTurnIndex = 0;
 
         boolean isAuctionOver = false;
         Player playerInTurn = players[playerInTurnIndex];
         while (!isAuctionOver) {
             // 1) player takes his decision
-            int currentScore = gameTable.getInfo().getAuctionScore();
+            int currentScore = 0; //gameTable.getInfo().getAuctionScore();
 
             try {
                 playerInTurn.performAuctionAction(currentScore);
@@ -36,7 +36,7 @@ public class AuctionRoulette implements GameRoulette {
             // 2) update game table
             int playerScore = playerInTurn.tellAuctionScore();
             if (currentScore < playerScore) {
-                gameTable.getInfo().setAuctionScore(playerScore);
+//                gameTable.getInfo().setAuctionScore(playerScore);
             }
 
             // 2.1) turn card if side deck is present
@@ -54,9 +54,9 @@ public class AuctionRoulette implements GameRoulette {
             isAuctionOver = isAuctionOver(gameTable);
         }
         // 5) set last player remaining as winner
-        final int auctionScore = gameTable.getInfo().getAuctionScore();
+        final int auctionScore = 0;// gameTable.getInfo().getAuctionScore();
         Player winner = findWinner(players, auctionScore);
-        gameTable.getInfo().setAuctionWinner(winner);
+//        gameTable.getInfo().setAuctionWinner(winner);
 
         // 6) winner chooses anion
         Card anionCard = winner.chooseCompanionCard();
@@ -67,7 +67,7 @@ public class AuctionRoulette implements GameRoulette {
         }
 
         // 8) confirm anion card
-        gameTable.getInfo().setPairedPlayerCard(anionCard);
+//        gameTable.getInfo().setPairedPlayerC/ard(anionCard);
     }
 
     private Card turnCardFromSideDeck(Deck sideDeck) {
@@ -89,7 +89,7 @@ public class AuctionRoulette implements GameRoulette {
 
     private boolean isAuctionOver(GameTable gameTable) {
         final int foldedCount = 0;// TODO: gameTable.getInfo().getFoldedCount();
-        final int auctionScore = gameTable.getInfo().getAuctionScore();
+        final int auctionScore = 0;// gameTable.getInfo().getAuctionScore();
         return foldedCount == 4 || auctionScore >= Player.MAX_AUCTION_SCORE;
     }
 
