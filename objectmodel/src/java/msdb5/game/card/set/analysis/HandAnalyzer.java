@@ -4,6 +4,8 @@ import msdb5.game.card.Card;
 import msdb5.game.card.CardSuit;
 import msdb5.game.card.set.Hand;
 
+import java.util.Comparator;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -35,8 +37,8 @@ public class HandAnalyzer {
     private int getDistanceFromSecond(Hand hand) {
         return hand.getCardSet().stream().
                 collect(Collectors.groupingBy(Card::getCardSuit, Collectors.counting()))
-                .values().stream().sorted().limit(2).
-                        reduce((second, first) -> first - second).orElse(0L).intValue();
+                .entrySet().stream().map(Map.Entry::getValue).sorted(Comparator.reverseOrder()).limit(2).
+                        reduce((first, second) -> first - second).orElse(0L).intValue();
     }
 
     @Override
