@@ -3,7 +3,7 @@ package msdb5.gameplay.pregame;
 import msdb5.game.player.Player;
 import msdb5.game.table.GameTable;
 import msdb5.game.table.PreparedGameTableFactory;
-import msdb5.gameplay.player.*;
+import msdb5.gameplay.player.TestPlayerForGamePlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -23,7 +23,7 @@ public class AuctionRouletteTest {
 
     @Before
     public void setUp() throws Exception {
-        Player[] fakePlayers = {new Ambiguo(), new BuonCompagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
+        Player[] fakePlayers = {new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer()};
         inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         auctionRouletteTest = new AuctionRoulette();
     }
@@ -34,6 +34,7 @@ public class AuctionRouletteTest {
         System.out.println(inputOutputGameTable);
     }
 
+    @Ignore
     @Test
     public void testIsAuctionOver() throws Exception {
         Method method = AuctionRoulette.class.getDeclaredMethod("isAuctionOver", GameTable.class);
