@@ -9,6 +9,8 @@ import java.util.function.IntFunction;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static msdb5.game.card.set.CardSet.MAX_CARDSET_SIZE;
+
 /**
  * Created by nikiforos on 29/08/15.
  */
@@ -29,7 +31,7 @@ abstract class CardSetFactory {
     public abstract CardSet create();
 
     Collection<Card> createCardSet() {
-        return new Random().ints(0, cardSetSize).distinct().limit(cardSetSize).
+        return new Random().ints(0, MAX_CARDSET_SIZE).distinct().limit(cardSetSize).
                 mapToObj(mapIdToCard()).collect(Collectors.toCollection(this.containerSupplier));
     }
 

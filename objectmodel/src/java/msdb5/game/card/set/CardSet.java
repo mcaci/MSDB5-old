@@ -1,6 +1,8 @@
 package msdb5.game.card.set;
 
 import msdb5.game.card.Card;
+import msdb5.game.card.CardNumber;
+import msdb5.game.card.CardSuit;
 
 import java.util.Collection;
 
@@ -8,6 +10,8 @@ import java.util.Collection;
  * Created by nikiforos on 16/09/15.
  */
 public abstract class CardSet<T extends Collection<Card>> {
+
+    public static final int MAX_CARDSET_SIZE = CardNumber.values().length * CardSuit.values().length;
 
     private final T cardSet;
 
