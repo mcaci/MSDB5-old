@@ -38,20 +38,14 @@ public class HandFactoryTest extends CardSetFactoryTest {
 
     @Override
     public void testOnConcreteSize(int deckSize) {
-        int expectedDeckSize = getExpectedDeckSize();
+        int expectedDeckSize = getExpectedDeckSize(this.isSideDeckPresent);
         assertEquals("Size doesn't correspond to test value " + expectedDeckSize,
                 expectedDeckSize,
                 deckSize);
     }
 
-    private int getExpectedDeckSize() {
-        int expectedDeckSize = 0;
-        if (this.isSideDeckPresent) {
-            expectedDeckSize = Hand.WITH_SIDE_DECK_HAND_SIZE;
-        } else {
-            expectedDeckSize = Hand.WITHOUT_SIDE_DECK_HAND_SIZE;
-        }
-        return expectedDeckSize;
+    private int getExpectedDeckSize(boolean isSideDeckPresent) {
+        return isSideDeckPresent ? Hand.WITH_SIDE_DECK_HAND_SIZE : Hand.WITHOUT_SIDE_DECK_HAND_SIZE;
     }
 
     public Hand getMockHand() {
