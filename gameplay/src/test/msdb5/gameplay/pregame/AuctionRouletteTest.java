@@ -23,7 +23,8 @@ public class AuctionRouletteTest {
 
     @Before
     public void setUp() throws Exception {
-        Player[] fakePlayers = {new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer()};
+        Player[] fakePlayers = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
+                new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
         inputOutputGameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         auctionRouletteTest = new AuctionRoulette();
     }

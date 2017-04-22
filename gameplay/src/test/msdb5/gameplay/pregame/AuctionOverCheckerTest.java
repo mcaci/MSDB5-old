@@ -22,7 +22,8 @@ public class AuctionOverCheckerTest {
     @Test
     public void testWithNewGameTable() throws Exception {
         AuctionOverChecker auctionOverChecker = new AuctionOverChecker();
-        Player[] fakePlayers = {new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer(), new TestPlayerForGamePlayer()};
+        Player[] fakePlayers = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
+                new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
         GameTable gameTable = new PreparedGameTableFactory(true).create(fakePlayers);
         boolean test = auctionOverChecker.isAuctionOver(gameTable);
         assertFalse(test);
