@@ -17,6 +17,10 @@ public class HandFactory extends CardSetFactory {
         super(HashSet<Card>::new, isSizeDeckPresent ? Hand.WITH_SIDE_DECK_HAND_SIZE : Hand.WITHOUT_SIDE_DECK_HAND_SIZE);
     }
 
+    public static Hand createEmptyHand() {
+        return new Hand(new HashSet<>());
+    }
+
     @Override
     public Hand create() {
         return new Hand((Set<Card>) this.createCardSet());

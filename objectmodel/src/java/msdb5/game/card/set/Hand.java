@@ -12,7 +12,7 @@ public class Hand extends CardSet<Set<Card>> {
     public static final int WITH_SIDE_DECK_HAND_SIZE = 7;
     public static final int WITHOUT_SIDE_DECK_HAND_SIZE = 8;
 
-    public Hand(Set<Card> handCards) {
+    Hand(Set<Card> handCards) {
         super(handCards);
     }
 
