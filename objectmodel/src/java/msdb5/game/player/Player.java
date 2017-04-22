@@ -2,12 +2,12 @@ package msdb5.game.player;
 
 import msdb5.game.card.set.Deck;
 import msdb5.game.card.set.Hand;
+import msdb5.game.card.set.HandFactory;
 import msdb5.game.player.characteristic.IPersonalityForPreparation;
 import msdb5.game.player.characteristic.IPersonalityInGame;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 
-import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -19,8 +19,19 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     public static final byte MIN_AUCTION_SCORE = 60;
     public static final byte MAX_AUCTION_SCORE = 120;
-    private final AuctionInfo auctionInfo = new AuctionInfo();
-    private final Hand hand = new Hand(new HashSet<>());
+    private final int id;
+    private final AuctionInfo auctionInfo;
+    private final Hand hand;
+
+    public Player() {
+        this(0);
+    }
+
+    public Player(int id) {
+        this.id = id;
+        auctionInfo = new AuctionInfo();
+        hand = HandFactory.createEmptyHand();
+    }
 
     public Hand getHand() {
         return this.hand;
@@ -33,8 +44,9 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     @Override
     public String toString() {
         return "Player{" +
-                "hand=" + hand +
+                "id=" + id +
                 ", auctionInfo=" + auctionInfo +
+                ", hand=" + hand +
                 '}';
     }
 
@@ -42,8 +54,8 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         return statusPredicate.test(this.auctionInfo.getAuctionStatus());
     }
 
-    public byte tellAuctionScore() {
-        return (byte) this.auctionInfo.getAuctionScore();
+    public int tellAuctionScore() {
+        return this.auctionInfo.getAuctionScore();
     }
 
     public void setAuctionStatusAs(Supplier<AuctionStatus> statusSupplier) {

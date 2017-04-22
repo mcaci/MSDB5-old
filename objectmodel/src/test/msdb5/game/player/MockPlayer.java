@@ -23,6 +23,7 @@ public abstract class MockPlayer extends Player {
     private final int scoreIncrement;
 
     public MockPlayer(float chanceToFold, int scoreIncrement) {
+        super();
         this.chanceToFold = chanceToFold;
         this.scoreIncrement = scoreIncrement;
     }
