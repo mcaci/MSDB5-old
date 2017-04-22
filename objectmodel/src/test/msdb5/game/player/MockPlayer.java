@@ -3,6 +3,7 @@ package msdb5.game.player;
 import msdb5.game.card.Card;
 import msdb5.game.card.MockCard;
 import msdb5.game.card.set.Deck;
+import msdb5.game.card.set.Hand;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
@@ -10,7 +11,9 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiPredicate;
 import java.util.function.IntUnaryOperator;
+import java.util.function.ToIntBiFunction;
 
 import static org.junit.Assert.*;
 
@@ -56,13 +59,18 @@ public abstract class MockPlayer extends Player {
     }
 
     @Override
-    public int actsOnAuction(AtomicInteger auctionValue) {
+    public int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
         return auctionValue.getAndIncrement();
     }
 
     @Override
-    public int decideAuctionScore(int previousScore) {
-        return chooseNextScore(previousScore);
+    public BiPredicate<Integer, Hand> getFoldingDecision() {
+        return null;
+    }
+
+    @Override
+    public ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction() {
+        return null;
     }
 
     private int chooseNextScore(int currentScore) {

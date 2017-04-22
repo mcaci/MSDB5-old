@@ -10,6 +10,7 @@ import msdb5.game.player.info.AuctionStatus;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 import java.util.function.ToIntBiFunction;
 
 /**
@@ -17,8 +18,9 @@ import java.util.function.ToIntBiFunction;
  */
 public class TestPlayerForGamePlayer extends Player {
 
-    ToIntBiFunction<Integer, Hand> chooseNextScoreFunction = (currentScore, hand) -> 80;
-    BiPredicate<Integer, Hand> foldingDecision = (currentScore, hand) -> currentScore > 90;
+    public TestPlayerForGamePlayer(int id) {
+        super(id);
+    }
 
     @Override
     public void swapCardsWithSideDeck(Deck deck) {
@@ -36,21 +38,32 @@ public class TestPlayerForGamePlayer extends Player {
     }
 
     @Override
-    public int actsOnAuction(AtomicInteger auctionValue) {
-        int currentAuctionValue = auctionValue.get();
-        boolean wantsToFold = foldingDecision.test(currentAuctionValue, this.getHand());
-        if(wantsToFold){
-            this.setAuctionStatusAs(() -> AuctionStatus.FOLDED);
-        }
-        else {
-            this.setAuctionStatusAs(() -> AuctionStatus.IN_AUCTION);
-            currentAuctionValue = auctionValue.updateAndGet(this::decideAuctionScore);
-        }
-        return currentAuctionValue;
+    public int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
+        AuctionInfoOperator auctionInfoOperator = new AuctionInfoOperator(auctionValue, this.getHand(), foldingDecision, chooseNextScoreFunction);
+        updatePersonalAuctionStatus(auctionInfoOperator.getAuctionStatusSupplier());
+        updatePersonalAuctionaValue(auctionInfoOperator.getAuctionValueOperator().applyAsInt(auctionValue));
+        return auctionValue.get();
     }
 
     @Override
-    public int decideAuctionScore(int currentScore) {
-        return chooseNextScoreFunction.applyAsInt(currentScore, this.getHand());
+    public BiPredicate<Integer, Hand> getFoldingDecision() {
+        return (currentScore, hand) -> currentScore > 90;
+    }
+
+    @Override
+    public ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction() {
+        return (currentScore, hand) -> ++currentScore;
+    }
+
+    private void updatePersonalAuctionStatus(Supplier<AuctionStatus> auctionStatusSupplier) {
+        if (auctionStatusSupplier.get() != this.getAuctionInfo().getAuctionStatus()) {
+            this.setAuctionStatusAs(auctionStatusSupplier);
+        }
+    }
+
+    private void updatePersonalAuctionaValue(int updatedAuctionValue) {
+        if (updatedAuctionValue != this.tellAuctionScore()) {
+            this.getAuctionInfo().setAuctionScore(updatedAuctionValue);
+        }
     }
 }

@@ -9,8 +9,10 @@ import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToIntBiFunction;
 
 /**
  * Created by nikiforos on 30/08/15.
@@ -66,7 +68,9 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         this.getHand().add(fromDeck.giveOneCard());
     }
 
-    public abstract int actsOnAuction(AtomicInteger auctionValue);
+    public abstract int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction);
 
-    public abstract int decideAuctionScore(int previousScore);
+    public abstract BiPredicate<Integer, Hand> getFoldingDecision();
+
+    public abstract ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction();
 }
