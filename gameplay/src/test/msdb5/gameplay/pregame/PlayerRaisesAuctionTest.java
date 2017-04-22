@@ -1,40 +1,25 @@
 package msdb5.gameplay.pregame;
 
-import msdb5.game.player.info.AuctionStatus;
 import org.junit.Test;
 
-import java.util.function.IntUnaryOperator;
-import java.util.function.Predicate;
+import static msdb5.game.player.info.AuctionStatus.IN_AUCTION;
 
 /**
  * Created by mcaci on 4/21/17.
  */
 public class PlayerRaisesAuctionTest extends AuctionActionTableTest {
 
+    public PlayerRaisesAuctionTest() {
+        super(() -> 80);
+    }
+
     @Test
-    public void testPlayerRaisesAuction() throws Exception {
-        testScoreAfterPlayerPlaysAuctionRound();
+    public void testPlayerRaisesAuctionScore() throws Exception {
+        testScoreAfterPlayerPlaysAuctionRound((before, after) -> Integer.compare(before, after) < 0);
     }
 
     @Test
     public void testPlayerIsActiveAfterAuction() throws Exception {
-        testPlayerStatus();
-    }
-
-    Predicate<AuctionStatus> getStatus() {
-        return AuctionStatus::isInAuction;
-    }
-
-    int getNewValue() {
-        return 70;
-    }
-
-    IntUnaryOperator getIntUnaryOperator() {
-        return auctionValue -> auctionValue;
-    }
-
-    @Override
-    boolean isCondition(Integer auctionValueBeforePlayerMoves, Integer auctionValueAfterPlayerMoves) {
-        return Integer.compare(auctionValueAfterPlayerMoves, auctionValueBeforePlayerMoves) > 0;
+        testPlayerStatus(status -> status == IN_AUCTION);
     }
 }
