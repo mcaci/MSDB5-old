@@ -10,8 +10,6 @@ public enum AuctionStatus {
         return !(this == NOT_STARTED);
     }
 
-    public boolean isInAuction() { return this == IN_AUCTION; }
-
     public boolean isWinner() {
         return this == AUCTION_WINNER;
     }
