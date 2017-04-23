@@ -112,15 +112,19 @@ public class AuctionRoulette implements GameRoulette {
         AtomicInteger auctionValue = new AtomicInteger(60);
         ExecutorService executorService = Executors.newFixedThreadPool(players.length);
         Future<Player> winner = null;
-        for (Player player : players) {
-            winner = executorService.submit(() -> {
-                while (player.getAuctionStatusFor(this::isActive)) {
-                    player.actsOnAuction(auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
-                }
-                players[4].setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
-                players[4].getAuctionInfo().setAuctionScore(120);
-                return players[4];
-            });
+        try {
+            for (Player player : players) {
+                winner = executorService.submit(() -> {
+                    while (player.getAuctionStatusFor(this::isActive)) {
+                        player.actsOnAuction(auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
+                    }
+                    players[4].setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
+                    players[4].getAuctionInfo().setAuctionScore(120);
+                    return players[4];
+                });
+            }
+        } finally {
+            if (executorService != null) executorService.shutdown();
         }
         try {
             return winner.get();
