@@ -18,7 +18,7 @@ public class AuctionInfoOperator {
     public AuctionInfoOperator(AtomicInteger auctionValue, Hand hand, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
         this.wantsToFold = foldingDecision.test(auctionValue.get(), hand);
         this.scoreDecisionOperator = x -> chooseNextScoreFunction.applyAsInt(auctionValue.get(), hand);
-        invoke();
+        computeAuctionInfo();
     }
 
     public Supplier<AuctionStatus> getAuctionStatusSupplier() {
@@ -29,7 +29,7 @@ public class AuctionInfoOperator {
         return auctionValueOperator;
     }
 
-    private void invoke() {
+    private void computeAuctionInfo() {
         if (wantsToFold) {
             auctionStatusSupplier = () -> AuctionStatus.FOLDED;
             auctionValueOperator = AtomicInteger::get;

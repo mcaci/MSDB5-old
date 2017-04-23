@@ -11,16 +11,17 @@ import msdb5.game.table.GameTable;
 import msdb5.game.table.GameTableInfo;
 import msdb5.gameplay.GameRoulette;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 18/09/15.
  */
 public class AuctionRoulette implements GameRoulette {
+
+    public static final int AUCTION_BASE = 60;
+    public static final int AUCTION_MAX = 120;
 
     public void executeOn(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
@@ -108,17 +109,27 @@ public class AuctionRoulette implements GameRoulette {
     }
 
     public Player executeOn(Player... players) throws AuctionException {
+        AtomicInteger auctionValue = new AtomicInteger(60);
         ExecutorService executorService = Executors.newFixedThreadPool(players.length);
-        Future<Player> winner = executorService.submit(() -> {
-            Stream.of(players).limit(4).forEach(player -> player.setAuctionStatusAs((() -> AuctionStatus.FOLDED)));
-            players[4].setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
-            players[4].getAuctionInfo().setAuctionScore(120);
-            return players[4];
-        });
+        Future<Player> winner = null;
+        for (Player player : players) {
+            winner = executorService.submit(() -> {
+                while (player.getAuctionStatusFor(this::isActive)) {
+                    player.actsOnAuction(auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
+                }
+                players[4].setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
+                players[4].getAuctionInfo().setAuctionScore(120);
+                return players[4];
+            });
+        }
         try {
             return winner.get();
         } catch (InterruptedException | ExecutionException e) {
             throw new AuctionException(e);
         }
+    }
+
+    public boolean isActive(AuctionStatus status) {
+        return status == AuctionStatus.NOT_STARTED || status == AuctionStatus.IN_AUCTION;
     }
 }

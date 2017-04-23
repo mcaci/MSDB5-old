@@ -7,7 +7,7 @@ import static msdb5.game.player.info.AuctionStatus.IN_AUCTION;
 /**
  * Created by mcaci on 4/21/17.
  */
-public class PlayerRaisesAuctionTest extends AuctionActionTableTest {
+public class PlayerRaisesAuctionTest extends PlayerActionAtAuctionTest {
 
     public PlayerRaisesAuctionTest() {
         super(() -> 80);

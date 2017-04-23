@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by mcaci on 4/21/17.
  */
-public class PlayerFoldsAtAuctionTest extends AuctionActionTableTest {
+public class PlayerFoldsAtAuctionTest extends PlayerActionAtAuctionTest {
 
     public PlayerFoldsAtAuctionTest() {
         super(() -> 100);

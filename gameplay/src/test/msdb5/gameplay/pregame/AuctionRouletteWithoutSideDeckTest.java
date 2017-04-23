@@ -9,7 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Comparator;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -27,6 +26,7 @@ public class AuctionRouletteWithoutSideDeckTest {
     private static final int WINNERS_COUNT = 1;
     private static final Player[] PLAYERS = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
             new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
+    private static final GameTable GAME_TABLE = new PreparedGameTableFactory(false).create(PLAYERS);
     private Player winner;
 
     @Before
@@ -36,9 +36,8 @@ public class AuctionRouletteWithoutSideDeckTest {
 
     @After
     public void tearDown() throws Exception {
-        GameTable inputOutputGameTable = new PreparedGameTableFactory(false).create(PLAYERS);
         System.out.println("auctionRouletteTest: gameTable after the evaluation");
-        System.out.println(inputOutputGameTable);
+        System.out.println(GAME_TABLE);
     }
 
     @Test
@@ -48,32 +47,32 @@ public class AuctionRouletteWithoutSideDeckTest {
 
     @Test
     public void testWinnerIsThePlayerReturnedByTheAuctionMethod() throws Exception {
-        assertEquals(getWinnerPlayer(), winner);
+        assertEquals(winner, getWinnerPlayer());
     }
 
     @Test
     public void testWinnerHasMaxScore() throws Exception {
-        assertEquals(Stream.of(PLAYERS).mapToInt(Player::tellAuctionScore).max().getAsInt(), getWinnerPlayer().tellAuctionScore());
+        assertEquals(getWinnerPlayer().tellAuctionScore(), Stream.of(PLAYERS).mapToInt(Player::tellAuctionScore).max().getAsInt());
     }
 
     @Test
     public void testThereIsOneWinnerOnly() throws Exception {
-        assertEquals(getFilteredPlayersCount(WINNER_PREDICATE), WINNERS_COUNT);
+        assertEquals(WINNERS_COUNT, getFilteredPlayersCount(WINNER_PREDICATE));
     }
 
     @Test
     public void testOnFoldedPlayers() throws Exception {
-        assertEquals(getFilteredPlayersCount(FOLDED_PREDICATE), FOLDED_PLAYERS_COUNT);
+        assertEquals(FOLDED_PLAYERS_COUNT, getFilteredPlayersCount(FOLDED_PREDICATE));
     }
 
     @Test
     public void testPlayersScoreAfterAuctionGreaterOrEqualsThanMin() throws Exception {
-        assertTrue(verifyScoreConditionOver(auctionScore -> Integer.compare(auctionScore, AtomicAuctionTable.AUCTION_BASE) >= 0));
+        assertTrue(verifyScoreConditionOver(auctionScore -> Integer.compare(auctionScore, AuctionRoulette.AUCTION_BASE) >= 0));
     }
 
     @Test
     public void testPlayersScoreAfterAuctionLessOrEqualsThanMax() throws Exception {
-        assertTrue(verifyScoreConditionOver(auctionScore -> Integer.compare(auctionScore, AtomicAuctionTable.AUCTION_MAX) <= 0));
+        assertTrue(verifyScoreConditionOver(auctionScore -> Integer.compare(auctionScore, AuctionRoulette.AUCTION_MAX) <= 0));
     }
 
     private boolean verifyScoreConditionOver(IntPredicate auctionScorePredicate) {
