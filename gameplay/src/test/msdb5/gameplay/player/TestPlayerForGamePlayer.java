@@ -41,7 +41,7 @@ public class TestPlayerForGamePlayer extends Player {
     public int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
         AuctionInfoOperator auctionInfoOperator = new AuctionInfoOperator(auctionValue, this.getHand(), foldingDecision, chooseNextScoreFunction);
         updatePersonalAuctionStatus(auctionInfoOperator.getAuctionStatusSupplier());
-        updatePersonalAuctionaValue(auctionInfoOperator.getAuctionValueOperator().applyAsInt(auctionValue));
+        updatePersonalAuctionValue(auctionInfoOperator.getAuctionValueOperator().applyAsInt(auctionValue));
         return auctionValue.get();
     }
 
@@ -61,8 +61,8 @@ public class TestPlayerForGamePlayer extends Player {
         }
     }
 
-    private void updatePersonalAuctionaValue(int updatedAuctionValue) {
-        if (updatedAuctionValue != this.tellAuctionScore()) {
+    private void updatePersonalAuctionValue(int updatedAuctionValue) {
+        if (this.getAuctionStatusFor(status -> AuctionStatus.FOLDED != status)) {
             this.getAuctionInfo().setAuctionScore(updatedAuctionValue);
         }
     }
