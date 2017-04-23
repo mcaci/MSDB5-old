@@ -44,6 +44,22 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        return id == player.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
