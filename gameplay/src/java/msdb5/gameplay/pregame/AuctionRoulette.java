@@ -1,6 +1,8 @@
 package msdb5.gameplay.pregame;
 
 import msdb5.game.card.Card;
+import msdb5.game.card.CardNumber;
+import msdb5.game.card.CardSuit;
 import msdb5.game.card.set.Deck;
 import msdb5.game.player.Player;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
@@ -8,6 +10,12 @@ import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.table.GameTable;
 import msdb5.game.table.GameTableInfo;
 import msdb5.gameplay.GameRoulette;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 18/09/15.
@@ -99,4 +107,18 @@ public class AuctionRoulette implements GameRoulette {
         return playerInTurn;
     }
 
+    public Player executeOn(Player... players) throws AuctionException {
+        ExecutorService executorService = Executors.newFixedThreadPool(players.length);
+        Future<Player> winner = executorService.submit(() -> {
+            Stream.of(players).limit(4).forEach(player -> player.setAuctionStatusAs((() -> AuctionStatus.FOLDED)));
+            players[4].setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
+            players[4].getAuctionInfo().setAuctionScore(120);
+            return players[4];
+        });
+        try {
+            return winner.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new AuctionException(e);
+        }
+    }
 }
