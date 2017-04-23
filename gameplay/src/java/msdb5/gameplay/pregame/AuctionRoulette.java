@@ -127,6 +127,9 @@ public class AuctionRoulette implements GameRoulette {
             if (executorService != null) executorService.shutdown();
         }
         try {
+            while (executorService.isTerminated()) {
+                executorService.awaitTermination(1, TimeUnit.SECONDS);
+            }
             return winner.get();
         } catch (InterruptedException | ExecutionException e) {
             throw new AuctionException(e);
