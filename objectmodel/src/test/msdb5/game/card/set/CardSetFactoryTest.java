@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
  */
 public abstract class CardSetFactoryTest {
 
-    private final CardSet mockCardSet;
+    private final CardSet<?> mockCardSet;
 
     CardSetFactoryTest(CardSetFactory cardSetFactoryTestObject) {
         this.mockCardSet = cardSetFactoryTestObject.create();
     }
 
-    CardSet getMockCardSet() {
+    CardSet<?> getMockCardSet() {
         return mockCardSet;
     }
 
