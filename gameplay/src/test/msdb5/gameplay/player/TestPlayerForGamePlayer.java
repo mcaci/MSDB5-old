@@ -38,11 +38,11 @@ public class TestPlayerForGamePlayer extends Player {
     }
 
     @Override
-    public int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
+    public AtomicInteger actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
         AuctionInfoOperator auctionInfoOperator = new AuctionInfoOperator(auctionValue, this.getHand(), foldingDecision, chooseNextScoreFunction);
         updatePersonalAuctionStatus(auctionInfoOperator.getAuctionStatusSupplier());
         updatePersonalAuctionValue(auctionInfoOperator.getAuctionValueOperator().applyAsInt(auctionValue));
-        return auctionValue.get();
+        return auctionValue;
     }
 
     @Override
