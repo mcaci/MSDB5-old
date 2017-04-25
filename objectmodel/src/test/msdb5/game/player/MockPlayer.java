@@ -59,8 +59,9 @@ public abstract class MockPlayer extends Player {
     }
 
     @Override
-    public int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
-        return auctionValue.getAndIncrement();
+    public AtomicInteger actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction) {
+        auctionValue.incrementAndGet();
+        return auctionValue;
     }
 
     @Override

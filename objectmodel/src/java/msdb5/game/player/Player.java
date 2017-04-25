@@ -84,7 +84,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
         this.getHand().add(fromDeck.giveOneCard());
     }
 
-    public abstract int actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction);
+    public abstract AtomicInteger actsOnAuction(AtomicInteger auctionValue, BiPredicate<Integer, Hand> foldingDecision, ToIntBiFunction<Integer, Hand> chooseNextScoreFunction);
 
     public abstract BiPredicate<Integer, Hand> getFoldingDecision();
 
