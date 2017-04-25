@@ -11,7 +11,6 @@ import java.util.function.BiPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -49,17 +48,17 @@ public abstract class PlayerActionAtAuctionTest {
 
     @Test
     public void testPlayersScoreAfterAuction() {
-        int auctionValueAfterPlayerMoves = this.player.actsOnAuction(this.auctionValue, this.player.getFoldingDecision(), this.player.getChooseNextScoreFunction());
+        this.auctionValue = this.player.actsOnAuction(this.auctionValue, this.player.getFoldingDecision(), this.player.getChooseNextScoreFunction());
         int playersScoreAfterAuction = this.player.tellAuctionScore();
-        assertEquals("Auction value after decision: " + auctionValueAfterPlayerMoves + " - Player's score: " + playersScoreAfterAuction
-                , playersScoreAfterAuction, auctionValueAfterPlayerMoves);
+        assertTrue("Auction value after decision: " + this.auctionValue + " - Player's score: " + playersScoreAfterAuction,
+                playersScoreAfterAuction <= this.auctionValue.get());
     }
 
     void testScoreAfterPlayerPlaysAuctionRound(BiPredicate<Integer, Integer> scoresPredicate) {
         int auctionValueBeforePlayerMoves = this.auctionValue.get();
-        int auctionValueAfterPlayerMoves = this.player.actsOnAuction(this.auctionValue, this.player.getFoldingDecision(), this.player.getChooseNextScoreFunction());
-        assertTrue("Auction value before: " + auctionValueBeforePlayerMoves + " - Auction value after: " +auctionValueAfterPlayerMoves
-                , scoresPredicate.test(auctionValueBeforePlayerMoves, auctionValueAfterPlayerMoves));
+        this.auctionValue = this.player.actsOnAuction(this.auctionValue, this.player.getFoldingDecision(), this.player.getChooseNextScoreFunction());
+        assertTrue("Auction value before: " + auctionValueBeforePlayerMoves + " - Auction value after: " +this.auctionValue
+                , scoresPredicate.test(auctionValueBeforePlayerMoves, this.auctionValue.get()));
     }
 
     void testPlayerStatus(Predicate<AuctionStatus> statusPredicate) {
