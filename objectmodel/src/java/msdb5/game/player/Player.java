@@ -1,13 +1,13 @@
 package msdb5.game.player;
 
-import msdb5.game.card.set.Deck;
-import msdb5.game.card.set.Hand;
-import msdb5.game.card.set.HandFactory;
+import msdb5.game.card.Card;
+import msdb5.game.card.set.*;
 import msdb5.game.player.characteristic.IPersonalityForPreparation;
 import msdb5.game.player.characteristic.IPersonalityInGame;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -24,6 +24,8 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     private final int id;
     private final AuctionInfo auctionInfo;
     private final Hand hand;
+    private final CardSet<? extends Collection<Card>> collectedCards;
+    private int gameScore = 0;
 
     public Player() {
         this(0);
@@ -31,8 +33,9 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     public Player(int id) {
         this.id = id;
-        auctionInfo = new AuctionInfo();
-        hand = HandFactory.createEmptyHand();
+        this.auctionInfo = new AuctionInfo();
+        this.hand = HandFactory.createEmptyHand();
+        this.collectedCards = new CollectedCardSetFactory().create();
     }
 
     public Hand getHand() {
@@ -89,4 +92,16 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public abstract BiPredicate<Integer, Hand> getFoldingDecision();
 
     public abstract ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction();
+
+    public CardSet<? extends Collection<Card>> getCollectedCards() {
+        return collectedCards;
+    }
+
+    public int getGameScore() {
+        return gameScore;
+    }
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
+    }
 }
