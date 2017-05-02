@@ -32,7 +32,7 @@ public abstract class CardSetFactoryTest {
     @Test
     public void testOnSize() throws Exception {
         int cardSetSize = mockCardSet.getCardSet().size();
-        assertTrue("Deck size should be greater than 0", cardSetSize > 0);
+        assertTrue("Card set size should be greater or equals than 0", cardSetSize >= 0);
         testOnConcreteSize(cardSetSize);
     }
 
@@ -42,7 +42,6 @@ public abstract class CardSetFactoryTest {
     public void testOnContent() throws Exception {
         assertNotNull(mockCardSet);
         assertNotNull(mockCardSet.getCardSet());
-        assertFalse(mockCardSet.isEmpty());
         Stream<Card> cards = mockCardSet.getCardSet().stream();
         assertTrue(cards.allMatch(Card::isValid));
     }
