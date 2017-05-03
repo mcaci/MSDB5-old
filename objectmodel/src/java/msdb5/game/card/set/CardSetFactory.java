@@ -4,7 +4,8 @@ import msdb5.game.card.Card;
 import msdb5.game.card.CardNumber;
 import msdb5.game.card.CardSuit;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Random;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -33,6 +34,10 @@ abstract class CardSetFactory {
     Collection<Card> createCardSet() {
         return new Random().ints(0, MAX_CARDSET_SIZE).distinct().limit(cardSetSize).
                 mapToObj(mapIdToCard()).collect(Collectors.toCollection(this.containerSupplier));
+    }
+
+    Collection<Card> createEmptyCardSet() {
+        return this.containerSupplier.get();
     }
 
     private IntFunction<Card> mapIdToCard() {
