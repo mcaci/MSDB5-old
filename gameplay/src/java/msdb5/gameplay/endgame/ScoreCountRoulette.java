@@ -9,16 +9,13 @@ import msdb5.gameplay.GameRoulette;
  */
 public class ScoreCountRoulette implements GameRoulette {
 
+    @Override
     public void executeOn(GameTable gameTable) {
         Player[] players = gameTable.getPlayers();
         for (Player player : players) {
-            byte playerScore = 0;
-
-//            for (Card card : player.getCardPile()) {
-//                playerScore += card.pointsForTheCard();
-//            }
-
-//            player.setScore(playerScore);
+            CardSetScoreCounter counter = new CardSetScoreCounter(player.getCollectedCards());
+            int playerScore = counter.compute().intValue();
+            player.setGameScore(playerScore);
         }
     }
 }
