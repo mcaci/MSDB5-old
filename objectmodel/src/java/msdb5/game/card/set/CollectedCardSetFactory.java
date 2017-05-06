@@ -8,16 +8,12 @@ import java.util.HashSet;
 /**
  * Created by nikiforos on 29/08/15.
  */
-public class CollectedCardSetFactory extends CardSetFactory {
-
-    public CollectedCardSetFactory() {
-        super(0);
-    }
-
+public class CollectedCardSetFactory extends EmptyCardSetFactory {
     @Override
-    public CardSet<? extends Collection<Card>> create() {
-        return new CardSet(this.createCardSet(HashSet<Card>::new)) {
-        };
+    public CardSet<Collection<Card>> create() {
+        return new CardSet<Collection<Card>>(this.createCardSet(HashSet<Card>::new)) {};
     }
+
+
 
 }

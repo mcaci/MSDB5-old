@@ -7,11 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by nikiforos on 06/05/17.
  */
-public class SideDeckFactory extends CardSetFactory {
-
-    public SideDeckFactory() {
-        super(0);
-    }
+public class SideDeckFactory extends EmptyCardSetFactory {
 
     @Override
     public SideDeck create() {
