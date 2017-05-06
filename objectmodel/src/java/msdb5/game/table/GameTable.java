@@ -1,6 +1,6 @@
 package msdb5.game.table;
 
-import msdb5.game.card.set.Deck;
+import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.Player;
 
 import java.util.Arrays;
@@ -11,16 +11,8 @@ import java.util.Arrays;
 public class GameTable {
 
     private final GameTableInfo info = new GameTableInfo();
-    private Deck deck;
     private Player[] players;
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
+    private SideDeck sideDeck;
 
     public Player[] getPlayers() {
         return players;
@@ -34,12 +26,20 @@ public class GameTable {
         return info;
     }
 
+    public SideDeck getSideDeck() {
+        return sideDeck;
+    }
+
+    public void setSideDeck(SideDeck sideDeck) {
+        this.sideDeck = sideDeck;
+    }
+
     @Override
     public String toString() {
         return "GameTable{" +
-                "deck=" + deck +
-                ", players=" + Arrays.toString(players) +
-                ", tableInfo=" + info +
-                '}';
+               "info=" + info +
+               ", players=" + Arrays.toString(players) +
+               ", sideDeck=" + sideDeck +
+               '}';
     }
 }

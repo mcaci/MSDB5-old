@@ -11,7 +11,7 @@ public class FullGamePlayTest {
 //    @Before
 //    public void setUp() throws Exception {
 //        Player[] testPlayers = {new Ambiguo(), new Buonagno(), new CampioneDecaduto(), new Dubbioso(), new Rialzatore()};
-//        inputOutputGameTable = new PreparedGameTableFactory(true).create(testPlayers);
+//        inputOutputGameTable = new GameTableFactory(true).create(testPlayers);
 //        stepName = "";
 //    }
 //

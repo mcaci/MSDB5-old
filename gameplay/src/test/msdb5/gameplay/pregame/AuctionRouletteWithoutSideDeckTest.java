@@ -3,7 +3,7 @@ package msdb5.gameplay.pregame;
 import msdb5.game.player.Player;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.table.GameTable;
-import msdb5.game.table.PreparedGameTableFactory;
+import msdb5.game.table.GameTableFactory;
 import msdb5.gameplay.player.TestPlayerForGamePlayer;
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class AuctionRouletteWithoutSideDeckTest {
     private static final int WINNERS_COUNT = 1;
     private static final Player[] PLAYERS = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
             new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
-    private static final GameTable GAME_TABLE = new PreparedGameTableFactory(false).create(PLAYERS);
+    private static final GameTable GAME_TABLE = new GameTableFactory(false).create(PLAYERS);
     private Player winner;
 
     @Before

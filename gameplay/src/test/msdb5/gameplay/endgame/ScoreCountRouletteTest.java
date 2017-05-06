@@ -4,7 +4,7 @@ import msdb5.game.card.set.DeckFactory;
 import msdb5.game.player.Player;
 import msdb5.game.player.info.InGameStatus;
 import msdb5.game.table.GameTable;
-import msdb5.game.table.PreparedGameTableFactory;
+import msdb5.game.table.GameTableFactory;
 import msdb5.gameplay.player.TestPlayerForGamePlayer;
 import org.junit.After;
 import org.junit.Before;
@@ -28,13 +28,13 @@ public class ScoreCountRouletteTest {
     public void setUp() throws Exception {
         Player[] testPlayers = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2), new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
         assignMockCardPilesToPlayers(testPlayers);
-        inputOutputGameTable = new PreparedGameTableFactory(true).create(testPlayers);
+        inputOutputGameTable = new GameTableFactory(true).create(testPlayers);
         ScoreCountRoulette scoreCountRouletteTest = new ScoreCountRoulette();
         scoreCountRouletteTest.executeOn(inputOutputGameTable);
     }
 
     private void assignMockCardPilesToPlayers(Player[] testPlayers) {
-        testPlayers[0].getCollectedCards().getCardSet().addAll(new DeckFactory().create().getCardSet());
+        testPlayers[0].getCollectedCards().addAll(new DeckFactory().create());
     }
 
     @After
