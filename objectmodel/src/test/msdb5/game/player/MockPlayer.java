@@ -2,8 +2,8 @@ package msdb5.game.player;
 
 import msdb5.game.card.Card;
 import msdb5.game.card.MockCard;
-import msdb5.game.card.set.Deck;
 import msdb5.game.card.set.Hand;
+import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
@@ -87,7 +87,7 @@ public abstract class MockPlayer extends Player {
     }
 
     @Override
-    public void swapCardsWithSideDeck(Deck deck) {
+    public void swapCardsWithSideDeck(SideDeck deck) {
         return; // TODO: mock implementation
     }
 
