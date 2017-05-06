@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class DeckFactoryTest extends CardSetFactoryTest {
 
     public DeckFactoryTest() {
-        super(new DeckFactory());
+        super(new DeckFactory().create());
     }
 
     @After

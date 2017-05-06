@@ -16,8 +16,8 @@ public abstract class CardSetFactoryTest {
 
     private final CardSet<?> mockCardSet;
 
-    CardSetFactoryTest(CardSetFactory cardSetFactoryTestObject) {
-        this.mockCardSet = cardSetFactoryTestObject.create();
+    CardSetFactoryTest(CardSet<?> cardSet) {
+        this.mockCardSet = cardSet;
     }
 
     CardSet<?> getMockCardSet() {

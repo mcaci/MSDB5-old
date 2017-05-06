@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class HandFactoryTest extends CardSetFactoryTest {
 
     public HandFactoryTest() {
-        super(new EmptyHandFactory());
+        super(new EmptyHandFactory().create());
     }
 
     @After

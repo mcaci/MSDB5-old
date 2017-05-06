@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class CollectedCardSetFactoryTest extends CardSetFactoryTest {
 
     public CollectedCardSetFactoryTest() {
-        super(new CollectedCardSetFactory());
+        super(new CollectedCardSetFactory().create());
     }
 
 
