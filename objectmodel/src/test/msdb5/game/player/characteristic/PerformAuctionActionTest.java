@@ -3,7 +3,7 @@ package msdb5.game.player.characteristic;
 import msdb5.game.player.MockClassicPlayer;
 import msdb5.game.player.MockCowardPlayer;
 import msdb5.game.player.MockUnwaveringPlayer;
-import msdb5.game.player.ScoreWithinBoundsTest;
+import msdb5.game.player.Player;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 import org.junit.After;
@@ -74,8 +74,7 @@ public class PerformAuctionActionTest {
         try {
             infoAfterAction = iPersonalityForPreparationTestObject.performAuctionAction(startingScore);
         } catch (AuctionOnScoreOutOfBoundsException ex) {
-              exceptionWasRaisedCorrectly = ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(startingScore,
-                      ScoreWithinBoundsTest.lowerThanMax.negate().or(ScoreWithinBoundsTest.sameOrGreaterThanMin.negate()));
+            exceptionWasRaisedCorrectly = startingScore >= Player.MAX_AUCTION_SCORE || startingScore < Player.MIN_AUCTION_SCORE;
         }
         if (exceptionWasRaisedCorrectly) {
             assertNull(infoAfterAction);
