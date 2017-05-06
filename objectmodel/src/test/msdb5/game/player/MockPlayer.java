@@ -106,11 +106,15 @@ public abstract class MockPlayer extends Player {
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
         assertFalse(this.getAuctionStatusFor(AuctionStatus::actionWasDone));
         assertFalse(this.getAuctionStatusFor(AuctionStatus::isWinner));
+        assertNotNull(this.getCollectedCards());
+        this.setGameScore(120);
+        assertEquals(120, this.getGameScore());
     }
 
     @Test
     public void testSetAsWinner() throws Exception {
         this.setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
+        assertTrue(this.getAuctionStatusFor(AuctionStatus::isWinner));
     }
 
 }
