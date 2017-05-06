@@ -2,6 +2,7 @@ package msdb5.game.card.set;
 
 import msdb5.game.card.Card;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 /**
@@ -10,12 +11,12 @@ import java.util.HashSet;
 public class CollectedCardSetFactory extends CardSetFactory {
 
     public CollectedCardSetFactory() {
-        super(HashSet<Card>::new, 0);
+        super(0);
     }
 
     @Override
-    public CardSet create() {
-        return new CardSet(this.createEmptyCardSet()) {
+    public CardSet<? extends Collection<Card>> create() {
+        return new CardSet(this.createCardSet(HashSet<Card>::new)) {
         };
     }
 

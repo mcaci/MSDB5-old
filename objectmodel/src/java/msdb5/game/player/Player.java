@@ -34,7 +34,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public Player(int id) {
         this.id = id;
         this.auctionInfo = new AuctionInfo();
-        this.hand = HandFactory.createEmptyHand();
+        this.hand = new HandFactory().create();
         this.collectedCards = new CollectedCardSetFactory().create();
     }
 

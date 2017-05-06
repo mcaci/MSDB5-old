@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CardSetScoreCounterWithSpecificHandTest {
 
-    public static final Hand CARDS = HandFactory.createEmptyHand();
+    public static final Hand CARDS = new HandFactory().create();
     private static int score;
 
     @BeforeClass
