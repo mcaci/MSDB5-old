@@ -2,8 +2,7 @@ package msdb5.game.player;
 
 import msdb5.game.card.Card;
 import msdb5.game.card.set.*;
-import msdb5.game.player.characteristic.IPersonalityForPreparation;
-import msdb5.game.player.characteristic.IPersonalityInGame;
+import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.player.info.InGameStatus;
@@ -18,7 +17,7 @@ import java.util.function.ToIntBiFunction;
 /**
  * Created by nikiforos on 30/08/15.
  */
-public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
+public abstract class Player {
 
     public static final byte MIN_AUCTION_SCORE = 60;
     public static final byte MAX_AUCTION_SCORE = 120;
@@ -94,6 +93,12 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public abstract BiPredicate<Integer, Hand> getFoldingDecision();
 
     public abstract ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction();
+
+    public abstract AuctionInfo performAuctionAction(int currentScore) throws AuctionOnScoreOutOfBoundsException;
+
+    public abstract Card chooseCompanionCard();
+
+    public abstract void swapCardsWithSideDeck(SideDeck deck);
 
     public CardSet<? extends Collection<Card>> getCollectedCards() {
         return collectedCards;
