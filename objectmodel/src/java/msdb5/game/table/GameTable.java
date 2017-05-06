@@ -10,7 +10,6 @@ import java.util.Arrays;
  */
 public class GameTable {
 
-    private final GameTableInfo info = new GameTableInfo();
     private Player[] players;
     private SideDeck sideDeck;
 
@@ -20,10 +19,6 @@ public class GameTable {
 
     public void setPlayers(Player[] players) {
         this.players = players;
-    }
-
-    public GameTableInfo getInfo() {
-        return info;
     }
 
     public SideDeck getSideDeck() {
@@ -37,8 +32,7 @@ public class GameTable {
     @Override
     public String toString() {
         return "GameTable{" +
-               "info=" + info +
-               ", players=" + Arrays.toString(players) +
+               "Players=" + Arrays.toString(players) +
                ", sideDeck=" + sideDeck +
                '}';
     }

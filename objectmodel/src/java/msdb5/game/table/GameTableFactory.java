@@ -29,7 +29,6 @@ public class GameTableFactory {
         Deck gameDeck = new DeckFactory().create();
         distributeCardsToPlayers(gameDeck, players, useSideDeck);
 
-        gameTable.getInfo().setSideDeckPresent(useSideDeck);
         SideDeck sideDeck = new SideDeckFactory().create();
         gameTable.setSideDeck(sideDeck);
         if (useSideDeck) {

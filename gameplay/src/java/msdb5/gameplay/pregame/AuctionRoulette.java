@@ -6,7 +6,6 @@ import msdb5.game.player.Player;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.table.GameTable;
-import msdb5.game.table.GameTableInfo;
 import msdb5.gameplay.GameRoulette;
 
 import java.util.concurrent.*;
@@ -101,7 +100,7 @@ public class AuctionRoulette implements GameRoulette {
 
     private int setNextPlayerToGo(int playerInTurn) {
         playerInTurn++;
-        playerInTurn %= GameTableInfo.NUMBER_OF_PLAYERS;
+        playerInTurn %= 5;
         return playerInTurn;
     }
 

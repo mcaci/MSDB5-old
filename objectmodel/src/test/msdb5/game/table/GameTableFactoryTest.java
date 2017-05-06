@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import java.util.stream.Stream;
 
-import static msdb5.game.table.GameTableInfo.NUMBER_OF_PLAYERS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -34,7 +33,7 @@ public abstract class GameTableFactoryTest {
 
     @Test
     public void testNumberOfPlayersCreated() throws Exception {
-        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, getMockGameTable().getPlayers().length, NUMBER_OF_PLAYERS);
+        assertEquals("Number of players should be " + 5, getMockGameTable().getPlayers().length, 5);
     }
 
     @Test
