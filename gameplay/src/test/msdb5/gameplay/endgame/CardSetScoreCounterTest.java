@@ -1,14 +1,17 @@
 package msdb5.gameplay.endgame;
 
-import msdb5.game.card.set.Hand;
-import msdb5.game.card.set.HandFactory;
+import msdb5.game.card.Card;
+import msdb5.game.card.set.CardSet;
+import msdb5.game.card.set.CollectedCardSetFactory;
+import msdb5.gameplay.player.MockCard;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertTrue;
 
@@ -17,11 +20,12 @@ import static org.junit.Assert.assertTrue;
  */
 public class CardSetScoreCounterTest {
 
-    public static final Hand CARDS = new HandFactory(false).create();
+    public static final CardSet<? extends Collection<Card>> CARDS = new CollectedCardSetFactory().create();
     private static int score;
 
     @BeforeClass
     public static void getScore() {
+        IntStream.range(0, 20).forEach(i -> CARDS.add(new MockCard()));
         ForkJoinTask<Integer> taskToComputeScore = new CardSetScoreCounter(CARDS);
         ForkJoinPool pool = new ForkJoinPool();
         score = pool.invoke(taskToComputeScore);

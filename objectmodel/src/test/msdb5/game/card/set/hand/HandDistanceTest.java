@@ -25,7 +25,7 @@ public class HandDistanceTest {
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new HandFactoryTest(true).getMockHand();
+        inputHand = new HandFactoryTest().getMockHand(7);
         inputHand.getCardSet().clear();
     }
 
