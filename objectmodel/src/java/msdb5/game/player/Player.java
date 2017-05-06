@@ -6,6 +6,7 @@ import msdb5.game.player.characteristic.IPersonalityForPreparation;
 import msdb5.game.player.characteristic.IPersonalityInGame;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
+import msdb5.game.player.info.InGameStatus;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,6 +27,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     private final Hand hand;
     private final CardSet<? extends Collection<Card>> collectedCards;
     private int gameScore = 0;
+    private InGameStatus inGameStatus;
 
     public Player() {
         this(0);
@@ -103,5 +105,13 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     public void setGameScore(int gameScore) {
         this.gameScore = gameScore;
+    }
+
+    public InGameStatus getInGameStatus() {
+        return inGameStatus;
+    }
+
+    public void setInGameStatus(InGameStatus inGameStatus) {
+        this.inGameStatus = inGameStatus;
     }
 }
