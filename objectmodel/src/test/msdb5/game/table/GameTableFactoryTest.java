@@ -7,11 +7,7 @@ import msdb5.game.player.MockUnwaveringPlayer;
 import msdb5.game.player.Player;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.stream.Stream;
 
 import static msdb5.game.table.GameTableInfo.NUMBER_OF_PLAYERS;
@@ -21,24 +17,13 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by nikiforos on 31/08/15.
  */
-@RunWith(Parameterized.class)
-public class GameTableFactoryTest {
+public abstract class GameTableFactoryTest {
 
-    private final boolean isSideDeckUsed;
     private final GameTable mockGameTable;
-    private final Player[] mockPlayers = {new MockClassicPlayer(), new MockCowardPlayer(), new MockClassicPlayer(), new MockUnwaveringPlayer(), new MockClassicPlayer()};
 
     public GameTableFactoryTest(boolean isSideDeckUsed) {
-        mockGameTable = new GameTableFactory(isSideDeckUsed).create(mockPlayers);
-        this.isSideDeckUsed = isSideDeckUsed;
-    }
-
-    @Parameterized.Parameters
-    public static Collection initParameters() {
-        return Arrays.asList(new Object[][]{
-                {true},
-                {false}
-        });
+        final Player[] mockPlayers = {new MockClassicPlayer(), new MockCowardPlayer(), new MockClassicPlayer(), new MockUnwaveringPlayer(), new MockClassicPlayer()};
+        this.mockGameTable = new GameTableFactory(isSideDeckUsed).create(mockPlayers);
     }
 
     @After
@@ -48,18 +33,31 @@ public class GameTableFactoryTest {
     }
 
     @Test
-    public void testPlayersAreCreated() throws Exception {
-        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, mockGameTable.getPlayers().length, NUMBER_OF_PLAYERS);
-        Player[] players = this.mockGameTable.getPlayers();
-        Stream.of(players).
-                mapToInt(player -> player.getHand().size()).
-                forEach(handSize -> assertTrue("Hand should be between 7 and 8 cards and instead is of " + handSize, handSize == 7 || handSize == 8));
+    public void testNumberOfPlayersCreated() throws Exception {
+        assertEquals("Number of players should be " + NUMBER_OF_PLAYERS, getMockGameTable().getPlayers().length, NUMBER_OF_PLAYERS);
     }
 
     @Test
-    public void testSideDeckIsCreated() throws Exception {
-        SideDeck sideDeck = this.mockGameTable.getSideDeck();
-        int deckSize = this.isSideDeckUsed ? GameTableInfo.SIDE_DECK_SIZE : GameTableInfo.NO_SIDE_DECK_SIZE;
-        assertEquals("The size of the deck should be " + deckSize, sideDeck.size(), deckSize);
+    public abstract void testPlayersHandsSize() throws Exception;
+
+    public void verifyPlayersHandsSize(int expectedHandSize) throws Exception {
+        Player[] players = this.getMockGameTable().getPlayers();
+        assertTrue("Hand size should be of " + expectedHandSize + " for all players",
+                Stream.of(players).
+                        mapToInt(player -> player.getHand().size()).
+                        allMatch(handSize -> handSize == expectedHandSize));
     }
+
+    @Test
+    public abstract void testSideDeckIsCreated() throws Exception;
+
+    public void verifySideDeckSize(int size) {
+        SideDeck sideDeck = this.getMockGameTable().getSideDeck();
+        assertEquals("The size of the deck should be " + size, sideDeck.size(), size);
+    }
+
+    public final GameTable getMockGameTable() {
+        return mockGameTable;
+    }
+
 }
