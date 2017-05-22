@@ -35,23 +35,34 @@ public class HostilitiesRoundTest {
     @Test
     public void testAllPlayersAreOneCardShort() throws Exception {
         final Player[] players = gameTable.getPlayers();
-        int playersHandSize = players[0].getHand().size();
-        GameRoulette round = this::performHostilitiesRound;
-        round.executeOn(gameTable);
-        final Predicate<Hand> handIsOneCardShorter = hand -> hand.size() == playersHandSize - 1;
-        boolean test = Arrays.stream(players).map(player -> player.getHand()).allMatch(handIsOneCardShorter);
-        assertTrue(test);
+        final int size = players[0].getHand().size();
+        executeRound();
+        boolean everyoneHasPlayedACard = isEveryoneHasPlayedACard(players, size);
+        assertTrue(everyoneHasPlayedACard);
     }
 
     @Test
     public void testOnePlayerHasWonFiveCards() throws Exception {
         final Player[] players = gameTable.getPlayers();
-        int playersHandSize = players[0].getCollectedCards().size();
+        final int size = players[0].getCollectedCards().size();
+        executeRound();
+        boolean onePlayerHasWonTheRound = isOnePlayerHasWonTheRound(players, size);
+        assertTrue(onePlayerHasWonTheRound);
+    }
+
+    private void executeRound() {
         GameRoulette round = this::performHostilitiesRound;
         round.executeOn(gameTable);
-        final Predicate<CardSet<? extends Collection<Card>>> handIsOneCardShorter = collectedCards -> collectedCards.size() == playersHandSize + 5;
-        boolean test = Arrays.stream(players).map(player -> player.getCollectedCards()).anyMatch(handIsOneCardShorter);
-        assertTrue(test);
+    }
+
+    private boolean isEveryoneHasPlayedACard(Player[] players, int playersHandSize) {
+        final Predicate<Hand> handIsOneCardShorter = hand -> hand.size() == playersHandSize - 1;
+        return Arrays.stream(players).map(player -> player.getHand()).allMatch(handIsOneCardShorter);
+    }
+
+    private boolean isOnePlayerHasWonTheRound(Player[] players, int playersHandSize) {
+        final Predicate<CardSet<? extends Collection<Card>>> cardCollectedAreFiveMore = collectedCards -> collectedCards.size() == playersHandSize + 5;
+        return Arrays.stream(players).map(player -> player.getCollectedCards()).anyMatch(cardCollectedAreFiveMore);
     }
 
     private void performHostilitiesRound(GameTable gameTable) {
