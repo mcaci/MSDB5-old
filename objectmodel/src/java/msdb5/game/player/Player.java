@@ -2,10 +2,10 @@ package msdb5.game.player;
 
 import msdb5.game.card.Card;
 import msdb5.game.card.set.*;
-import msdb5.game.player.characteristic.IPersonalityForPreparation;
-import msdb5.game.player.characteristic.IPersonalityInGame;
+import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
+import msdb5.game.player.info.InGameStatus;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,7 +17,7 @@ import java.util.function.ToIntBiFunction;
 /**
  * Created by nikiforos on 30/08/15.
  */
-public abstract class Player implements IPersonalityForPreparation, IPersonalityInGame {
+public abstract class Player {
 
     public static final byte MIN_AUCTION_SCORE = 60;
     public static final byte MAX_AUCTION_SCORE = 120;
@@ -26,6 +26,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     private final Hand hand;
     private final CardSet<? extends Collection<Card>> collectedCards;
     private int gameScore = 0;
+    private InGameStatus inGameStatus;
 
     public Player() {
         this(0);
@@ -34,7 +35,7 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
     public Player(int id) {
         this.id = id;
         this.auctionInfo = new AuctionInfo();
-        this.hand = HandFactory.createEmptyHand();
+        this.hand = new EmptyHandFactory().create();
         this.collectedCards = new CollectedCardSetFactory().create();
     }
 
@@ -93,6 +94,12 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     public abstract ToIntBiFunction<Integer, Hand> getChooseNextScoreFunction();
 
+    public abstract AuctionInfo performAuctionAction(int currentScore) throws AuctionOnScoreOutOfBoundsException;
+
+    public abstract Card chooseCompanionCard();
+
+    public abstract void swapCardsWithSideDeck(SideDeck deck);
+
     public CardSet<? extends Collection<Card>> getCollectedCards() {
         return collectedCards;
     }
@@ -103,5 +110,13 @@ public abstract class Player implements IPersonalityForPreparation, IPersonality
 
     public void setGameScore(int gameScore) {
         this.gameScore = gameScore;
+    }
+
+    public InGameStatus getInGameStatus() {
+        return inGameStatus;
+    }
+
+    public void setInGameStatus(InGameStatus inGameStatus) {
+        this.inGameStatus = inGameStatus;
     }
 }

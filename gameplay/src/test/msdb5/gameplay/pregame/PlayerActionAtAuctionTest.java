@@ -40,8 +40,7 @@ public abstract class PlayerActionAtAuctionTest {
 
     @Test
     public void auctionScoreNeverGoesOverMax() throws Exception {
-        Player player = this.player;
-        player.actsOnAuction(this.auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
+        this.player.actsOnAuction(this.auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
         System.out.println(this.auctionValue.get());
         assertTrue("Actual value of auction is more than 120: " + this.auctionValue.get(), this.auctionValue.get() <= AuctionRoulette.AUCTION_MAX);
     }
@@ -62,8 +61,7 @@ public abstract class PlayerActionAtAuctionTest {
     }
 
     void testPlayerStatus(Predicate<AuctionStatus> statusPredicate) {
-        Player player = this.player;
-        player.actsOnAuction(this.auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
+        this.player.actsOnAuction(this.auctionValue, player.getFoldingDecision(), player.getChooseNextScoreFunction());
         assertTrue("Player is in state: " + player.getAuctionInfo().getAuctionStatus(),
                 player.getAuctionStatusFor(statusPredicate));
     }

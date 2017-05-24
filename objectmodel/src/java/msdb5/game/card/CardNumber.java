@@ -50,14 +50,14 @@ public enum CardNumber {
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return "CardNumber{" +
-                "name=" + name() +
-                ", weight=" + getWeight() +
-                ", points=" + getPoints() +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "CardNumber{" +
+//                "name=" + name() +
+//                ", weight=" + getWeight() +
+//                ", points=" + getPoints() +
+//                '}';
+//    }
 
     public int getWeight() {
         return weight;

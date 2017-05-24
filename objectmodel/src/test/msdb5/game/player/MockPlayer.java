@@ -2,8 +2,8 @@ package msdb5.game.player;
 
 import msdb5.game.card.Card;
 import msdb5.game.card.MockCard;
-import msdb5.game.card.set.Deck;
 import msdb5.game.card.set.Hand;
+import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
 import msdb5.game.player.info.AuctionStatus;
@@ -88,7 +88,7 @@ public abstract class MockPlayer extends Player {
     }
 
     @Override
-    public void swapCardsWithSideDeck(Deck deck) {
+    public void swapCardsWithSideDeck(SideDeck deck) {
         return; // TODO: mock implementation
     }
 
@@ -102,16 +102,20 @@ public abstract class MockPlayer extends Player {
         assertNotNull(this.getHand());
         assertTrue(this.getHand().isEmpty()); // Hand is empty at player creation
         assertNotNull(this.getAuctionInfo());
-        assertTrue(ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(this.tellAuctionScore(), ScoreWithinBoundsTest.sameOrGreaterThanMin));
-        assertTrue(ScoreWithinBoundsTest.howIsScoreWithRespectToBounds(this.tellAuctionScore(), ScoreWithinBoundsTest.sameOrLowerThanMax));
+        assertTrue(this.tellAuctionScore() >= Player.MIN_AUCTION_SCORE);
+        assertTrue(this.tellAuctionScore() <= Player.MAX_AUCTION_SCORE);
         assertNotNull(this.getAuctionInfo().getAuctionStatus());
         assertFalse(this.getAuctionStatusFor(AuctionStatus::actionWasDone));
         assertFalse(this.getAuctionStatusFor(AuctionStatus::isWinner));
+        assertNotNull(this.getCollectedCards());
+        this.setGameScore(120);
+        assertEquals(120, this.getGameScore());
     }
 
     @Test
     public void testSetAsWinner() throws Exception {
         this.setAuctionStatusAs(() -> AuctionStatus.AUCTION_WINNER);
+        assertTrue(this.getAuctionStatusFor(AuctionStatus::isWinner));
     }
 
 }

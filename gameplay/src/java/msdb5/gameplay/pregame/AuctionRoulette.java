@@ -1,19 +1,15 @@
 package msdb5.gameplay.pregame;
 
 import msdb5.game.card.Card;
-import msdb5.game.card.CardNumber;
-import msdb5.game.card.CardSuit;
-import msdb5.game.card.set.Deck;
+import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.Player;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.table.GameTable;
-import msdb5.game.table.GameTableInfo;
 import msdb5.gameplay.GameRoulette;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 /**
  * Created by nikiforos on 18/09/15.
@@ -51,7 +47,7 @@ public class AuctionRoulette implements GameRoulette {
             // 2.1) turn card if side deck is present
             if (sideDeckPresent &&
                     playerScore >= ScoreForTurningSideDeckCard.nextTurningAt(currentScore).getEquivalentInteger()) {
-                turnCardFromSideDeck(gameTable.getDeck());
+                turnCardFromSideDeck(gameTable.getSideDeck());
                 System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
             }
 
@@ -72,14 +68,14 @@ public class AuctionRoulette implements GameRoulette {
 
         // 7) mix with side deck
         if (sideDeckPresent) {
-            winner.swapCardsWithSideDeck(gameTable.getDeck());
+            winner.swapCardsWithSideDeck(gameTable.getSideDeck());
         }
 
         // 8) confirm anion card
 //        gameTable.getInfo().setPairedPlayerC/ard(anionCard);
     }
 
-    private Card turnCardFromSideDeck(Deck sideDeck) {
+    private Card turnCardFromSideDeck(SideDeck sideDeck) {
         /* TODO: turn card, implies also that players can see it and adapt their evaluation to the card seen
          * for now it will just be a print to see that it is called */
         return null;
@@ -104,7 +100,7 @@ public class AuctionRoulette implements GameRoulette {
 
     private int setNextPlayerToGo(int playerInTurn) {
         playerInTurn++;
-        playerInTurn %= GameTableInfo.NUMBER_OF_PLAYERS;
+        playerInTurn %= 5;
         return playerInTurn;
     }
 

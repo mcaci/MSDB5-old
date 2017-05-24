@@ -39,7 +39,7 @@ public class HandEvaluatorTest {
 
     @Before
     public void setUp() throws Exception {
-        inputHand = new HandFactoryTest(true).getMockHand();
+        inputHand = new HandFactoryTest().getMockHand(8);
     }
 
     @After

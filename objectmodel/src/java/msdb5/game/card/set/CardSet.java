@@ -23,6 +23,14 @@ public abstract class CardSet<T extends Collection<Card>> {
         return this.cardSet;
     }
 
+    public void add(Card card) {
+        this.getCardSet().add(card);
+    }
+
+    public void addAll(CardSet<? extends Collection<Card>> anotherCardSet) {
+        this.cardSet.addAll(anotherCardSet.cardSet);
+    }
+
     public boolean contains(Card toDraw) {
         return this.cardSet.contains(toDraw);
     }

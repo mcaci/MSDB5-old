@@ -1,8 +1,8 @@
 package msdb5.gameplay.player;
 
 import msdb5.game.card.Card;
-import msdb5.game.card.set.Deck;
 import msdb5.game.card.set.Hand;
+import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.Player;
 import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionInfo;
@@ -23,7 +23,7 @@ public class TestPlayerForGamePlayer extends Player {
     }
 
     @Override
-    public void swapCardsWithSideDeck(Deck deck) {
+    public void swapCardsWithSideDeck(SideDeck deck) {
 
     }
 
