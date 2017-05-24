@@ -1,8 +1,6 @@
 package msdb5.gameplay.ingame;
 
 import msdb5.game.card.Card;
-import msdb5.game.card.set.CardSet;
-import msdb5.game.card.set.Hand;
 import msdb5.game.player.Player;
 import msdb5.game.table.GameTable;
 import msdb5.game.table.GameTableFactory;
@@ -11,10 +9,6 @@ import msdb5.gameplay.player.TestPlayerForGamePlayer;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.function.Predicate;
-
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -22,47 +16,33 @@ import static org.junit.Assert.assertTrue;
  */
 public class HostilitiesRoundTest {
 
-
     private GameTable gameTable;
+    private HostilitiesRoundVerificationTest roundTest;
 
     @Before
     public void setUp() throws Exception {
-        Player[] players = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
+        final Player[] players = {new TestPlayerForGamePlayer(1), new TestPlayerForGamePlayer(2),
                 new TestPlayerForGamePlayer(3), new TestPlayerForGamePlayer(4), new TestPlayerForGamePlayer(5)};
         gameTable = new GameTableFactory(true).create(players);
     }
 
     @Test
     public void testAllPlayersAreOneCardShort() throws Exception {
-        final Player[] players = gameTable.getPlayers();
-        final int size = players[0].getHand().size();
-        executeRound();
-        boolean everyoneHasPlayedACard = isEveryoneHasPlayedACard(players, size);
-        assertTrue(everyoneHasPlayedACard);
+        roundTest = new EveryoneHasPlayedACardTest(this.gameTable.getPlayers()[0]);
+        executeRound(gameTable);
+        assertTrue(roundTest.verify(this.gameTable.getPlayers(), player -> player.getHand()));
     }
 
     @Test
     public void testOnePlayerHasWonFiveCards() throws Exception {
-        final Player[] players = gameTable.getPlayers();
-        final int size = players[0].getCollectedCards().size();
-        executeRound();
-        boolean onePlayerHasWonTheRound = isOnePlayerHasWonTheRound(players, size);
-        assertTrue(onePlayerHasWonTheRound);
+        roundTest = new OnePlayerHasWonTheRoundTest(this.gameTable.getPlayers()[0]);
+        executeRound(gameTable);
+        assertTrue(roundTest.verify(this.gameTable.getPlayers(), player -> player.getCollectedCards()));
     }
 
-    private void executeRound() {
+    private void executeRound(GameTable gameTable) {
         GameRoulette round = this::performHostilitiesRound;
         round.executeOn(gameTable);
-    }
-
-    private boolean isEveryoneHasPlayedACard(Player[] players, int playersHandSize) {
-        final Predicate<Hand> handIsOneCardShorter = hand -> hand.size() == playersHandSize - 1;
-        return Arrays.stream(players).map(player -> player.getHand()).allMatch(handIsOneCardShorter);
-    }
-
-    private boolean isOnePlayerHasWonTheRound(Player[] players, int playersHandSize) {
-        final Predicate<CardSet<? extends Collection<Card>>> cardCollectedAreFiveMore = collectedCards -> collectedCards.size() == playersHandSize + 5;
-        return Arrays.stream(players).map(player -> player.getCollectedCards()).anyMatch(cardCollectedAreFiveMore);
     }
 
     private void performHostilitiesRound(GameTable gameTable) {
