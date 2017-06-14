@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 /**
  * Created by mcaci on 5/24/17.
  */
-public abstract class HostilitiesRoundVerificationTest {
+public abstract class IngameRoundTest {
 
     private final Predicate<CardSet<? extends Collection<Card>>> sizeOfCardSetChangePredicate;
 
-    HostilitiesRoundVerificationTest(int playersHandSize, int sizeDelta){
+    IngameRoundTest(int playersHandSize, int sizeDelta){
         this.sizeOfCardSetChangePredicate = collectedCards -> collectedCards.size() == playersHandSize + sizeDelta;
     }
 

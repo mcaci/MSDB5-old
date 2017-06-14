@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  * Created by mcaci on 5/24/17.
  */
-public class OnePlayerHasWonTheRoundTest extends HostilitiesRoundVerificationTest {
+public class OnePlayerHasWonTheRoundTest extends IngameRoundTest {
 
     OnePlayerHasWonTheRoundTest(Player player) {
         super(player.getCollectedCards().size(), 5);

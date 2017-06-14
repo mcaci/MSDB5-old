@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  * Created by mcaci on 5/24/17.
  */
-public class EveryoneHasPlayedACardTest extends HostilitiesRoundVerificationTest {
+public class EveryoneHasPlayedACardTest extends IngameRoundTest {
 
     EveryoneHasPlayedACardTest(Player player) {
         super(player.getHand().size(), -1);
