@@ -35,7 +35,7 @@ public class AfterIngameRoundTest {
     }
 
     private void executeRound(GameTable gameTable) {
-        GameRoulette round = new SimpleIngameRoulette();
+        GameRoulette round = new SimpleIngameRoundRoulette();
         round.executeOn(gameTable);
     }
 
