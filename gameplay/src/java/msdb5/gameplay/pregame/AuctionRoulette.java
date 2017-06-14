@@ -3,7 +3,6 @@ package msdb5.gameplay.pregame;
 import msdb5.game.card.Card;
 import msdb5.game.card.set.SideDeck;
 import msdb5.game.player.Player;
-import msdb5.game.player.characteristic.AuctionOnScoreOutOfBoundsException;
 import msdb5.game.player.info.AuctionStatus;
 import msdb5.game.table.GameTable;
 import msdb5.gameplay.GameRoulette;
@@ -20,59 +19,64 @@ public class AuctionRoulette implements GameRoulette {
     public static final int AUCTION_MAX = 120;
 
     public void executeOn(GameTable gameTable) {
-        Player[] players = gameTable.getPlayers();
-        final boolean sideDeckPresent = false; //gameTable.getInfo().isSideDeckPresent();
-        int playerInTurnIndex = 0;
-
-        boolean isAuctionOver = false;
-        Player playerInTurn = players[playerInTurnIndex];
-        while (!isAuctionOver) {
-            // 1) player takes his decision
-            int currentScore = 0; //gameTable.getInfo().getAuctionScore();
-
-            try {
-                playerInTurn.performAuctionAction(currentScore);
-            } catch (AuctionOnScoreOutOfBoundsException e) {
-                // TODO: replace with logger and rethrow e
-                System.out.println(currentScore);
-                e.printStackTrace();
-            }
-
-            // 2) update game table
-            int playerScore = playerInTurn.tellAuctionScore();
-            if (currentScore < playerScore) {
-//                gameTable.getInfo().setAuctionScore(playerScore);
-            }
-
-            // 2.1) turn card if side deck is present
-            if (sideDeckPresent &&
-                    playerScore >= ScoreForTurningSideDeckCard.nextTurningAt(currentScore).getEquivalentInteger()) {
-                turnCardFromSideDeck(gameTable.getSideDeck());
-                System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
-            }
-
-            // 3) set next player to do the pregame
-            playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
-            playerInTurn = players[playerInTurnIndex];
-
-            // 4) verify pregame is still ongoing
-            isAuctionOver = isAuctionOver(gameTable);
+        try {
+            Player auctionWinner = this.executeOn(gameTable.getPlayers());
+        } catch (AuctionException e) {
+            e.printStackTrace();
         }
-        // 5) set last player remaining as winner
-        final int auctionScore = 0;// gameTable.getInfo().getAuctionScore();
-        Player winner = findWinner(players, auctionScore);
-//        gameTable.getInfo().setAuctionWinner(winner);
-
-        // 6) winner chooses anion
-        Card anionCard = winner.chooseCompanionCard();
-
-        // 7) mix with side deck
-        if (sideDeckPresent) {
-            winner.swapCardsWithSideDeck(gameTable.getSideDeck());
-        }
-
-        // 8) confirm anion card
-//        gameTable.getInfo().setPairedPlayerC/ard(anionCard);
+//        Player[] players = gameTable.getPlayers();
+//        final boolean sideDeckPresent = false; //gameTable.getInfo().isSideDeckPresent();
+//        int playerInTurnIndex = 0;
+//
+//        boolean isAuctionOver = false;
+//        Player playerInTurn = players[playerInTurnIndex];
+//        while (!isAuctionOver) {
+//            // 1) player takes his decision
+//            int currentScore = 0; //gameTable.getInfo().getAuctionScore();
+//
+//            try {
+//                playerInTurn.performAuctionAction(currentScore);
+//            } catch (AuctionOnScoreOutOfBoundsException e) {
+//                // TODO: replace with logger and rethrow e
+//                System.out.println(currentScore);
+//                e.printStackTrace();
+//            }
+//
+//            // 2) update game table
+//            int playerScore = playerInTurn.tellAuctionScore();
+//            if (currentScore < playerScore) {
+////                gameTable.getInfo().setAuctionScore(playerScore);
+//            }
+//
+//            // 2.1) turn card if side deck is present
+//            if (sideDeckPresent &&
+//                    playerScore >= ScoreForTurningSideDeckCard.nextTurningAt(currentScore).getEquivalentInteger()) {
+//                turnCardFromSideDeck(gameTable.getSideDeck());
+//                System.out.println("turning card at " + ScoreForTurningSideDeckCard.nextTurningAt(currentScore) + "(" + playerScore + ")");
+//            }
+//
+//            // 3) set next player to do the pregame
+//            playerInTurnIndex = setNextPlayerToGo(playerInTurnIndex);
+//            playerInTurn = players[playerInTurnIndex];
+//
+//            // 4) verify pregame is still ongoing
+//            isAuctionOver = isAuctionOver(gameTable);
+//        }
+//        // 5) set last player remaining as winner
+//        final int auctionScore = 0;// gameTable.getInfo().getAuctionScore();
+//        Player winner = findWinner(players, auctionScore);
+////        gameTable.getInfo().setAuctionWinner(winner);
+//
+//        // 6) winner chooses anion
+//        Card anionCard = winner.chooseCompanionCard();
+//
+//        // 7) mix with side deck
+//        if (sideDeckPresent) {
+//            winner.swapCardsWithSideDeck(gameTable.getSideDeck());
+//        }
+//
+//        // 8) confirm anion card
+////        gameTable.getInfo().setPairedPlayerCard(anionCard);
     }
 
     private Card turnCardFromSideDeck(SideDeck sideDeck) {
@@ -104,6 +108,7 @@ public class AuctionRoulette implements GameRoulette {
         return playerInTurn;
     }
 
+    // TODO: it blocks randomly
     public Player executeOn(Player... players) throws AuctionException {
         AtomicInteger auctionValue = new AtomicInteger(60);
         ExecutorService executorService = Executors.newFixedThreadPool(players.length);
