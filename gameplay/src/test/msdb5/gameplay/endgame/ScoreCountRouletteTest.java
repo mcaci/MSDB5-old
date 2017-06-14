@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -92,7 +93,7 @@ public class ScoreCountRouletteTest {
     }
 
     private void assignInGameRolesToPlayers(Player[] testPlayers, int auctionWinnerIndex, int companionIndex) {
-        Arrays.stream(testPlayers).forEach(player -> player.setInGameStatus(InGameStatus.COMPETITOR));
+        Stream.of(testPlayers).forEach(player -> player.setInGameStatus(InGameStatus.COMPETITOR));
         testPlayers[auctionWinnerIndex].setInGameStatus(InGameStatus.AUCTION_WINNER);
         testPlayers[companionIndex].setInGameStatus(InGameStatus.COMPANION);
     }

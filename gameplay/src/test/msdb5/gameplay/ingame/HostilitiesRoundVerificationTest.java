@@ -4,7 +4,6 @@ import msdb5.game.card.Card;
 import msdb5.game.card.set.CardSet;
 import msdb5.game.player.Player;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -24,7 +23,7 @@ public abstract class HostilitiesRoundVerificationTest {
     public abstract boolean verify(Player[] players, Function<Player, CardSet<? extends Collection<Card>>> playersCards);
 
     Stream<CardSet<? extends Collection<Card>>> getCardSetStream(Player[] players, Function<Player, CardSet<? extends Collection<Card>>> playerCardSetFunction) {
-        return Arrays.stream(players).map(playerCardSetFunction);
+        return Stream.of(players).map(playerCardSetFunction);
     }
 
     Predicate<CardSet<? extends Collection<Card>>> getSizeOfCardSetChangePredicate() {
